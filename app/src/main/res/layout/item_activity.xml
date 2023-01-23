@@ -13,8 +13,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_activity"
         android:checkable="true"
-        android:focusable="true"
-        android:clickable="true"
+        android:checked="@{item.finished}"
         android:layout_margin="@dimen/margin_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

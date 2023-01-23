@@ -1,10 +1,7 @@
 package me.ako.androidbasics.data.model
 
 import android.net.Uri
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(
     tableName = "activity",
@@ -17,6 +14,7 @@ import androidx.room.PrimaryKey
         )
     ]
 )
+@TypeConverters(ActivityTypeConverter::class)
 data class ActivityEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
@@ -53,4 +51,50 @@ sealed class ActivityType(val type: String) {
     object CodeLab: ActivityType("CodeLab")
     object Video: ActivityType("Video")
     object Article: ActivityType("Article")
+    object Quiz: ActivityType("Quiz")
+    object Unknown: ActivityType("Unknown")
+}
+
+class ActivityTypeConverter {
+    @TypeConverter
+    fun typeToInt(type: ActivityType?): Int {
+        return when (type) {
+            ActivityType.CodeLab -> {
+                1
+            }
+            ActivityType.Video -> {
+                2
+            }
+            ActivityType.Article -> {
+                3
+            }
+            ActivityType.Quiz -> {
+                4
+            }
+            else -> {
+                0
+            }
+        }
+    }
+
+    @TypeConverter
+    fun intToType(type: Int?): ActivityType {
+        return when (type) {
+            1 -> {
+                ActivityType.CodeLab
+            }
+            2 -> {
+                ActivityType.Video
+            }
+            3 -> {
+                ActivityType.Article
+            }
+            4 -> {
+                ActivityType.Quiz
+            }
+            else -> {
+                ActivityType.Unknown
+            }
+        }
+    }
 }

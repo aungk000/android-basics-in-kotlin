@@ -54,35 +54,5 @@ abstract class AppDatabase : RoomDatabase() {
         fun dateToTimestamp(date: DateTime?): Long? {
             return date?.millis
         }
-
-        @TypeConverter
-        fun typeToInt(type: ActivityType?): Int {
-            return when (type) {
-                ActivityType.CodeLab -> {
-                    0
-                }
-                ActivityType.Video -> {
-                    1
-                }
-                else -> {
-                    0
-                }
-            }
-        }
-
-        @TypeConverter
-        fun intToType(type: Int?): ActivityType {
-            return when (type) {
-                0 -> {
-                    ActivityType.CodeLab
-                }
-                1 -> {
-                    ActivityType.Video
-                }
-                else -> {
-                    ActivityType.CodeLab
-                }
-            }
-        }
     }
 }

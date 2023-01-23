@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.launch
 import me.ako.androidbasics.AndroidBasicsApplication
+import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
 import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.ActivityType
@@ -56,12 +58,24 @@ class FragmentActivities : Fragment() {
     }
 
     private fun onBind(item: PathwayWithActivities) {
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.item = item
-
         binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            this.item = item
+
             val progress = "${item.pathway.progress}% completed"
             txtProgress.text = progress
+
+            val activityCount =
+                "${item.activities.size} activities \u2022 ${item.activities.size} quiz"
+            txtActivityCount.text = activityCount
+
+            btnBookmark.addOnCheckedChangeListener { button, isChecked ->
+                button.icon = if (isChecked) {
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
+                } else {
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
+                }
+            }
 
             val adapter = ActivityAdapter {
                 onItemClicked(item, it)
@@ -71,11 +85,11 @@ class FragmentActivities : Fragment() {
     }
 
     private fun onItemClicked(item: PathwayWithActivities, it: ActivityEntity) {
-        if(!it.finished) {
+        if (!it.finished) {
             viewModel.finishActivity(it)
         }
 
-        if(!it.optional) {
+        if (!it.optional) {
             viewModel.updateProgress(item.pathway, it.progress)
 
             // update ui
@@ -86,16 +100,15 @@ class FragmentActivities : Fragment() {
             }
         }
 
-        if(it.type is ActivityType.Video) {
+        if (it.type is ActivityType.Video) {
             // Try to generate a direct intent to the YouTube app
             var intent = Intent(Intent.ACTION_VIEW, it.launchUri)
-            if(intent.resolveActivity(requireActivity().packageManager) == null) {
+            if (intent.resolveActivity(requireActivity().packageManager) == null) {
                 // YouTube app isn't found, use the web url
                 intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.url))
             }
             startActivity(intent)
-        }
-        else {
+        } else {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.url))
             startActivity(intent)
         }

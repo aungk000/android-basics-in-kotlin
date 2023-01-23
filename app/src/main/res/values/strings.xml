@@ -8,4 +8,5 @@
     <string name="optional">Optional</string>
     <string name="take_codelab">Take CodeLab</string>
     <string name="play">Play</string>
+    <string name="bullet">&#8226;</string>
 </resources>

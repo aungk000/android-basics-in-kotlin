@@ -18,30 +18,49 @@
             android:layout_height="match_parent"
             tools:context=".presentation.component.FragmentActivities">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/header"
                 android:padding="@dimen/padding_large"
                 android:background="@color/cyan_dark"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="@{item.pathway.title}"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
                     android:textSize="@dimen/text_welcome_title"
-                    tools:text="@string/welcome_title"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/welcome_title" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_bookmark"
+                    style="?materialIconButtonStyle"
+                    app:icon="@drawable/ic_bookmark_border"
+                    app:iconSize="32dp"
+                    android:checkable="true"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/txt_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_description"
                     android:text="@{item.pathway.description}"
+                    app:layout_constraintTop_toBottomOf="@id/txt_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,7 +69,22 @@
                     android:textSize="@dimen/text_unit_description"
                     tools:text="@string/welcome_description" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_activity_count"
+                    app:layout_constraintTop_toBottomOf="@id/txt_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    tools:text="4 activities &#8226; 1 quiz"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                
                 <com.google.android.material.card.MaterialCardView
+                    app:layout_constraintTop_toBottomOf="@id/txt_activity_count"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
@@ -58,6 +92,7 @@
 
                     <LinearLayout
                         android:padding="@dimen/padding_large"
+                        android:gravity="center_horizontal"
                         android:orientation="vertical"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content">
@@ -65,7 +100,6 @@
                         <ImageView
                             android:id="@+id/img_pathway"
                             app:load="@{item.pathway.image}"
-                            android:layout_gravity="center_horizontal"
                             tools:src="@drawable/android_basics_kotlin"
                             android:contentDescription="@{item.pathway.title}"
                             android:scaleType="fitCenter"
@@ -75,13 +109,14 @@
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/txt_progress"
                             tools:text="0% completed"
-                            android:layout_gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
                             android:id="@+id/progressIndicator"
                             android:progress="@{item.pathway.progress}"
+                            app:trackThickness="8dp"
+                            app:trackCornerRadius="4dp"
                             android:layout_marginTop="@dimen/margin_normal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -90,7 +125,7 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_activities"

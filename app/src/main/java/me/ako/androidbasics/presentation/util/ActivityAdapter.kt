@@ -59,7 +59,7 @@ class ActivityAdapter(private val onItemClicked: (ActivityEntity) -> Unit) :
                 progressThumbnail.visibility = View.GONE
             }
 
-            cardActivity.isChecked = item.finished
+            //cardActivity.isChecked = item.finished
 
             this.item = item
             executePendingBindings()
