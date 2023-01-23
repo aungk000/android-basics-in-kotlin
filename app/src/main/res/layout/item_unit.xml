@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="me.ako.androidbasics.data.model.UnitWithPathways" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_normal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/padding_large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_unit_title"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_unit_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Unit 1: Kotlin basics" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_unit_description"
+                android:text="@{item.unit.description}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:textSize="@dimen/text_unit_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_unit_title"
+                tools:text="@string/welcome_description" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_badges"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/earnable_badges"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_unit_description"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_unit_description" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_badges"
+                app:badges="@{item.pathways}"
+                android:layout_marginTop="@dimen/margin_large"
+                android:padding="@dimen/padding_normal"
+                android:clipToPadding="false"
+                tools:listitem="@layout/item_badge"
+                tools:itemCount="4"
+                app:spanCount="2"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_badges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

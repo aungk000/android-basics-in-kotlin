@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Android Basics</string>
+    <string name="welcome_title">Android Basics in Kotlin</string>
+    <string name="welcome_description">Welcome to Android Basics in Kotlin! In this course, you\'ll learn the basics of building Android apps with the Kotlin programming language. Along the way, you\'ll develop a collection of apps to start your journey as an Android developer.</string>
+    <string name="earnable_badges">Earnable Badges</string>
+    <string name="explore">Explore</string>
+    <string name="video">Video</string>
+    <string name="optional">Optional</string>
+    <string name="take_codelab">Take CodeLab</string>
+    <string name="play">Play</string>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="pathway"
+            type="me.ako.androidbasics.data.model.PathwayEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_badge"
+            app:load="@{pathway.image}"
+            app:unlocked="@{pathway.progress}"
+            android:contentDescription="@{pathway.title}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitCenter"
+            android:layout_margin="@dimen/margin_normal"
+            tools:src="@drawable/badge_intro_to_kotlin"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

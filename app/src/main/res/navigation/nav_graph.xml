@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentMain">
+    <fragment
+        android:id="@+id/fragmentUnits"
+        android:name="me.ako.androidbasics.presentation.component.FragmentUnits"
+        android:label="FragmentUnits"
+        tools:layout="@layout/fragment_units">
+        <action
+            android:id="@+id/action_fragmentUnits_to_fragmentPathways"
+            app:destination="@id/fragmentPathways" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPathways"
+        android:name="me.ako.androidbasics.presentation.component.FragmentPathways"
+        android:label="FragmentPathways"
+        tools:layout="@layout/fragment_pathways">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentPathways_to_fragmentActivities"
+            app:destination="@id/fragmentActivities" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMain"
+        android:name="me.ako.androidbasics.presentation.component.FragmentMain"
+        android:label="FragmentMain"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentUnits"
+            app:destination="@id/fragmentUnits"
+            app:popUpTo="@id/fragmentMain"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentActivities"
+        android:name="me.ako.androidbasics.presentation.component.FragmentActivities"
+        android:label="FragmentActivities"
+        tools:layout="@layout/fragment_activities">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+</navigation>

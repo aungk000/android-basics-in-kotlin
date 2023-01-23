@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="me.ako.androidbasics.data.model.PathwayWithActivities" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".presentation.component.FragmentActivities">
+
+            <LinearLayout
+                android:id="@+id/header"
+                android:padding="@dimen/padding_large"
+                android:background="@color/cyan_dark"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_title"
+                    android:text="@{item.pathway.title}"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_welcome_title"
+                    tools:text="@string/welcome_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_description"
+                    android:text="@{item.pathway.description}"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:textSize="@dimen/text_unit_description"
+                    tools:text="@string/welcome_description" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:padding="@dimen/padding_large"
+                        android:orientation="vertical"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/img_pathway"
+                            app:load="@{item.pathway.image}"
+                            android:layout_gravity="center_horizontal"
+                            tools:src="@drawable/android_basics_kotlin"
+                            android:contentDescription="@{item.pathway.title}"
+                            android:scaleType="fitCenter"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/txt_progress"
+                            tools:text="0% completed"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/progressIndicator"
+                            android:progress="@{item.pathway.progress}"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_activities"
+                app:activities="@{item.activities}"
+                tools:listitem="@layout/item_activity"
+                tools:itemCount="1"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

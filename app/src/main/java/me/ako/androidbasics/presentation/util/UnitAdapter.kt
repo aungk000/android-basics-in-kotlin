@@ -1,0 +1,41 @@
+package me.ako.androidbasics.presentation.util
+
+import androidx.recyclerview.widget.DiffUtil
+import me.ako.androidbasics.R
+import me.ako.androidbasics.data.model.UnitWithPathways
+import me.ako.androidbasics.databinding.ItemUnitBinding
+import me.ako.androidbasics.domain.util.Base
+
+class UnitAdapter(private val onItemClicked: (UnitWithPathways) -> Unit) :
+    Base.ClickableListAdapter<UnitWithPathways, ItemUnitBinding>(
+        R.layout.item_unit,
+        DiffCallback()
+    ) {
+    class DiffCallback: DiffUtil.ItemCallback<UnitWithPathways>() {
+        override fun areItemsTheSame(oldItem: UnitWithPathways, newItem: UnitWithPathways): Boolean {
+            return oldItem.unit.id == newItem.unit.id
+        }
+        override fun areContentsTheSame(oldItem: UnitWithPathways, newItem: UnitWithPathways): Boolean {
+            return oldItem.unit == newItem.unit
+        }
+    }
+
+    override fun onViewBind(item: UnitWithPathways, binding: ItemUnitBinding) {
+        binding.apply {
+            val adapter = BadgeAdapter {
+
+            }
+            recyclerViewBadges.adapter = adapter
+
+            val title = "Unit ${item.unit.id}: ${item.unit.title}"
+            txtUnitTitle.text = title
+
+            this.item = item
+            executePendingBindings()
+        }
+    }
+
+    override fun onItemViewClicked(item: UnitWithPathways, binding: ItemUnitBinding) {
+        onItemClicked(item)
+    }
+}
