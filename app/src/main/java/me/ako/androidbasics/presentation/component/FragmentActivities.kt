@@ -1,12 +1,19 @@
 package me.ako.androidbasics.presentation.component
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ClickableSpan
+import android.text.style.ImageSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -65,8 +72,7 @@ class FragmentActivities : Fragment() {
             val progress = "${item.pathway.progress}% completed"
             txtProgress.text = progress
 
-            val activityCount =
-                "${item.activities.size} activities \u2022 ${item.activities.size} quiz"
+            val activityCount = "${item.activities.size} activities"
             txtActivityCount.text = activityCount
 
             btnBookmark.addOnCheckedChangeListener { button, isChecked ->
