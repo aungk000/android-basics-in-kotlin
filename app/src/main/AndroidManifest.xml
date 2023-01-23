@@ -36,6 +36,10 @@
         </intent>
         <intent>
             <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https" android:host="youtu.be"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
             <data android:scheme="https" android:host="developer.android.com"/>
         </intent>
     </queries>

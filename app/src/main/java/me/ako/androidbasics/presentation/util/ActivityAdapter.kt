@@ -33,7 +33,11 @@ class ActivityAdapter(private val onItemClicked: (ActivityEntity) -> Unit) :
     override fun onViewBind(item: ActivityEntity, binding: ItemActivityBinding) {
         binding.apply {
             if(item.type is ActivityType.Video) {
-                val videoId = item.url.substringAfter("watch?v=")
+                var videoId = item.url.substringAfter("watch?v=")
+                if(item.url.contains("youtu.be")) {
+                    videoId = item.url.substringAfterLast("/")
+                }
+
                 val thumbnail = "https://img.youtube.com/vi/$videoId/0.jpg"
                 imgThumbnail.load(thumbnail) {
                     listener(

@@ -424,6 +424,500 @@ class AppData {
             ActivityType.Video,
             true,
             "https://www.youtube.com/watch?v=tHFJkps7U5M"
+        ),
+        ActivityEntity(
+            20,
+            5,
+            1,
+            "Welcome to Unit 2: Layouts",
+            "Learn about the two apps you’ll build in this unit to advance your knowledge " +
+                    "about UI layouts in Android.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=JJLNvVXPYYw"
+        ),
+        ActivityEntity(
+            21,
+            5,
+            2,
+            "Tip calculator app introduction",
+            "Get a glimpse of the tip calculator app you’ll be building in this pathway.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=a-Ss24ZH3WU"
+        ),
+        ActivityEntity(
+            22,
+            5,
+            3,
+            "Classes and inheritance in Kotlin",
+            "To build more complex apps, you’ll need to better understand how classes and " +
+                    "inheritance work so that you can more fully use what the Android platform offers.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-classes-and-inheritance"
+        ),
+        ActivityEntity(
+            23,
+            5,
+            4,
+            "Create XML layouts for Android",
+            "Learn about new UI components, such as editable text fields, radio buttons, " +
+                    "and switches to build up the layout for your tip calculator app. Instead of " +
+                    "using the Layout Editor in Android Studio, you’ll be editing the layout for " +
+                    "your app in XML.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-xml-layouts"
+        ),
+        ActivityEntity(
+            24,
+            5,
+            5,
+            "Calculate the tip",
+            "Learn how to write Kotlin code to interact with the UI elements in the tip " +
+                    "calculator app, so that you can calculate the tip. You’ll also learn how to " +
+                    "handle edge cases in your app to make your app more robust.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-tip-calculator"
+        ),
+        ActivityEntity(
+            25,
+            6,
+            1,
+            "Change the app theme",
+            "Choose colors for your app and apply them consistently throughout your app " +
+                    "using themes.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-theme"
+        ),
+        ActivityEntity(
+            26,
+            6,
+            2,
+            "Change the app icon",
+            "Change the launcher icon for your app with the help of the Image Asset Studio " +
+                    "tool in Android Studio.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-icon"
+        ),
+        ActivityEntity(
+            27,
+            6,
+            3,
+            "Create a more polished user experience",
+            "Update your tip calculator app to look more professional and polished by " +
+                    "following Material Design guidelines and best practices for UI development.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-polished-user-experience"
+        ),
+        ActivityEntity(
+            28,
+            6,
+            4,
+            "Write Instrumentation Tests",
+            "Learn what instrumentation tests look like, how to write instrumentations " +
+                    "tests, and how to run them.",
+            url = "https://developer.android.com/codelabs/android-basics-kotlin-write-instrumentation-tests"
+        ),
+        ActivityEntity(
+            29,
+            7,
+            1,
+            "Affirmations app introduction",
+            "Get an introduction to the Affirmations app you will be creating in this pathway.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=VCeEIkT_2U4"
+        ),
+        ActivityEntity(
+            30,
+            7,
+            2,
+            "Use Lists in Kotlin",
+            "Learn how to create lists in Kotlin and loop through them.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-lists"
+        ),
+        ActivityEntity(
+            31,
+            7,
+            3,
+            "Use RecyclerView to display a scrollable list",
+            "Learn how to efficiently display a list of text in a RecyclerView and " +
+                    "understand its architecture.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-recyclerview-scrollable-list"
+        ),
+        ActivityEntity(
+            32,
+            7,
+            4,
+            "Display a list of images using cards",
+            "Learn how to add images to our scrolling list of affirmations. We’ll also " +
+                    "enhance the look of our app’s UI by using MaterialCardView and fine-tuning " +
+                    "its theme colors.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-display-list-cards"
+        ),
+        ActivityEntity(
+            33,
+            7,
+            5,
+            "Test Lists and Adapters",
+            "Learn a little bit more about best practices for testing and how to add " +
+                    "testing dependencies. Get more practice writing both unit and instrumentation tests.",
+            url = "https://developer.android.com/codelabs/android-basics-kotlin-affirmations-test-lists-and-adapters"
+        ),
+        ActivityEntity(
+            34,
+            7,
+            6,
+            "Project: Dogglers app",
+            "Use your knowledge of layouts to build a scrollable dog photo app in Android " +
+                    "Studio, and run tests against your code to make sure everything works as expected.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-dogglers-app"
+        ),
+        ActivityEntity(
+            35,
+            8,
+            1,
+            "Welcome to Unit 3: Navigation",
+            "Learn the basic concepts of app navigation, the interactions that allow users " +
+                    "to navigate across, into, and back out from the different pieces of content within an app.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=SdfryvVkBBc"
+        ),
+        ActivityEntity(
+            36,
+            8,
+            2,
+            "Collections in Kotlin",
+            "Understand collections and how to manipulate them using lambdas and higher-order functions.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-collections"
+        ),
+        ActivityEntity(
+            37,
+            8,
+            3,
+            "Activities and intents",
+            "Build a Words app with multiple activities that uses intents to navigate " +
+                    "between them and also passes data to other apps.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-activities-intents"
+        ),
+        ActivityEntity(
+            38,
+            8,
+            4,
+            "Stages of the activity lifecycle",
+            "Learn about the activity lifecycle and the different states of an activity, " +
+                    "from first initialized to finally destroyed.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-activity-lifecycle"
+        ),
+        ActivityEntity(
+            39,
+            9,
+            1,
+            "Android Jetpack: Introducing Navigation Component",
+            "Learn about the Navigation Architecture Component in Android Jetpack, which " +
+                    "provides a framework for building in-app navigation.",
+            ActivityType.Video,
+            false,
+            "https://www.youtube.com/watch?v=Y0Cs2MQxyIs"
+        ),
+        ActivityEntity(
+            40,
+            9,
+            2,
+            "Fragments and the Navigation component",
+            "Understand how to use fragments and implement navigation within a single activity.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-fragments-navigation-component"
+        ),
+        ActivityEntity(
+            41,
+            9,
+            3,
+            "Test Navigation Components",
+            "Learn how to test navigation handled by Navigation Components and how to " +
+                    "mitigate repeat code in tests.",
+            url = "https://developer.android.com/codelabs/android-basics-kotlin-test-navigation-components"
+        ),
+        ActivityEntity(
+            42,
+            9,
+            4,
+            "Navigation: Overview - MAD Skills",
+            "Learn Modern Android Development (MAD) skills with the Navigation component, " +
+                    "which is both a tool and an API for editing the Navigation flows inside of your application.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=xITkfPIaStU"
+        ),
+        ActivityEntity(
+            43,
+            10,
+            1,
+            "Unscramble app introduction",
+            "Build a game app that asks you to try your luck at unscrambling words.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=Xi0649S7evA"
+        ),
+        ActivityEntity(
+            44,
+            10,
+            2,
+            "Store data in ViewModel",
+            "Improve your app by implementing a ViewModel to retain app data during " +
+                    "configuration changes.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-viewmodel"
+        ),
+        ActivityEntity(
+            45,
+            10,
+            3,
+            "Use LiveData with ViewModel",
+            "Convert the app data in the ViewModel to LiveData and observe the changes " +
+                    "to update the UI automatically.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-livedata"
+        ),
+        ActivityEntity(
+            46,
+            11,
+            1,
+            "Cupcake app introduction",
+            "Get an introduction to the Cupcake app you will be creating in this pathway.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=R-7Xbkhohmo"
+        ),
+        ActivityEntity(
+            47,
+            11,
+            2,
+            "Shared ViewModel",
+            "Build a cupcake ordering app, and use a shared ViewModel to share data " +
+                    "between the fragments of the same activity.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-shared-viewmodel"
+        ),
+        ActivityEntity(
+            48,
+            11,
+            3,
+            "Navigation and the backstack",
+            "Manipulate the back stack in a custom way by modifying the Cupcake app so " +
+                    "that the user can cancel a cupcake order.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-navigation-backstack"
+        ),
+        ActivityEntity(
+            49,
+            11,
+            4,
+            "Test ViewModels and LiveData",
+            "Learn how to write unit tests for ViewModels and LiveData.",
+            url = "https://developer.android.com/codelabs/android-basics-kotlin-test-viewmodel-and-livedata"
+        ),
+        ActivityEntity(
+            50,
+            12,
+            1,
+            "Create a two pane layout",
+            "Learn about using the SlidingPaneLayout component to adapt layouts to " +
+                    "different screen sizes.",
+            optional = true,
+            url = "https://developer.android.com/"
+        ),
+        ActivityEntity(
+            51,
+            12,
+            2,
+            "Adaptive layouts",
+            "In this codelab, you learn how to use SlidingPaneLayout to your app " +
+                    "adaptable to different screen sizes.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-adaptive-layouts"
+        ),
+        ActivityEntity(
+            52,
+            12,
+            3,
+            "Migrate your UI to responsive layouts",
+            "Learn about the Responsive UI principles of flexibility and continuity.",
+            ActivityType.Article,
+            true,
+            "https://developer.android.com/guide/topics/large-screens/migrate-to-responsive-layouts"
+        ),
+        ActivityEntity(
+            53,
+            12,
+            4,
+            "Project: Lunch Tray app",
+            "Apply what you've learned in this unit to complete a food ordering app by " +
+                    "implementing a ViewModel with data binding, and adding navigation between fragments.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-lunch-tray"
+        ),
+        ActivityEntity(
+            54,
+            13,
+            1,
+            "Welcome to Unit 4: Connect to the internet",
+            "In this unit, you’ll learn how to build an app that can get data from the internet.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=M9djOLAwnPc"
+        ),
+        ActivityEntity(
+            55,
+            13,
+            2,
+            "Introduction to coroutines",
+            "Learn to write clear, non-blocking code while building more complex and advanced apps.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-introduction-coroutines"
+        ),
+        ActivityEntity(
+            56,
+            14,
+            1,
+            "Introduction to HTTP/REST",
+            "Learn how apps communicate with each other over the internet.",
+            ActivityType.Video,
+            url = "https://www.youtube.com/watch?v=uRwQKikomtE"
+        ),
+        ActivityEntity(
+            57,
+            14,
+            2,
+            "Get data from the internet",
+            "Connect your app to backend servers using the third-party library Retrofit, " +
+                    "and learn about REST web services.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-getting-data-internet"
+        ),
+        ActivityEntity(
+            58,
+            14,
+            3,
+            "Load and display images from the internet",
+            "Load and display images from a web URL using the Coil library.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-internet-images"
+        ),
+        ActivityEntity(
+            59,
+            14,
+            4,
+            "Debug with breakpoints",
+            "Learn how to use breakpoints and watch specific variables when debugging.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-debugging-with-breakpoints"
+        ),
+        ActivityEntity(
+            60,
+            14,
+            5,
+            "Project: Amphibians app",
+            "Take an app that displays information about different amphibian species, and " +
+                    "use your knowledge of networking, JSON parsing, and view models to enable the " +
+                    "app to use data from the network. The app will get its data from a custom API " +
+                    "for this project and display it in a list view.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-amphibians"
+        ),
+        ActivityEntity(
+            61,
+            15,
+            1,
+            "SQL Basics",
+            "Learn the fundamentals of relational databases and practice running SQL " +
+                    "queries with Database Inspector in Android Studio.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-sql-basics"
+        ),
+        ActivityEntity(
+            62,
+            15,
+            2,
+            "Introduction to Room and Flow",
+            "Learn to work with databases on Android using the Room persistence library.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-intro-room-flow"
+        ),
+        ActivityEntity(
+            63,
+            16,
+            1,
+            "Using Room Kotlin APIs",
+            "Learn how to use and test Room Kotlin APIs.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=vsDkhRTMdA0"
+        ),
+        ActivityEntity(
+            64,
+            16,
+            2,
+            "Persist data with Room",
+            "Learn to build an app that uses Room to save inventory items into a SQLite database.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-persisting-data-room"
+        ),
+        ActivityEntity(
+            65,
+            16,
+            3,
+            "Read and update data with Room",
+            "Learn how to read, display, update, and delete data from the app’s SQLite " +
+                    "database using Room.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-update-data-room"
+        ),
+        ActivityEntity(
+            66,
+            16,
+            4,
+            "Repository Pattern",
+            "Implement caching in an existing app using the repository pattern.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern"
+        ),
+        ActivityEntity(
+            67,
+            16,
+            5,
+            "Preferences DataStore",
+            "Learn how to use a data storage solution called Jetpack DataStore to store a " +
+                    "key-value pair in your application.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-preferences-datastore"
+        ),
+        ActivityEntity(
+            68,
+            16,
+            6,
+            "Project: Forage app",
+            "The completed Forage app allows users to keep track of items, food for example, " +
+                    "that they've foraged for in nature. This data is persisted between sessions " +
+                    "using Room. You'll use your knowledge of Room and performing read, write, update, " +
+                    "and delete operations on a database to implement persistence in the Forage app.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-forage"
+        ),
+        ActivityEntity(
+            69,
+            17,
+            1,
+            "Introduction to WorkManager basics",
+            "Learn the basics of using WorkManager in this introductory video for Unit 6.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=YOZCm2Qk_4o"
+        ),
+        ActivityEntity(
+            70,
+            17,
+            2,
+            "Introduction to WorkManager implementation",
+            "Learn to use WorkRequests and get familiar with its classes and functions.",
+            ActivityType.Video,
+            true,
+            "https://www.youtube.com/watch?v=UOoDt1El1f4"
+        ),
+        ActivityEntity(
+            71,
+            17,
+            3,
+            "Background Work with WorkManager",
+            "Learn to use WorkManager to write a simple job, then perform more complex " +
+                    "chained jobs with constraints.",
+            url = "https://developer.android.com/codelabs/android-workmanager"
+        ),
+        ActivityEntity(
+            72,
+            17,
+            4,
+            "Project: Water Me! app",
+            "The Water Me! app consists of a list of plants, some information about them, " +
+                    "and a description for how often each one should be watered. For each of these " +
+                    "plants, the completed app will schedule a reminder for when they should be watered.",
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-water-me"
         )
     )
 }

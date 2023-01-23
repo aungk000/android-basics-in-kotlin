@@ -52,4 +52,5 @@ data class ActivityEntity(
 sealed class ActivityType(val type: String) {
     object CodeLab: ActivityType("CodeLab")
     object Video: ActivityType("Video")
+    object Article: ActivityType("Article")
 }
