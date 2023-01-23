@@ -100,6 +100,13 @@ fun bindActivityType(textView: TextView, type: ActivityType) {
             textView.text = type.type
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_article,0,0,0)
         }
+        is ActivityType.Quiz -> {
+            textView.text = type.type
+            textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_quiz,0,0,0)
+        }
+        else -> {
+
+        }
     }
 }
 

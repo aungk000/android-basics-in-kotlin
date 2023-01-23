@@ -42,7 +42,7 @@ interface DataDao {
 
     @Transaction
     @Query("SELECT * FROM unit")
-    suspend fun getUnitsWithPathways(): List<UnitWithPathways>
+    fun getUnitsWithPathways(): Flow<List<UnitWithPathways>>
 
     @Transaction
     @Query("SELECT * FROM unit WHERE id = :unitId")

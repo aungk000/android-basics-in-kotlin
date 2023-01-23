@@ -453,7 +453,8 @@ class AppData {
             "Classes and inheritance in Kotlin",
             "To build more complex apps, you’ll need to better understand how classes and " +
                     "inheritance work so that you can more fully use what the Android platform offers.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-classes-and-inheritance"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-classes-and-inheritance",
+            progress = 25
         ),
         ActivityEntity(
             23,
@@ -464,7 +465,8 @@ class AppData {
                     "and switches to build up the layout for your tip calculator app. Instead of " +
                     "using the Layout Editor in Android Studio, you’ll be editing the layout for " +
                     "your app in XML.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-xml-layouts"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-xml-layouts",
+            progress = 25
         ),
         ActivityEntity(
             24,
@@ -474,7 +476,8 @@ class AppData {
             "Learn how to write Kotlin code to interact with the UI elements in the tip " +
                     "calculator app, so that you can calculate the tip. You’ll also learn how to " +
                     "handle edge cases in your app to make your app more robust.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-tip-calculator"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-tip-calculator",
+            progress = 25
         ),
         ActivityEntity(
             25,
@@ -483,7 +486,8 @@ class AppData {
             "Change the app theme",
             "Choose colors for your app and apply them consistently throughout your app " +
                     "using themes.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-theme"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-theme",
+            progress = 20
         ),
         ActivityEntity(
             26,
@@ -492,7 +496,8 @@ class AppData {
             "Change the app icon",
             "Change the launcher icon for your app with the help of the Image Asset Studio " +
                     "tool in Android Studio.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-icon"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-icon",
+            progress = 20
         ),
         ActivityEntity(
             27,
@@ -501,7 +506,8 @@ class AppData {
             "Create a more polished user experience",
             "Update your tip calculator app to look more professional and polished by " +
                     "following Material Design guidelines and best practices for UI development.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-polished-user-experience"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-polished-user-experience",
+            progress = 20
         ),
         ActivityEntity(
             28,
@@ -510,7 +516,8 @@ class AppData {
             "Write Instrumentation Tests",
             "Learn what instrumentation tests look like, how to write instrumentations " +
                     "tests, and how to run them.",
-            url = "https://developer.android.com/codelabs/android-basics-kotlin-write-instrumentation-tests"
+            url = "https://developer.android.com/codelabs/android-basics-kotlin-write-instrumentation-tests",
+            progress = 20
         ),
         ActivityEntity(
             29,
@@ -520,7 +527,8 @@ class AppData {
             "Get an introduction to the Affirmations app you will be creating in this pathway.",
             ActivityType.Video,
             true,
-            "https://www.youtube.com/watch?v=VCeEIkT_2U4"
+            "https://www.youtube.com/watch?v=VCeEIkT_2U4",
+            progress = 15
         ),
         ActivityEntity(
             30,
@@ -528,7 +536,8 @@ class AppData {
             2,
             "Use Lists in Kotlin",
             "Learn how to create lists in Kotlin and loop through them.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-lists"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-lists",
+            progress = 15
         ),
         ActivityEntity(
             31,
@@ -537,7 +546,8 @@ class AppData {
             "Use RecyclerView to display a scrollable list",
             "Learn how to efficiently display a list of text in a RecyclerView and " +
                     "understand its architecture.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-recyclerview-scrollable-list"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-recyclerview-scrollable-list",
+            progress = 15
         ),
         ActivityEntity(
             32,
@@ -547,7 +557,8 @@ class AppData {
             "Learn how to add images to our scrolling list of affirmations. We’ll also " +
                     "enhance the look of our app’s UI by using MaterialCardView and fine-tuning " +
                     "its theme colors.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-display-list-cards"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-display-list-cards",
+            progress = 15
         ),
         ActivityEntity(
             33,
@@ -556,7 +567,8 @@ class AppData {
             "Test Lists and Adapters",
             "Learn a little bit more about best practices for testing and how to add " +
                     "testing dependencies. Get more practice writing both unit and instrumentation tests.",
-            url = "https://developer.android.com/codelabs/android-basics-kotlin-affirmations-test-lists-and-adapters"
+            url = "https://developer.android.com/codelabs/android-basics-kotlin-affirmations-test-lists-and-adapters",
+            progress = 15
         ),
         ActivityEntity(
             34,
@@ -565,7 +577,8 @@ class AppData {
             "Project: Dogglers app",
             "Use your knowledge of layouts to build a scrollable dog photo app in Android " +
                     "Studio, and run tests against your code to make sure everything works as expected.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-dogglers-app"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-dogglers-app",
+            progress = 15
         ),
         ActivityEntity(
             35,
@@ -584,7 +597,8 @@ class AppData {
             2,
             "Collections in Kotlin",
             "Understand collections and how to manipulate them using lambdas and higher-order functions.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-collections"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-collections",
+            progress = 25
         ),
         ActivityEntity(
             37,
@@ -593,7 +607,8 @@ class AppData {
             "Activities and intents",
             "Build a Words app with multiple activities that uses intents to navigate " +
                     "between them and also passes data to other apps.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-activities-intents"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-activities-intents",
+            progress = 25
         ),
         ActivityEntity(
             38,
@@ -602,7 +617,8 @@ class AppData {
             "Stages of the activity lifecycle",
             "Learn about the activity lifecycle and the different states of an activity, " +
                     "from first initialized to finally destroyed.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-activity-lifecycle"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-activity-lifecycle",
+            progress = 25
         ),
         ActivityEntity(
             39,
@@ -613,7 +629,8 @@ class AppData {
                     "provides a framework for building in-app navigation.",
             ActivityType.Video,
             false,
-            "https://www.youtube.com/watch?v=Y0Cs2MQxyIs"
+            "https://www.youtube.com/watch?v=Y0Cs2MQxyIs",
+            progress = 25
         ),
         ActivityEntity(
             40,
@@ -621,7 +638,8 @@ class AppData {
             2,
             "Fragments and the Navigation component",
             "Understand how to use fragments and implement navigation within a single activity.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-fragments-navigation-component"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-fragments-navigation-component",
+            progress = 25
         ),
         ActivityEntity(
             41,
@@ -630,7 +648,8 @@ class AppData {
             "Test Navigation Components",
             "Learn how to test navigation handled by Navigation Components and how to " +
                     "mitigate repeat code in tests.",
-            url = "https://developer.android.com/codelabs/android-basics-kotlin-test-navigation-components"
+            url = "https://developer.android.com/codelabs/android-basics-kotlin-test-navigation-components",
+            progress = 25
         ),
         ActivityEntity(
             42,
@@ -660,7 +679,8 @@ class AppData {
             "Store data in ViewModel",
             "Improve your app by implementing a ViewModel to retain app data during " +
                     "configuration changes.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-viewmodel"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-viewmodel",
+            progress = 35
         ),
         ActivityEntity(
             45,
@@ -669,7 +689,8 @@ class AppData {
             "Use LiveData with ViewModel",
             "Convert the app data in the ViewModel to LiveData and observe the changes " +
                     "to update the UI automatically.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-livedata"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-livedata",
+            progress = 35
         ),
         ActivityEntity(
             46,
@@ -688,7 +709,8 @@ class AppData {
             "Shared ViewModel",
             "Build a cupcake ordering app, and use a shared ViewModel to share data " +
                     "between the fragments of the same activity.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-shared-viewmodel"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-shared-viewmodel",
+            progress = 25
         ),
         ActivityEntity(
             48,
@@ -697,7 +719,8 @@ class AppData {
             "Navigation and the backstack",
             "Manipulate the back stack in a custom way by modifying the Cupcake app so " +
                     "that the user can cancel a cupcake order.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-navigation-backstack"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-navigation-backstack",
+            progress = 25
         ),
         ActivityEntity(
             49,
@@ -705,7 +728,8 @@ class AppData {
             4,
             "Test ViewModels and LiveData",
             "Learn how to write unit tests for ViewModels and LiveData.",
-            url = "https://developer.android.com/codelabs/android-basics-kotlin-test-viewmodel-and-livedata"
+            url = "https://developer.android.com/codelabs/android-basics-kotlin-test-viewmodel-and-livedata",
+            progress = 25
         ),
         ActivityEntity(
             50,
@@ -724,7 +748,8 @@ class AppData {
             "Adaptive layouts",
             "In this codelab, you learn how to use SlidingPaneLayout to your app " +
                     "adaptable to different screen sizes.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-adaptive-layouts"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-adaptive-layouts",
+            progress = 35
         ),
         ActivityEntity(
             52,
@@ -743,7 +768,8 @@ class AppData {
             "Project: Lunch Tray app",
             "Apply what you've learned in this unit to complete a food ordering app by " +
                     "implementing a ViewModel with data binding, and adding navigation between fragments.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-lunch-tray"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-lunch-tray",
+            progress = 35
         ),
         ActivityEntity(
             54,
@@ -761,7 +787,8 @@ class AppData {
             2,
             "Introduction to coroutines",
             "Learn to write clear, non-blocking code while building more complex and advanced apps.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-introduction-coroutines"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-introduction-coroutines",
+            progress = 50
         ),
         ActivityEntity(
             56,
@@ -770,7 +797,8 @@ class AppData {
             "Introduction to HTTP/REST",
             "Learn how apps communicate with each other over the internet.",
             ActivityType.Video,
-            url = "https://www.youtube.com/watch?v=uRwQKikomtE"
+            url = "https://www.youtube.com/watch?v=uRwQKikomtE",
+            progress = 15
         ),
         ActivityEntity(
             57,
@@ -779,7 +807,8 @@ class AppData {
             "Get data from the internet",
             "Connect your app to backend servers using the third-party library Retrofit, " +
                     "and learn about REST web services.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-getting-data-internet"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-getting-data-internet",
+            progress = 15
         ),
         ActivityEntity(
             58,
@@ -787,7 +816,8 @@ class AppData {
             3,
             "Load and display images from the internet",
             "Load and display images from a web URL using the Coil library.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-internet-images"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-internet-images",
+            progress = 15
         ),
         ActivityEntity(
             59,
@@ -795,7 +825,8 @@ class AppData {
             4,
             "Debug with breakpoints",
             "Learn how to use breakpoints and watch specific variables when debugging.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-debugging-with-breakpoints"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-debugging-with-breakpoints",
+            progress = 15
         ),
         ActivityEntity(
             60,
@@ -806,7 +837,8 @@ class AppData {
                     "use your knowledge of networking, JSON parsing, and view models to enable the " +
                     "app to use data from the network. The app will get its data from a custom API " +
                     "for this project and display it in a list view.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-amphibians"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-amphibians",
+            progress = 15
         ),
         ActivityEntity(
             61,
@@ -815,7 +847,8 @@ class AppData {
             "SQL Basics",
             "Learn the fundamentals of relational databases and practice running SQL " +
                     "queries with Database Inspector in Android Studio.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-sql-basics"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-sql-basics",
+            progress = 35
         ),
         ActivityEntity(
             62,
@@ -823,7 +856,8 @@ class AppData {
             2,
             "Introduction to Room and Flow",
             "Learn to work with databases on Android using the Room persistence library.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-intro-room-flow"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-intro-room-flow",
+            progress = 35
         ),
         ActivityEntity(
             63,
@@ -841,7 +875,8 @@ class AppData {
             2,
             "Persist data with Room",
             "Learn to build an app that uses Room to save inventory items into a SQLite database.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-persisting-data-room"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-persisting-data-room",
+            progress = 15
         ),
         ActivityEntity(
             65,
@@ -850,7 +885,8 @@ class AppData {
             "Read and update data with Room",
             "Learn how to read, display, update, and delete data from the app’s SQLite " +
                     "database using Room.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-update-data-room"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-update-data-room",
+            progress = 15
         ),
         ActivityEntity(
             66,
@@ -858,7 +894,8 @@ class AppData {
             4,
             "Repository Pattern",
             "Implement caching in an existing app using the repository pattern.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern",
+            progress = 15
         ),
         ActivityEntity(
             67,
@@ -867,7 +904,8 @@ class AppData {
             "Preferences DataStore",
             "Learn how to use a data storage solution called Jetpack DataStore to store a " +
                     "key-value pair in your application.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-preferences-datastore"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-preferences-datastore",
+            progress = 15
         ),
         ActivityEntity(
             68,
@@ -878,7 +916,8 @@ class AppData {
                     "that they've foraged for in nature. This data is persisted between sessions " +
                     "using Room. You'll use your knowledge of Room and performing read, write, update, " +
                     "and delete operations on a database to implement persistence in the Forage app.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-forage"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-forage",
+            progress = 15
         ),
         ActivityEntity(
             69,
@@ -907,7 +946,8 @@ class AppData {
             "Background Work with WorkManager",
             "Learn to use WorkManager to write a simple job, then perform more complex " +
                     "chained jobs with constraints.",
-            url = "https://developer.android.com/codelabs/android-workmanager"
+            url = "https://developer.android.com/codelabs/android-workmanager",
+            progress = 35
         ),
         ActivityEntity(
             72,
@@ -917,7 +957,177 @@ class AppData {
             "The Water Me! app consists of a list of plants, some information about them, " +
                     "and a description for how often each one should be watered. For each of these " +
                     "plants, the completed app will schedule a reminder for when they should be watered.",
-            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-water-me"
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-water-me",
+            progress = 35
+        ),
+        ActivityEntity(
+            pathwayId = 1,
+            number = 5,
+            title = "Quiz",
+            description = "Test what you’ve learned and earn your Introduction to Kotlin badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-one/android-basics-kotlin-pathway-one",
+            progress = 30
+        ),
+        ActivityEntity(
+            pathwayId = 2,
+            number = 6,
+            title = "Quiz",
+            description = "Test your knowledge of Android Studio, and earn your Android Studio badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-two/android-basics-kotlin-pathway-two",
+            progress = 25
+        ),
+        ActivityEntity(
+            pathwayId = 3,
+            number = 4,
+            title = "Quiz",
+            description = "Test your knowledge of basic layouts, and earn your Basic Layouts badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-three/android-basics-kotlin-pathway-three",
+            progress = 30
+        ),
+        ActivityEntity(
+            pathwayId = 4,
+            number = 8,
+            title = "Project: Lemonade app",
+            description = "Use what you've learned in this unit to build a new app in Android Studio, " +
+                    "and run a test suite to see that your code works as expected.",
+            type = ActivityType.CodeLab,
+            url = "https://developer.android.com/codelabs/basic-android-kotlin-training-project-lemonade",
+            progress = 20
+        ),
+        ActivityEntity(
+            pathwayId = 4,
+            number = 9,
+            title = "Quiz",
+            description = "Test your knowledge of classes, objects, and conditionals in Kotlin, " +
+                    "and earn your Dice Roller badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-four/android-basics-kotlin-pathway-four",
+            progress = 20
+        ),
+        ActivityEntity(
+            pathwayId = 5,
+            number = 6,
+            title = "Quiz",
+            description = "Test your knowledge of class inheritance and layouts in XML, and earn " +
+                    "your Get user input in an app: Part 1 badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-2-pathway-1/android-basics-kotlin-unit-2-pathway-1",
+            progress = 25
+        ),
+        ActivityEntity(
+            pathwayId = 6,
+            number = 6,
+            title = "Quiz",
+            description = "Test your knowledge of the Gradle build system, app icons, and themes, " +
+                    "and earn your Get user input in an app: Part 2 badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-2-pathway-2/android-basics-kotlin-unit-2-pathway-2",
+            progress = 20
+        ),
+        ActivityEntity(
+            pathwayId = 7,
+            number = 7,
+            title = "Quiz",
+            description = "Test your knowledge of lists in Kotlin and Android’s RecyclerView widget " +
+                    "to earn your Display a scrollable list badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-2-pathway-3/android-basics-kotlin-unit-2-pathway-3",
+            progress = 10
+        ),
+        ActivityEntity(
+            pathwayId = 8,
+            number = 5,
+            title = "Quiz",
+            description = "Test your knowledge to earn your Navigate between screens badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-3-pathway-1/android-basics-kotlin-unit-3-pathway-1",
+            progress = 25
+        ),
+        ActivityEntity(
+            pathwayId = 9,
+            number = 5,
+            title = "Quiz",
+            description = "Test your knowledge and earn your Introduction to the Navigation Component badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-3-pathway-2/android-basics-kotlin-unit-3-pathway-2",
+            progress = 25
+        ),
+        ActivityEntity(
+            pathwayId = 10,
+            number = 4,
+            title = "Quiz",
+            description = "Test your knowledge and earn your Architecture components badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-3-pathway-3/android-basics-kotlin-unit-3-pathway-3",
+            progress = 30
+        ),
+        ActivityEntity(
+            pathwayId = 11,
+            number = 5,
+            title = "Quiz",
+            description = "Test your knowledge and earn your Advanced navigation app examples badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-3-pathway-4/android-basics-kotlin-unit-3-pathway-4",
+            progress = 25
+        ),
+        ActivityEntity(
+            pathwayId = 12,
+            number = 5,
+            title = "Quiz",
+            description = "Test your knowledge and earn your Adaptive layouts badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-3-pathway-5/android-basics-kotlin-unit-3-pathway-5",
+            progress = 30
+        ),
+        ActivityEntity(
+            pathwayId = 13,
+            number = 3,
+            title = "Quiz",
+            description = "Test your knowledge and earn your Coroutines badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-4-pathway-1/android-basics-kotlin-unit-4-pathway-1",
+            progress = 50
+        ),
+        ActivityEntity(
+            pathwayId = 14,
+            number = 6,
+            title = "Quiz",
+            description = "Test your knowledge of HTTP/REST, and earn your Get and display data from " +
+                    "the internet badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-4-pathway-2/android-basics-kotlin-unit-4-pathway-2",
+            progress = 25
+        ),
+        ActivityEntity(
+            pathwayId = 15,
+            number = 3,
+            title = "Quiz",
+            description = "Test your knowledge of relational databases and the Room library, " +
+                    "and earn your SQL, Room, and Flow badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-5-pathway-1/android-basics-kotlin-unit-5-pathway-1",
+            progress = 30
+        ),
+        ActivityEntity(
+            pathwayId = 16,
+            number = 7,
+            title = "Quiz",
+            description = "Test your knowledge of the Room library, and earn your data persistence badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-5-pathway-2/android-basics-kotlin-unit-5-pathway-2",
+            progress = 25
+        ),
+        ActivityEntity(
+            pathwayId = 17,
+            number = 5,
+            title = "Quiz",
+            description = "Test your knowledge of WorkManager, and earn your WorkManager badge.",
+            type = ActivityType.Quiz,
+            url = "https://developer.android.com/courses/quizzes/android-basics-kotlin-unit-6-pathway-1/android-basics-kotlin-unit-6-pathway-1",
+            progress = 30
         )
     )
 }

@@ -2,6 +2,7 @@ package me.ako.androidbasics.domain.model
 
 import android.util.Log
 import androidx.lifecycle.*
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.ako.androidbasics.data.AppData
 import me.ako.androidbasics.data.DataRepository
@@ -58,8 +59,10 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
         _statusUnits.value = Status.Loading
         viewModelScope.launch {
             try {
-                _unitsWithPathways.value = repository.getUnitsWithPathways()
-                _statusUnits.value = Status.Done
+                repository.getUnitsWithPathways().collectLatest {
+                    _unitsWithPathways.value = it
+                    _statusUnits.value = Status.Done
+                }
             } catch (e: Exception) {
                 Log.e("AppViewModel", "loadUnits: ${e.message}")
                 _statusUnits.value = Status.Error
