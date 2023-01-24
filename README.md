@@ -11,4 +11,4 @@ App for official [Android basics in Kotlin](https://developer.android.com/course
 
 # Apk
 
-[Android Basics in Kotlin App](https://github.com/aungk000/android-basics-in-kotlin/blob/main/release/android-basics-0-1-1.apk)
+[Android Basics in Kotlin App](https://github.com/aungk000/android-basics-in-kotlin/blob/main/readme/app-debug.apk)
