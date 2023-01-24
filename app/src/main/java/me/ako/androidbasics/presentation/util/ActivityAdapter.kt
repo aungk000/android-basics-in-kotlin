@@ -9,7 +9,10 @@ import me.ako.androidbasics.data.model.ActivityType
 import me.ako.androidbasics.databinding.ItemActivityBinding
 import me.ako.androidbasics.domain.util.Base
 
-class ActivityAdapter(private val onItemClicked: (ActivityEntity) -> Unit) :
+class ActivityAdapter(
+    private val onItemClicked: (ActivityEntity) -> Unit,
+    private val onLongClicked: (ActivityEntity) -> Unit
+) :
     Base.ClickableListAdapter<ActivityEntity, ItemActivityBinding>(
         R.layout.item_activity,
         DiffCallback()
@@ -28,6 +31,12 @@ class ActivityAdapter(private val onItemClicked: (ActivityEntity) -> Unit) :
             binding.cardActivity.isChecked = true
         }
         onItemClicked(item)
+    }
+
+    override fun onItemViewLongClicked(item: ActivityEntity, binding: ItemActivityBinding) {
+        super.onItemViewLongClicked(item, binding)
+
+        onLongClicked(item)
     }
 
     override fun onViewBind(item: ActivityEntity, binding: ItemActivityBinding) {
@@ -58,8 +67,6 @@ class ActivityAdapter(private val onItemClicked: (ActivityEntity) -> Unit) :
                 imgPlay.visibility = View.GONE
                 progressThumbnail.visibility = View.GONE
             }
-
-            //cardActivity.isChecked = item.finished
 
             this.item = item
             executePendingBindings()

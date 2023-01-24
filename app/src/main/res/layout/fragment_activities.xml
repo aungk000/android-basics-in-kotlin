@@ -15,7 +15,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".presentation.component.FragmentActivities">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,23 +34,22 @@
                     android:layout_height="wrap_content"
                     android:text="@{item.pathway.title}"
                     android:textColor="@color/white"
-                    android:textSize="36sp"
+                    android:textSize="@dimen/text_welcome_title"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/btn_bookmark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/welcome_title" />
+                    tools:text="@string/app_name" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_bookmark"
                     style="?materialIconButtonStyle"
                     app:icon="@drawable/ic_bookmark_border"
-                    app:iconSize="36dp"
+                    app:iconTint="@color/colorPrimary"
                     android:checkable="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/txt_title"
                     app:layout_constraintBottom_toBottomOf="@id/txt_title"
-                    android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -81,6 +80,7 @@
                     android:layout_height="wrap_content"/>
                 
                 <com.google.android.material.card.MaterialCardView
+                    style="?materialCardViewElevatedStyle"
                     app:layout_constraintTop_toBottomOf="@id/txt_activity_count"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +128,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_activities"
-                app:activities="@{item.activities}"
+
                 tools:listitem="@layout/item_activity"
                 tools:itemCount="1"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

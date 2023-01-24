@@ -16,6 +16,7 @@ abstract class Base {
     ) : ListAdapter<T, ClickableListAdapter.ClickableViewHolder<VB>>(diffCallback) {
         abstract fun onViewBind(item: T, binding: VB)
         abstract fun onItemViewClicked(item: T, binding: VB)
+        open fun onItemViewLongClicked(item: T, binding: VB) {}
 
         class ClickableViewHolder<VB : ViewDataBinding>(val binding: VB) :
             RecyclerView.ViewHolder(binding.root)
@@ -31,6 +32,10 @@ abstract class Base {
             onViewBind(item, holder.binding)
             holder.itemView.setOnClickListener {
                 onItemViewClicked(item, holder.binding)
+            }
+            holder.itemView.setOnLongClickListener {
+                onItemViewLongClicked(item, holder.binding)
+                true
             }
         }
     }

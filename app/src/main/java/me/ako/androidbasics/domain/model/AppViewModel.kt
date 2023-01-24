@@ -77,8 +77,8 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
         return repository.getPathwayWithActivities(id).asLiveData()
     }
 
-    fun finishActivity(activity: ActivityEntity) {
-        activity.finished = true
+    fun finishActivity(activity: ActivityEntity, finished: Boolean) {
+        activity.finished = finished
         viewModelScope.launch {
             repository.updateActivity(activity)
         }

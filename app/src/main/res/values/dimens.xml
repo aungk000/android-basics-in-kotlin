@@ -7,5 +7,5 @@
 
     <dimen name="text_unit_title">24sp</dimen>
     <dimen name="text_unit_description">18sp</dimen>
-    <dimen name="text_welcome_title">48sp</dimen>
+    <dimen name="text_welcome_title">40sp</dimen>
 </resources>

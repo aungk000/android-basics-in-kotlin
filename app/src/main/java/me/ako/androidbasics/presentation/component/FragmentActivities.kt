@@ -1,24 +1,17 @@
 package me.ako.androidbasics.presentation.component
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ClickableSpan
-import android.text.style.ImageSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import kotlinx.coroutines.launch
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
@@ -69,16 +62,22 @@ class FragmentActivities : Fragment() {
                     ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
                 }
             }
-
-            val adapter = ActivityAdapter {
-                onItemClicked(it)
-            }
-            recyclerViewActivities.adapter = adapter
         }
+
+        val adapter = ActivityAdapter(
+            {
+                onItemClicked(it)
+            },
+            {
+                onItemLongClicked(it)
+            }
+        )
+        binding.recyclerViewActivities.adapter = adapter
 
         viewModel.loadPathwayWithActivities(args.id).observe(viewLifecycleOwner) {
             pathway = it
             onBind(it)
+            adapter.submitList(it.activities)
         }
     }
 
@@ -96,7 +95,7 @@ class FragmentActivities : Fragment() {
 
     private fun onItemClicked(it: ActivityEntity) {
         if (!it.finished) {
-            viewModel.finishActivity(it)
+            viewModel.finishActivity(it, true)
 
             if (!it.optional) {
                 viewModel.updateProgress(pathway.pathway, it.progress)
@@ -114,6 +113,24 @@ class FragmentActivities : Fragment() {
         } else {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.url))
             startActivity(intent)
+        }
+    }
+
+    private fun onItemLongClicked(it: ActivityEntity) {
+        if(it.finished) {
+            val dialog = MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Mark as unread")
+                .setMessage("Are you sure you want to mark ${it.title} activity as unread.")
+                .setPositiveButton("Ok") {dialog, which ->
+                    viewModel.finishActivity(it, false)
+
+                    if (!it.optional) {
+                        viewModel.updateProgress(pathway.pathway, -it.progress)
+                    }
+                }
+                .setNegativeButton("Cancel") {dialog, which -> }
+                .setCancelable(true)
+            dialog.show()
         }
     }
 }
