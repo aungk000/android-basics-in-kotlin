@@ -19,19 +19,18 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
     }
 
     private val _statusUnits = MutableLiveData<Status>()
-    private val _statusPreload = MutableLiveData<Status>()
     private val _unitsWithPathways = MutableLiveData<List<UnitWithPathways>>()
 
     val statusUnits: LiveData<Status> get() = _statusUnits
-    val statusPreload: LiveData<Status> get() = _statusPreload
     val unitsWithPathways: LiveData<List<UnitWithPathways>> get() = _unitsWithPathways
 
     /**
      * adding data in normal function by loop.
      * adding data in suspend function would make ui data inconsistent
      * **/
-    fun preloadData() {
-        _statusPreload.value = Status.Loading
+    fun preloadData(): LiveData<Status> {
+        val status = MutableLiveData<Status>()
+        status.value = Status.Loading
         viewModelScope.launch {
             try {
                 val data = AppData()
@@ -45,12 +44,14 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
                     repository.addActivity(it)
                 }
 
-                _statusPreload.value = Status.Done
+                status.value = Status.Done
             } catch (e: Exception) {
                 Log.e("AppViewModel", "preloadData: ${e.message}")
-                _statusPreload.value = Status.Error
+                status.value = Status.Error
             }
         }
+
+        return status
     }
 
     fun loadUnitsWithPathways() {

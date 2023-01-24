@@ -44,19 +44,8 @@ class FragmentPathways : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadUnitWithPathways(args.id).observe(viewLifecycleOwner) {
-            onBind(it)
-        }
-    }
-
-    private fun onBind(item: UnitWithPathways) {
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            this.item = item
-
-            val unit = "Unit ${item.unit.id}: ${item.unit.title}"
-            txtTitle.text = unit
-
             val adapter = PathwayAdapter {
                 val action = FragmentPathwaysDirections.actionFragmentPathwaysToFragmentActivities(
                     it.id
@@ -64,6 +53,19 @@ class FragmentPathways : Fragment() {
                 findNavController().navigate(action)
             }
             recyclerViewPathways.adapter = adapter
+        }
+
+        viewModel.loadUnitWithPathways(args.id).observe(viewLifecycleOwner) {
+            onBind(it)
+        }
+    }
+
+    private fun onBind(item: UnitWithPathways) {
+        binding.apply {
+            this.item = item
+
+            val unit = "Unit ${item.unit.id}: ${item.unit.title}"
+            txtTitle.text = unit
         }
     }
 }

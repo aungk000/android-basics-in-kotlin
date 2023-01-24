@@ -40,6 +40,7 @@ class FragmentActivities : Fragment() {
     private val args: FragmentPathwaysArgs by navArgs()
     private var _binding: FragmentActivitiesBinding? = null
     private val binding get() = _binding!!
+    private lateinit var pathway: PathwayWithActivities
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,21 +59,8 @@ class FragmentActivities : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadPathwayWithActivities(args.id).observe(viewLifecycleOwner) {
-            onBind(it)
-        }
-    }
-
-    private fun onBind(item: PathwayWithActivities) {
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
-            this.item = item
-
-            val progress = "${item.pathway.progress}% completed"
-            txtProgress.text = progress
-
-            val activityCount = "${item.activities.size} activities"
-            txtActivityCount.text = activityCount
 
             btnBookmark.addOnCheckedChangeListener { button, isChecked ->
                 button.icon = if (isChecked) {
@@ -83,25 +71,35 @@ class FragmentActivities : Fragment() {
             }
 
             val adapter = ActivityAdapter {
-                onItemClicked(item, it)
+                onItemClicked(it)
             }
             recyclerViewActivities.adapter = adapter
         }
+
+        viewModel.loadPathwayWithActivities(args.id).observe(viewLifecycleOwner) {
+            pathway = it
+            onBind(it)
+        }
     }
 
-    private fun onItemClicked(item: PathwayWithActivities, it: ActivityEntity) {
+    private fun onBind(item: PathwayWithActivities) {
+        binding.apply {
+            this.item = item
+
+            val progress = "${item.pathway.progress}% completed"
+            txtProgress.text = progress
+
+            val activityCount = "${item.activities.size} activities"
+            txtActivityCount.text = activityCount
+        }
+    }
+
+    private fun onItemClicked(it: ActivityEntity) {
         if (!it.finished) {
             viewModel.finishActivity(it)
 
             if (!it.optional) {
-                viewModel.updateProgress(item.pathway, it.progress)
-
-                // update ui
-                binding.apply {
-                    val updatedProgress = "${item.pathway.progress}% completed"
-                    txtProgress.text = updatedProgress
-                    progressIndicator.progress = item.pathway.progress
-                }
+                viewModel.updateProgress(pathway.pathway, it.progress)
             }
         }
 

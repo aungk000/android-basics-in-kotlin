@@ -53,10 +53,8 @@ class FragmentMain : Fragment() {
         val preload = sharedPref.getBoolean("preload", false)
 
         if(!preload) {
-            viewModel.preloadData()
-
-            viewModel.statusPreload.observe(viewLifecycleOwner) { status ->
-                if (status is Status.Done) {
+            viewModel.preloadData().observe(viewLifecycleOwner) {
+                if (it is Status.Done) {
                     val action = FragmentMainDirections.actionFragmentMainToFragmentUnits()
                     findNavController().navigate(action)
                 }

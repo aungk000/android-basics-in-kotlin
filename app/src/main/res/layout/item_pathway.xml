@@ -55,9 +55,10 @@
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progress"
                 android:progress="@{pathway.progress}"
+                app:trackThickness="8dp"
+                app:trackCornerRadius="4dp"
                 android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginBottom="@dimen/margin_large"
-                app:trackCornerRadius="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
