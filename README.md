@@ -6,7 +6,7 @@ App for official [Android basics in Kotlin](https://developer.android.com/course
 
 | Units | Pathways | Activities |
 |-------|----------|------------|
-| <img src="/readme/screenshot-1.jpg" alt="screenshot-units" width="200" height="400"/> | <img src="/readme/screenshot-2.jpg" alt="screenshot-pathways" width="200" height="400"/> | <img src="/readme/screenshot-3.jpg" alt="screenshot-activities" width="200" height="400"/> |
+| <img src="/readme/screenshot-1.jpg" alt="screenshot-units" height="400"/> | <img src="/readme/screenshot-2.jpg" alt="screenshot-pathways" height="400"/> | <img src="/readme/screenshot-3.jpg" alt="screenshot-activities" height="400"/> |
 
 
 # Apk
