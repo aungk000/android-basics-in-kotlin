@@ -20,9 +20,8 @@ class DataRepository(private val database: AppDatabase) {
     suspend fun deleteActivity(activity: ActivityEntity) = database.dao.deleteActivity(activity)
 
     fun getUnitsWithPathways(): Flow<List<UnitWithPathways>> = database.dao.getUnitsWithPathways()
-    suspend fun getUnitWithPathways(unitId: Int): UnitWithPathways =
+    fun getUnitWithPathways(unitId: Int): Flow<UnitWithPathways> =
         database.dao.getUnitWithPathways(unitId)
-
-    suspend fun getPathwayWithActivities(pathwayId: Int): PathwayWithActivities =
+    fun getPathwayWithActivities(pathwayId: Int): Flow<PathwayWithActivities> =
         database.dao.getPathwayWithActivities(pathwayId)
 }

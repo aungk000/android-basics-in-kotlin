@@ -46,9 +46,9 @@ interface DataDao {
 
     @Transaction
     @Query("SELECT * FROM unit WHERE id = :unitId")
-    suspend fun getUnitWithPathways(unitId: Int): UnitWithPathways
+    fun getUnitWithPathways(unitId: Int): Flow<UnitWithPathways>
 
     @Transaction
     @Query("SELECT * FROM pathway WHERE id = :pathwayId")
-    suspend fun getPathwayWithActivities(pathwayId: Int): PathwayWithActivities
+    fun getPathwayWithActivities(pathwayId: Int): Flow<PathwayWithActivities>
 }

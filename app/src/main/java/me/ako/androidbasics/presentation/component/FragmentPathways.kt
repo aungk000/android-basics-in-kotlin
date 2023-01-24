@@ -1,15 +1,13 @@
 package me.ako.androidbasics.presentation.component
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import kotlinx.coroutines.launch
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.data.DataRepository
 import me.ako.androidbasics.data.model.UnitWithPathways
@@ -46,9 +44,8 @@ class FragmentPathways : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
-            val item = viewModel.loadUnitWithPathways(args.id)
-            onBind(item)
+        viewModel.loadUnitWithPathways(args.id).observe(viewLifecycleOwner) {
+            onBind(it)
         }
     }
 

@@ -21,12 +21,10 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
     private val _statusUnits = MutableLiveData<Status>()
     private val _statusPreload = MutableLiveData<Status>()
     private val _unitsWithPathways = MutableLiveData<List<UnitWithPathways>>()
-    private val _pathwayWithActivities = MutableLiveData<List<PathwayWithActivities>>()
 
     val statusUnits: LiveData<Status> get() = _statusUnits
     val statusPreload: LiveData<Status> get() = _statusPreload
     val unitsWithPathways: LiveData<List<UnitWithPathways>> get() = _unitsWithPathways
-    val pathwayWithActivities: LiveData<List<PathwayWithActivities>> get() = _pathwayWithActivities
 
     /**
      * adding data in normal function by loop.
@@ -70,24 +68,24 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
         }
     }
 
-    suspend fun loadUnitWithPathways(id: Int): UnitWithPathways {
-        return repository.getUnitWithPathways(id)
+    fun loadUnitWithPathways(id: Int): LiveData<UnitWithPathways> {
+        return repository.getUnitWithPathways(id).asLiveData()
     }
 
-    suspend fun loadPathwayWithActivities(id: Int): PathwayWithActivities {
-        return repository.getPathwayWithActivities(id)
+    fun loadPathwayWithActivities(id: Int): LiveData<PathwayWithActivities> {
+        return repository.getPathwayWithActivities(id).asLiveData()
     }
 
     fun finishActivity(activity: ActivityEntity) {
+        activity.finished = true
         viewModelScope.launch {
-            activity.finished = true
             repository.updateActivity(activity)
         }
     }
 
     fun updateProgress(pathway: PathwayEntity, progress: Int) {
+        pathway.progress += progress
         viewModelScope.launch {
-            pathway.progress += progress
             repository.updatePathway(pathway)
         }
     }

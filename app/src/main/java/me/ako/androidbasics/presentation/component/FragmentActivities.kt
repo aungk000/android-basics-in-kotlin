@@ -58,9 +58,8 @@ class FragmentActivities : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
-            val item = viewModel.loadPathwayWithActivities(args.id)
-            onBind(item)
+        viewModel.loadPathwayWithActivities(args.id).observe(viewLifecycleOwner) {
+            onBind(it)
         }
     }
 
@@ -93,16 +92,16 @@ class FragmentActivities : Fragment() {
     private fun onItemClicked(item: PathwayWithActivities, it: ActivityEntity) {
         if (!it.finished) {
             viewModel.finishActivity(it)
-        }
 
-        if (!it.optional) {
-            viewModel.updateProgress(item.pathway, it.progress)
+            if (!it.optional) {
+                viewModel.updateProgress(item.pathway, it.progress)
 
-            // update ui
-            binding.apply {
-                val updatedProgress = "${item.pathway.progress}% completed"
-                txtProgress.text = updatedProgress
-                progressIndicator.progress = item.pathway.progress
+                // update ui
+                binding.apply {
+                    val updatedProgress = "${item.pathway.progress}% completed"
+                    txtProgress.text = updatedProgress
+                    progressIndicator.progress = item.pathway.progress
+                }
             }
         }
 
