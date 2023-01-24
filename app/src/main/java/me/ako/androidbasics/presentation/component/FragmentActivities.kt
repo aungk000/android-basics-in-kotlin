@@ -3,6 +3,7 @@ package me.ako.androidbasics.presentation.component
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,22 +63,21 @@ class FragmentActivities : Fragment() {
                     ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
                 }
             }
-        }
 
-        val adapter = ActivityAdapter(
-            {
-                onItemClicked(it)
-            },
-            {
-                onItemLongClicked(it)
-            }
-        )
-        binding.recyclerViewActivities.adapter = adapter
+            val adapter = ActivityAdapter(
+                {
+                    onItemClicked(it)
+                },
+                {
+                    onItemLongClicked(it)
+                }
+            )
+            recyclerViewActivities.adapter = adapter
+        }
 
         viewModel.loadPathwayWithActivities(args.id).observe(viewLifecycleOwner) {
             pathway = it
             onBind(it)
-            adapter.submitList(it.activities)
         }
     }
 
@@ -102,7 +102,11 @@ class FragmentActivities : Fragment() {
             }
         }
 
-        if (it.type is ActivityType.Video) {
+        intentActionView(it)
+    }
+
+    private fun intentActionView(it: ActivityEntity) {
+        if (it.type == ActivityType.Video) {
             // Try to generate a direct intent to the YouTube app
             var intent = Intent(Intent.ACTION_VIEW, it.launchUri)
             if (intent.resolveActivity(requireActivity().packageManager) == null) {
@@ -116,8 +120,8 @@ class FragmentActivities : Fragment() {
         }
     }
 
-    private fun onItemLongClicked(it: ActivityEntity) {
-        if(it.finished) {
+    private fun onItemLongClicked(it: ActivityEntity): Boolean {
+        return if(it.finished) {
             val dialog = MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Mark as unread")
                 .setMessage("Are you sure you want to mark ${it.title} activity as unread.")
@@ -131,6 +135,10 @@ class FragmentActivities : Fragment() {
                 .setNegativeButton("Cancel") {dialog, which -> }
                 .setCancelable(true)
             dialog.show()
+            true
+        }
+        else {
+            false
         }
     }
 }

@@ -88,19 +88,19 @@ fun bindLoadImage(imageView: ImageView, @DrawableRes image: Int?) {
 @BindingAdapter("activityType")
 fun bindActivityType(textView: TextView, type: ActivityType) {
     when(type) {
-        is ActivityType.CodeLab -> {
+        ActivityType.CodeLab -> {
             textView.text = type.type
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_codelab,0,0,0)
         }
-        is ActivityType.Video -> {
+        ActivityType.Video -> {
             textView.text = type.type
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_video,0,0,0)
         }
-        is ActivityType.Article -> {
+        ActivityType.Article -> {
             textView.text = type.type
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_article,0,0,0)
         }
-        is ActivityType.Quiz -> {
+        ActivityType.Quiz -> {
             textView.text = type.type
             textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_quiz,0,0,0)
         }

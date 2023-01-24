@@ -11,10 +11,8 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_activity"
+        android:id="@+id/card"
         android:checkable="true"
-        android:focusable="true"
-        android:clickable="true"
         android:checked="@{item.finished}"
         android:layout_margin="@dimen/margin_normal"
         android:layout_width="match_parent"
@@ -38,15 +36,14 @@
 
             <TextView
                 android:id="@+id/txt_type"
-                app:activityType="@{item.type}"
                 android:gravity="center_vertical"
                 android:paddingTop="@dimen/padding_normal"
                 android:paddingBottom="@dimen/padding_normal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_title"
-                app:drawableStartCompat="@drawable/ic_codelab"
+                app:drawableStartCompat="@drawable/ic_video"
                 android:drawablePadding="@dimen/padding_normal"
-                tools:text="CodeLab"
+                android:text="@string/video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -60,19 +57,54 @@
                 android:paddingEnd="@dimen/padding_normal"
                 app:layout_constraintStart_toEndOf="@id/txt_type"
                 app:layout_constraintTop_toBottomOf="@id/txt_title"
-                app:layout_constraintBottom_toTopOf="@id/txt_description"
+                app:layout_constraintBottom_toTopOf="@id/img_thumbnail"
                 android:text="@string/optional"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"/>
 
+            <ImageView
+                android:id="@+id/img_thumbnail"
+                android:contentDescription="@{item.title}"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                app:layout_constraintDimensionRatio="h,4:3"
+                app:layout_constraintTop_toBottomOf="@id/txt_type"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+            <ImageView
+                android:id="@+id/img_play"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                android:src="@drawable/ic_play"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/play"
+                app:layout_constraintTop_toTopOf="@id/img_thumbnail"
+                app:layout_constraintBottom_toBottomOf="@id/img_thumbnail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+
+            <ProgressBar
+                android:id="@+id/progress_thumbnail"
+                app:layout_constraintTop_toTopOf="@id/img_thumbnail"
+                app:layout_constraintBottom_toBottomOf="@id/img_thumbnail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_description"
+                android:id="@+id/txt_activity_description"
                 android:text="@{item.description}"
                 android:paddingTop="@dimen/padding_normal"
                 tools:text="@string/welcome_description"
                 android:textSize="@dimen/text_unit_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_type"
+                app:layout_constraintTop_toBottomOf="@id/img_thumbnail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

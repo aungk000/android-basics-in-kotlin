@@ -45,11 +45,12 @@
                     android:id="@+id/btn_bookmark"
                     style="?materialIconButtonStyle"
                     app:icon="@drawable/ic_bookmark_border"
+                    app:iconSize="32dp"
                     app:iconTint="@color/colorPrimary"
                     android:checkable="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/txt_title"
-                    app:layout_constraintBottom_toBottomOf="@id/txt_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/txt_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -128,7 +129,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_activities"
-
+                app:activities="@{item.activities}"
                 tools:listitem="@layout/item_activity"
                 tools:itemCount="1"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

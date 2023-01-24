@@ -45,14 +45,25 @@ data class ActivityEntity(
             val httpUri = Uri.parse(url)
             return Uri.parse("vnd.youtube:" + httpUri.getQueryParameter("v"))
         }
+
+    val videoId: String
+        get() {
+            var videoId = url.substringAfter("watch?v=")
+            if (url.contains("youtu.be")) {
+                videoId = url.substringAfterLast("/")
+            }
+            return videoId
+        }
+
+    val thumbnail: String get() = "https://img.youtube.com/vi/${videoId}/0.jpg"
 }
 
 sealed class ActivityType(val type: String) {
-    object CodeLab: ActivityType("CodeLab")
-    object Video: ActivityType("Video")
-    object Article: ActivityType("Article")
-    object Quiz: ActivityType("Quiz")
-    object Unknown: ActivityType("Unknown")
+    object CodeLab : ActivityType("CodeLab")
+    object Video : ActivityType("Video")
+    object Article : ActivityType("Article")
+    object Quiz : ActivityType("Quiz")
+    object Unknown : ActivityType("Unknown")
 }
 
 class ActivityTypeConverter {

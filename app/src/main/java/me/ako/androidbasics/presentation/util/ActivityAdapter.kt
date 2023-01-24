@@ -1,75 +1,120 @@
 package me.ako.androidbasics.presentation.util
 
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.ActivityType
 import me.ako.androidbasics.databinding.ItemActivityBinding
-import me.ako.androidbasics.domain.util.Base
+import me.ako.androidbasics.databinding.ItemActivityVideoBinding
 
 class ActivityAdapter(
-    private val onItemClicked: (ActivityEntity) -> Unit,
-    private val onLongClicked: (ActivityEntity) -> Unit
-) :
-    Base.ClickableListAdapter<ActivityEntity, ItemActivityBinding>(
-        R.layout.item_activity,
-        DiffCallback()
-    ) {
-    class DiffCallback: DiffUtil.ItemCallback<ActivityEntity>() {
+    private val onClicked: (ActivityEntity) -> Unit,
+    private val onLongClicked: (ActivityEntity) -> Boolean
+) : ListAdapter<ActivityEntity, ViewHolder>(DiffCallback()) {
+    private var loaded = false
+
+    private class DiffCallback : DiffUtil.ItemCallback<ActivityEntity>() {
         override fun areItemsTheSame(oldItem: ActivityEntity, newItem: ActivityEntity): Boolean {
             return oldItem.id == newItem.id
         }
+
         override fun areContentsTheSame(oldItem: ActivityEntity, newItem: ActivityEntity): Boolean {
-            return oldItem == newItem
+            return oldItem.finished != newItem.finished
         }
     }
 
-    override fun onItemViewClicked(item: ActivityEntity, binding: ItemActivityBinding) {
-        if(!item.finished) {
-            binding.cardActivity.isChecked = true
+    class ActivityViewHolder(private val binding: ItemActivityBinding) : ViewHolder(binding.root) {
+        fun onBind(item: ActivityEntity) {
+            binding.apply {
+                this.item = item
+                executePendingBindings()
+            }
         }
-        onItemClicked(item)
     }
 
-    override fun onItemViewLongClicked(item: ActivityEntity, binding: ItemActivityBinding) {
-        super.onItemViewLongClicked(item, binding)
+    class ActivityVideoViewHolder(
+        private val binding: ItemActivityVideoBinding,
+        private var loaded: Boolean
+    ) : ViewHolder(binding.root) {
+        fun onBind(item: ActivityEntity) {
+            binding.apply {
+                if (!loaded) {
+                    Log.d("ActivityAdapter", "ActivityVideoViewHolder: ${item.videoId} loaded $loaded")
+                    loaded = true
 
-        onLongClicked(item)
+                    imgThumbnail.load(item.thumbnail) {
+                        listener(
+                            onError = { request, result ->
+                                imgPlay.load(R.drawable.ic_broken_image)
+                                imgPlay.visibility = View.VISIBLE
+                                progressThumbnail.visibility = View.GONE
+                            },
+                            onSuccess = { request, result ->
+                                imgPlay.visibility = View.VISIBLE
+                                progressThumbnail.visibility = View.GONE
+                            }
+                        )
+                    }
+                }
+
+                this.item = item
+                executePendingBindings()
+            }
+        }
     }
 
-    override fun onViewBind(item: ActivityEntity, binding: ItemActivityBinding) {
-        binding.apply {
-            if(item.type is ActivityType.Video) {
-                var videoId = item.url.substringAfter("watch?v=")
-                if(item.url.contains("youtu.be")) {
-                    videoId = item.url.substringAfterLast("/")
-                }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val bindingActivity = ItemActivityBinding.inflate(inflater, parent, false)
+        val bindingActivityVideo = ItemActivityVideoBinding.inflate(inflater, parent, false)
+        return if (viewType == 2) {
+            ActivityVideoViewHolder(bindingActivityVideo, loaded)
+        } else {
+            ActivityViewHolder(bindingActivity)
+        }
+    }
 
-                val thumbnail = "https://img.youtube.com/vi/$videoId/0.jpg"
-                imgThumbnail.load(thumbnail) {
-                    listener(
-                        onError = { request, result ->
-                            imgPlay.visibility = View.VISIBLE
-                            imgPlay.load(R.drawable.ic_broken_image)
-                            progressThumbnail.visibility = View.GONE
-                        },
-                        onSuccess = { request, result ->
-                            imgPlay.visibility = View.VISIBLE
-                            progressThumbnail.visibility = View.GONE
-                        }
-                    )
-                }
-            }
-            else {
-                imgThumbnail.visibility = View.GONE
-                imgPlay.visibility = View.GONE
-                progressThumbnail.visibility = View.GONE
-            }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
 
-            this.item = item
-            executePendingBindings()
+        if(getItemViewType(position) == 2) {
+            (holder as ActivityVideoViewHolder).onBind(item)
+        } else {
+            (holder as ActivityViewHolder).onBind(item)
+        }
+
+        holder.itemView.setOnClickListener {
+            onClicked(item)
+        }
+        holder.itemView.setOnLongClickListener {
+            onLongClicked(item)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position).type) {
+            ActivityType.CodeLab -> {
+                1
+            }
+            ActivityType.Video -> {
+                2
+            }
+            ActivityType.Article -> {
+                3
+            }
+            ActivityType.Quiz -> {
+                4
+            }
+            else -> {
+                0
+            }
         }
     }
 }
