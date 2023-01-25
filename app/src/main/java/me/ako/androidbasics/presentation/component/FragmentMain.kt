@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.data.DataRepository
+import me.ako.androidbasics.databinding.FragmentActivitiesBinding
 import me.ako.androidbasics.databinding.FragmentMainBinding
 import me.ako.androidbasics.domain.model.AppViewModel
 import me.ako.androidbasics.domain.model.AppViewModel.Status
@@ -30,13 +31,21 @@ class FragmentMain : Fragment() {
             )
         )
     }
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentMainBinding.inflate(inflater, container, false).root
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,12 +58,14 @@ class FragmentMain : Fragment() {
             }
         })
 
-        val sharedPref = requireActivity().getSharedPreferences("preload", Context.MODE_PRIVATE)
+        val sharedPref = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         val preload = sharedPref.getBoolean("preload", false)
 
         if(!preload) {
             viewModel.preloadData().observe(viewLifecycleOwner) {
                 if (it is Status.Done) {
+                    /*binding.progressMain.hide()
+                    binding.progressMain.setVisibilityAfterHide(View.GONE)*/
                     val action = FragmentMainDirections.actionFragmentMainToFragmentUnits()
                     findNavController().navigate(action)
                 }

@@ -2,6 +2,7 @@ package me.ako.androidbasics.domain.model
 
 import android.util.Log
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.ako.androidbasics.data.AppData
@@ -10,6 +11,7 @@ import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.data.model.PathwayWithActivities
 import me.ako.androidbasics.data.model.UnitWithPathways
+import kotlin.coroutines.CoroutineContext
 
 class AppViewModel(private val repository: DataRepository) : ViewModel() {
     sealed class Status {
@@ -17,12 +19,6 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
         object Error : Status()
         object Done : Status()
     }
-
-    private val _statusUnits = MutableLiveData<Status>()
-    private val _unitsWithPathways = MutableLiveData<List<UnitWithPathways>>()
-
-    val statusUnits: LiveData<Status> get() = _statusUnits
-    val unitsWithPathways: LiveData<List<UnitWithPathways>> get() = _unitsWithPathways
 
     /**
      * adding data in normal function by loop.
@@ -54,63 +50,31 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
         return status
     }
 
-    fun loadUnitsWithPathways() {
-        _statusUnits.value = Status.Loading
-        viewModelScope.launch {
-            try {
-                repository.getUnitsWithPathways().collectLatest {
-                    _unitsWithPathways.value = it
-                    _statusUnits.value = Status.Done
-                }
-            } catch (e: Exception) {
-                Log.e("AppViewModel", "loadUnits: ${e.message}")
-                _statusUnits.value = Status.Error
-            }
-        }
+    fun loadUnitsWithPathways(): LiveData<List<UnitWithPathways>> {
+        return repository.getUnitsWithPathways().asLiveData(Dispatchers.IO)
     }
 
     fun loadUnitWithPathways(id: Int): LiveData<UnitWithPathways> {
-        return repository.getUnitWithPathways(id).asLiveData()
+        return repository.getUnitWithPathways(id).asLiveData(Dispatchers.IO)
     }
 
     fun loadPathwayWithActivities(id: Int): LiveData<PathwayWithActivities> {
-        return repository.getPathwayWithActivities(id).asLiveData()
+        return repository.getPathwayWithActivities(id).asLiveData(Dispatchers.IO)
     }
 
     fun finishActivity(activity: ActivityEntity, finished: Boolean) {
         activity.finished = finished
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.updateActivity(activity)
         }
     }
 
     fun updateProgress(pathway: PathwayEntity, progress: Int) {
         pathway.progress += progress
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.updatePathway(pathway)
         }
     }
-
-    /*private fun retrieveUnitWithPathways(unitId: Int): UnitWithPathways? {
-        var pathways: UnitWithPathways? = null
-        viewModelScope.launch {
-            try {
-                pathways = repository.getUnitWithPathways(unitId)
-            } catch (e: Exception) {
-                Log.e("AppViewModel", "retrievePathways: ${e.message}")
-            }
-        }
-        return pathways
-    }*/
-
-    /*fun getBadges(unitId: Int): List<Badge> {
-        val badges = arrayListOf<Badge>()
-        viewModelScope.launch {
-            repository.getPathway(unitId).collect {
-
-            }
-        }
-    }*/
 
     /*fun loadingFinished(): LiveData<Boolean> {
         val liveDataMerger = MediatorLiveData<Boolean>()

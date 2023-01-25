@@ -24,8 +24,8 @@
             android:scaleType="fitCenter"
             android:layout_margin="@dimen/margin_normal"
             tools:src="@drawable/badge_intro_to_kotlin"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
+            android:layout_width="@dimen/image_badge"
+            android:layout_height="@dimen/image_badge"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

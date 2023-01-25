@@ -10,10 +10,15 @@
     <color name="grey">#e0e0e0</color>
     <color name="grey_light">#fafafa</color>
     <color name="grey_dark">#212121</color>
-    <color name="cyan_dark">#073042</color>
-    <color name="blue">#03a9f4</color>
     <color name="blue_light">#40c4ff</color>
-    <color name="blue_dark">#0288d1</color>
+
+    <!--android basics-->
+    <color name="background">#062635</color>
+    <color name="background_alt">#073042</color>
+    <color name="green">#3ddc84</color>
+    <color name="orange">#f86734</color>
+    <color name="blue">#4285f4</color>
+    <color name="blue_dark">#1769e0</color>
 
     <color name="colorPrimary">@color/blue</color>
     <color name="colorSecondary">@color/blue_light</color>

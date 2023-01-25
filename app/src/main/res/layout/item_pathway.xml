@@ -42,8 +42,8 @@
                 android:scaleType="fitCenter"
                 tools:src="@drawable/badge_get_user_input_in_an_app_part_1"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="120dp"
-                android:layout_height="120dp"/>
+                android:layout_width="@dimen/image_badge"
+                android:layout_height="@dimen/image_badge"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_activities"
@@ -53,10 +53,10 @@
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
-                android:id="@+id/progress"
-                android:progress="@{pathway.progress}"
-                app:trackThickness="8dp"
-                app:trackCornerRadius="4dp"
+                android:id="@+id/progress_pathway"
+                app:progressCompat="@{pathway.progress}"
+                app:trackThickness="@dimen/track_thickness"
+                app:trackCornerRadius="@dimen/track_corner_radius"
                 android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginBottom="@dimen/margin_large"
                 android:layout_width="match_parent"

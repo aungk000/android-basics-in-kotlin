@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewModel"
-            type="me.ako.androidbasics.domain.model.AppViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -21,7 +18,7 @@
             <LinearLayout
                 android:id="@+id/header"
                 android:padding="@dimen/padding_large"
-                android:background="@color/cyan_dark"
+                android:background="@color/background_alt"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +48,6 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_units"
-                app:units="@{viewModel.unitsWithPathways}"
                 android:nestedScrollingEnabled="true"
                 tools:listitem="@layout/item_unit"
                 tools:itemCount="1"
@@ -62,10 +58,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
-            <ProgressBar
-                android:id="@+id/progressbar_units"
-                app:statusUnits="@{viewModel.statusUnits}"
-                android:visibility="visible"
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/progress_units"
+                style="?android:progressBarStyle"
                 android:layout_marginTop="@dimen/margin_large"
                 app:layout_constraintTop_toBottomOf="@id/header"
                 app:layout_constraintStart_toStartOf="parent"

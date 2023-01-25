@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -17,7 +18,9 @@ import me.ako.androidbasics.databinding.ItemActivityVideoBinding
 class ActivityAdapter(
     private val onClicked: (ActivityEntity) -> Unit,
     private val onLongClicked: (ActivityEntity) -> Boolean
-) : ListAdapter<ActivityEntity, ViewHolder>(DiffCallback()) {
+) : ListAdapter<ActivityEntity, ViewHolder>(
+    AsyncDifferConfig.Builder(DiffCallback()).build()
+) {
     private var loaded = false
 
     private class DiffCallback : DiffUtil.ItemCallback<ActivityEntity>() {
@@ -46,7 +49,6 @@ class ActivityAdapter(
         fun onBind(item: ActivityEntity) {
             binding.apply {
                 if (!loaded) {
-                    Log.d("ActivityAdapter", "ActivityVideoViewHolder: ${item.videoId} loaded $loaded")
                     loaded = true
 
                     imgThumbnail.load(item.thumbnail) {

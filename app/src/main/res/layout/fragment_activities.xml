@@ -21,7 +21,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/header"
                 android:padding="@dimen/padding_large"
-                android:background="@color/cyan_dark"
+                android:background="@color/background_alt"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
                         android:padding="@dimen/padding_large"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <ImageView
@@ -103,8 +103,8 @@
                             tools:src="@drawable/android_basics_kotlin"
                             android:contentDescription="@{item.pathway.title}"
                             android:scaleType="fitCenter"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp" />
+                            android:layout_width="@dimen/image_badge"
+                            android:layout_height="@dimen/image_badge" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/txt_progress"
@@ -113,12 +113,13 @@
                             android:layout_height="wrap_content"/>
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:id="@+id/progressIndicator"
-                            android:progress="@{item.pathway.progress}"
-                            app:trackThickness="8dp"
-                            app:trackCornerRadius="4dp"
+                            android:id="@+id/progress_indicator"
+                            app:progressCompat="@{item.pathway.progress}"
+                            android:indeterminate="false"
+                            app:trackThickness="@dimen/track_thickness"
+                            app:trackCornerRadius="@dimen/track_corner_radius"
                             android:layout_marginTop="@dimen/margin_normal"
-                            android:layout_width="wrap_content"
+                            android:layout_width="@dimen/image_badge"
                             android:layout_height="wrap_content"/>
 
                     </LinearLayout>

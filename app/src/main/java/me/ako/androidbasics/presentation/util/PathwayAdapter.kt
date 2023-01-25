@@ -27,13 +27,13 @@ class PathwayAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
 
     override fun onViewBind(item: PathwayEntity, binding: ItemPathwayBinding) {
         binding.apply {
-            binding.pathway = item
+            pathway = item
 
             val pathway = "Pathway ${item.number}"
-            binding.txtPathway.text = pathway
+            txtPathway.text = pathway
 
             val activities = "${item.activities} Activities"
-            binding.txtActivities.text = activities
+            txtActivities.text = activities
 
             /*CoroutineScope(Dispatchers.IO).launch {
                 val activityCount = viewModel.loadPathwayWithActivities(item.id).activities.size
@@ -42,9 +42,9 @@ class PathwayAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
             }*/
 
             val datetime = DateTimeFormat.forPattern("MMMM yyyy").print(item.datetime)
-            binding.txtDatetime.text = datetime
+            txtDatetime.text = datetime
 
-            binding.executePendingBindings()
+            executePendingBindings()
         }
     }
 

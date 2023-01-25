@@ -6,10 +6,12 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.ActivityType
@@ -35,16 +37,16 @@ fun bindBadges(recyclerView: RecyclerView, data: List<PathwayEntity>?) {
 }
 
 @BindingAdapter("statusUnits")
-fun bindStatusUnits(progressBar: ProgressBar, status: Status) {
+fun bindStatusUnits(progress: ContentLoadingProgressBar, status: Status) {
     when(status) {
         Status.Loading -> {
-            progressBar.visibility = View.VISIBLE
+            progress.show()
         }
         Status.Done -> {
-            progressBar.visibility = View.GONE
+            progress.hide()
         }
         Status.Error -> {
-            progressBar.visibility = View.GONE
+            progress.hide()
         }
     }
 }
@@ -117,5 +119,12 @@ fun bindOptional(textView: TextView, optional: Boolean) {
     }
     else {
         textView.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("progressCompat")
+fun bindProgressLinear(indicator: LinearProgressIndicator, progress: Int?) {
+    progress?.let {
+        indicator.setProgressCompat(it, true)
     }
 }

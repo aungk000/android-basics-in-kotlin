@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.transition.Visibility
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.ako.androidbasics.AndroidBasicsApplication
@@ -44,11 +45,6 @@ class FragmentUnits : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadUnitsWithPathways()
-
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-
         val adapter = UnitAdapter {
             val action = FragmentUnitsDirections.actionFragmentUnitsToFragmentPathways(
                 it.unit.id
@@ -56,5 +52,11 @@ class FragmentUnits : Fragment() {
             findNavController().navigate(action)
         }
         binding.recyclerViewUnits.adapter = adapter
+
+        viewModel.loadUnitsWithPathways().observe(viewLifecycleOwner) {
+            binding.progressUnits.hide()
+            //binding.progressUnits.setVisibilityAfterHide(View.GONE)
+            adapter.submitList(it)
+        }
     }
 }

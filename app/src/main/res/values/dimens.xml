@@ -7,5 +7,9 @@
 
     <dimen name="text_unit_title">24sp</dimen>
     <dimen name="text_unit_description">18sp</dimen>
-    <dimen name="text_welcome_title">40sp</dimen>
+    <dimen name="text_welcome_title">42sp</dimen>
+
+    <dimen name="track_thickness">8dp</dimen>
+    <dimen name="track_corner_radius">8dp</dimen>
+    <dimen name="image_badge">120dp</dimen>
 </resources>

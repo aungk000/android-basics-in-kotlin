@@ -14,7 +14,9 @@ abstract class Base {
     abstract class ClickableListAdapter<T, VB : ViewDataBinding>(
         @LayoutRes val layoutId: Int,
         diffCallback: DiffUtil.ItemCallback<T>
-    ) : ListAdapter<T, ClickableListAdapter.ClickableViewHolder<VB>>(diffCallback) {
+    ) : ListAdapter<T, ClickableListAdapter.ClickableViewHolder<VB>>(
+        AsyncDifferConfig.Builder(diffCallback).build()
+    ) {
         abstract fun onViewBind(item: T, binding: VB)
         abstract fun onItemViewClicked(item: T, binding: VB)
         open fun onItemViewLongClicked(item: T, binding: VB) {}
