@@ -25,7 +25,9 @@
         <item name="android:statusBarColor">@color/grey_dark</item>
         <item name="android:windowLightStatusBar">false</item>
 
-        <!-- menu icon color -->
+        <!-- icon color -->
         <item name="colorControlNormal">@color/white</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>

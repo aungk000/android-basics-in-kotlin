@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/app_name">
+        <menu>
+            <item
+                android:id="@+id/menu_home"
+                android:title="@string/home"
+                android:icon="@drawable/ic_home"
+                android:checkable="true"/>
+            <item
+                android:id="@+id/menu_bookmark"
+                android:title="@string/bookmarks"
+                android:icon="@drawable/ic_bookmark"
+                android:checkable="true"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"
+        android:checkable="true"/>
+    <item
+        android:id="@+id/menu_about"
+        android:title="@string/about"
+        android:icon="@drawable/ic_info"
+        android:checkable="true"/>
+</menu>

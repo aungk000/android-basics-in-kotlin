@@ -59,9 +59,9 @@ class FragmentMain : Fragment() {
         })
 
         val sharedPref = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-        val preload = sharedPref.getBoolean("preload", false)
+        val preload = sharedPref.getBoolean("preload", true)
 
-        if(!preload) {
+        if(preload) {
             viewModel.preloadData().observe(viewLifecycleOwner) {
                 if (it is Status.Done) {
                     /*binding.progressMain.hide()
@@ -71,7 +71,7 @@ class FragmentMain : Fragment() {
                 }
             }
 
-            sharedPref.edit().putBoolean("preload", true).apply()
+            sharedPref.edit().putBoolean("preload", false).apply()
         }
         else {
             val action = FragmentMainDirections.actionFragmentMainToFragmentUnits()
