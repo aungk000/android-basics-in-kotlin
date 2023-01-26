@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_alt"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <data>
+    <ImageView
+        android:id="@+id/img_developers"
+        android:padding="@dimen/padding_large"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/developers"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/android_developers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:fitsSystemWindows="true"
-        android:background="@color/background_alt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:contentDescription="@string/app_name"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/android_basics_kotlin"
-            android:layout_width="@dimen/image_badge"
-            android:layout_height="@dimen/image_badge"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

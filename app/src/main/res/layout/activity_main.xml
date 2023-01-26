@@ -7,29 +7,26 @@
 
     </data>
 
+    <!--tools:openDrawer="start"-->
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
-        tools:openDrawer="start"
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <!--android:fitsSystemWindows="true"-->
         <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".MainActivity">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appbar_layout"
-                android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
-                    app:layout_scrollFlags="scroll|enterAlways|snap"
+                    app:navigationIcon="@drawable/ic_menu"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize" />
 
@@ -49,7 +46,6 @@
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
             android:layout_gravity="start"
-            android:fitsSystemWindows="true"
             app:menu="@menu/navigation_drawer"
             app:headerLayout="@layout/header_navigation_drawer"
             android:layout_width="wrap_content"

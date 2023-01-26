@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/app_name">
-        <menu>
-            <item
-                android:id="@+id/menu_home"
-                android:title="@string/home"
-                android:icon="@drawable/ic_home"
-                android:checkable="true"/>
-            <item
-                android:id="@+id/menu_bookmark"
-                android:title="@string/bookmarks"
-                android:icon="@drawable/ic_bookmark"
-                android:checkable="true"/>
-        </menu>
-    </item>
     <item
-        android:id="@+id/menu_settings"
-        android:title="@string/settings"
-        android:icon="@drawable/ic_settings"
-        android:checkable="true"/>
+        android:id="@+id/menu_platform"
+        android:title="@string/platform" />
     <item
-        android:id="@+id/menu_about"
-        android:title="@string/about"
-        android:icon="@drawable/ic_info"
-        android:checkable="true"/>
+        android:id="@+id/menu_android_studio"
+        android:title="@string/android_studio" />
+    <item
+        android:id="@+id/menu_google_play"
+        android:title="@string/google_play" />
+    <item
+        android:id="@+id/menu_jetpack"
+        android:title="@string/jetpack" />
+    <item
+        android:id="@+id/menu_kotlin"
+        android:title="@string/kotlin" />
+    <item
+        android:id="@+id/menu_docs"
+        android:title="@string/docs" />
+    <item
+        android:id="@+id/menu_games"
+        android:title="@string/games" />
 </menu>
