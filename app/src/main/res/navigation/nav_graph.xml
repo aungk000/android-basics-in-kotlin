@@ -4,11 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentMain">
+    app:startDestination="@id/fragmentUnits">
     <fragment
         android:id="@+id/fragmentUnits"
         android:name="me.ako.androidbasics.presentation.component.FragmentUnits"
-        android:label="FragmentUnits"
         tools:layout="@layout/fragment_units">
         <action
             android:id="@+id/action_fragmentUnits_to_fragmentPathways"
@@ -17,7 +16,6 @@
     <fragment
         android:id="@+id/fragmentPathways"
         android:name="me.ako.androidbasics.presentation.component.FragmentPathways"
-        android:label="FragmentPathways"
         tools:layout="@layout/fragment_pathways">
         <argument
             android:name="id"
@@ -26,7 +24,7 @@
             android:id="@+id/action_fragmentPathways_to_fragmentActivities"
             app:destination="@id/fragmentActivities" />
     </fragment>
-    <fragment
+    <!--<fragment
         android:id="@+id/fragmentMain"
         android:name="me.ako.androidbasics.presentation.component.FragmentMain"
         android:label="FragmentMain"
@@ -36,11 +34,10 @@
             app:destination="@id/fragmentUnits"
             app:popUpTo="@id/fragmentMain"
             app:popUpToInclusive="true"/>
-    </fragment>
+    </fragment>-->
     <fragment
         android:id="@+id/fragmentActivities"
         android:name="me.ako.androidbasics.presentation.component.FragmentActivities"
-        android:label="FragmentActivities"
         tools:layout="@layout/fragment_activities">
         <argument
             android:name="id"

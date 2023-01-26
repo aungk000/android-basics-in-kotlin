@@ -7,44 +7,51 @@
     </data>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview_units"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_units"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".presentation.component.FragmentUnits">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/header"
                 android:padding="@dimen/padding_large"
                 android:background="@color/background_alt"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_welcome_title"
                     android:textStyle="bold"
                     android:text="@string/welcome_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_description"
+                    app:layout_constraintTop_toBottomOf="@id/txt_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:textSize="@dimen/text_unit_description"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:textColor="@color/white"
                     android:text="@string/welcome_description"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_units"
@@ -61,6 +68,7 @@
             <androidx.core.widget.ContentLoadingProgressBar
                 android:id="@+id/progress_units"
                 style="?android:progressBarStyle"
+                android:indeterminate="true"
                 android:layout_marginTop="@dimen/margin_large"
                 app:layout_constraintTop_toBottomOf="@id/header"
                 app:layout_constraintStart_toStartOf="parent"

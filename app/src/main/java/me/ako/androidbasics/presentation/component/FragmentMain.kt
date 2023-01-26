@@ -9,7 +9,9 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.MaterialToolbar
 import me.ako.androidbasics.AndroidBasicsApplication
+import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
 import me.ako.androidbasics.databinding.FragmentMainBinding
 import me.ako.androidbasics.domain.model.AppViewModel
@@ -19,7 +21,7 @@ class FragmentMain : Fragment() {
     private val viewModel: AppViewModel by activityViewModels {
         AppViewModel.Factory(
             DataRepository(
-                (activity?.application as AndroidBasicsApplication).database
+                (requireActivity().application as AndroidBasicsApplication).database
             )
         )
     }
@@ -43,31 +45,8 @@ class FragmentMain : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object :
-            OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // disable onBackPressed
-            }
-        })
 
-        val sharedPref = requireActivity().getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
-        val preload = sharedPref.getBoolean("preload", true)
 
-        if(preload) {
-            viewModel.preloadData().observe(viewLifecycleOwner) {
-                if (it is Status.Done) {
-                    /*binding.progressMain.hide()
-                    binding.progressMain.setVisibilityAfterHide(View.GONE)*/
-                    val action = FragmentMainDirections.actionFragmentMainToFragmentUnits()
-                    findNavController().navigate(action)
-                }
-            }
 
-            sharedPref.edit().putBoolean("preload", false).apply()
-        }
-        else {
-            val action = FragmentMainDirections.actionFragmentMainToFragmentUnits()
-            findNavController().navigate(action)
-        }
     }
 }

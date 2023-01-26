@@ -6,12 +6,16 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.shape.MaterialShapeDrawable
 import me.ako.androidbasics.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,12 +31,22 @@ class MainActivity : AppCompatActivity() {
             MaterialShapeDrawable.createWithElevationOverlay(this)
     }
 
-    private fun setupToolbarWithDrawer(toolbar: MaterialToolbar, drawerLayout: DrawerLayout) {
-        toolbar.setNavigationOnClickListener {
-            drawerLayout.open()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
-        toolbar.inflateMenu(R.menu.menu_main)
+    private fun setupToolbarWithDrawer(toolbar: MaterialToolbar, drawerLayout: DrawerLayout) {
+        setSupportActionBar(toolbar)
+        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHost.navController
+        //val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        NavigationUI.setupWithNavController(toolbar, navController, drawerLayout)
+
+        /*toolbar.setNavigationOnClickListener {
+            drawerLayout.open()
+        }*/
+
+        /*toolbar.inflateMenu(R.menu.menu_main)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_bookmark -> {
@@ -46,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
-        }
+        }*/
     }
 
     private fun setupDrawerNavigation(drawerLayout: DrawerLayout, navigationView: NavigationView) {

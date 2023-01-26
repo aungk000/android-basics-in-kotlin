@@ -19,7 +19,9 @@ abstract class Base {
     ) {
         abstract fun onViewBind(item: T, binding: VB)
         abstract fun onItemViewClicked(item: T, binding: VB)
-        open fun onItemViewLongClicked(item: T, binding: VB) {}
+        open fun onItemViewLongClicked(item: T, binding: VB): Boolean {
+            return false
+        }
 
         class ClickableViewHolder<VB : ViewDataBinding>(val binding: VB) :
             RecyclerView.ViewHolder(binding.root)
@@ -38,7 +40,6 @@ abstract class Base {
             }
             holder.itemView.setOnLongClickListener {
                 onItemViewLongClicked(item, holder.binding)
-                true
             }
         }
     }
@@ -49,12 +50,8 @@ abstract class Base {
     ) : ListAdapter<T, RecyclerListAdapter.RecyclerViewHolder<VB>>(diffCallback) {
         abstract fun onViewBind(item: T, binding: VB)
 
-        class RecyclerViewHolder<VB : ViewDataBinding>(private val binding: VB) :
-            RecyclerView.ViewHolder(binding.root) {
-            fun onBind(onViewBind: (VB) -> Unit) {
-                onViewBind(binding)
-            }
-        }
+        class RecyclerViewHolder<VB : ViewDataBinding>(val binding: VB) :
+            RecyclerView.ViewHolder(binding.root)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<VB> {
             val inflater = LayoutInflater.from(parent.context)
@@ -64,9 +61,7 @@ abstract class Base {
 
         override fun onBindViewHolder(holder: RecyclerViewHolder<VB>, position: Int) {
             val item = getItem(position)
-            holder.onBind {
-                onViewBind(item, it)
-            }
+            onViewBind(item, holder.binding)
         }
     }
 }

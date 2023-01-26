@@ -1,17 +1,17 @@
 package me.ako.androidbasics.domain.model
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.data.AppData
 import me.ako.androidbasics.data.DataRepository
 import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.data.model.PathwayWithActivities
 import me.ako.androidbasics.data.model.UnitWithPathways
-import kotlin.coroutines.CoroutineContext
 
 class AppViewModel(private val repository: DataRepository) : ViewModel() {
     sealed class Status {

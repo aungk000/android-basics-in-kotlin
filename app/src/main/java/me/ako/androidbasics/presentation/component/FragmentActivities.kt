@@ -25,7 +25,7 @@ class FragmentActivities : Fragment() {
     private val viewModel: AppViewModel by activityViewModels {
         AppViewModel.Factory(
             DataRepository(
-                (activity?.application as AndroidBasicsApplication).database
+                (requireActivity().application as AndroidBasicsApplication).database
             )
         )
     }

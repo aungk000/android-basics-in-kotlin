@@ -36,7 +36,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     "app_db"
-                ).build()
+                )
+                    .createFromAsset("database/android_basics_kotlin.db")
+                    .build()
 
                 INSTANCE = instance
                 instance

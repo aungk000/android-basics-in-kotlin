@@ -27,7 +27,7 @@
 
         <!-- icon color -->
         <item name="colorControlNormal">@color/black</item>
-        
+
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>
