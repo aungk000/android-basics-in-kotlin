@@ -35,7 +35,9 @@ data class ActivityEntity(
     @ColumnInfo(name = "progress")
     val progress: Int = 0,
     @ColumnInfo(name = "finished")
-    var finished: Boolean = false
+    var finished: Boolean = false,
+    @ColumnInfo(name = "bookmarked")
+    var bookmarked: Boolean = false
 ) {
     /**
      * to generate YouTube app links
