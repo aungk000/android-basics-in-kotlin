@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="bookmark"
-            type="me.ako.androidbasics.data.model.BookmarkWithPathway" />
+            name="pathway"
+            type="me.ako.androidbasics.data.model.PathwayEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,40 +16,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/img_bookmark"
-            app:load="@{bookmark.pathway.image}"
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress_badge"
+            tools:progress="90"
+            app:progressCompat="@{pathway.progress}"
+            app:indicatorSize="62dp"
+            android:indeterminate="false"
+            app:trackThickness="4dp"
+            app:trackCornerRadius="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/img_bookmark"
+            app:load="@{pathway.image}"
+            app:layout_constraintStart_toStartOf="@id/progress_badge"
+            app:layout_constraintEnd_toEndOf="@id/progress_badge"
+            app:layout_constraintTop_toTopOf="@id/progress_badge"
+            app:layout_constraintBottom_toBottomOf="@id/progress_badge"
             android:contentDescription="@string/badge_image"
-            tools:src="@drawable/badge_intro_to_kotlin"
+            tools:src="@drawable/badge_architecture_components"
             android:scaleType="fitCenter"
             android:layout_width="@dimen/image_min_height"
             android:layout_height="@dimen/image_min_height"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txt_bookmark_title"
-            android:text="@{bookmark.pathway.title}"
+            android:text="@{pathway.title}"
             android:textStyle="bold"
             android:ellipsize="end"
-            tools:text="@string/welcome_title"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            app:layout_constraintStart_toEndOf="@id/img_bookmark"
+            android:maxLines="1"
+            tools:text="@string/welcome_description"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            app:layout_constraintStart_toEndOf="@id/progress_badge"
             app:layout_constraintEnd_toStartOf="@id/btn_bookmark"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txt_bookmark_progress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txt_bookmark_progress"
-            android:text="@{bookmark.pathway.progressCompleted}"
+            android:text="@{pathway.progressCompleted}"
             tools:text="30% completed"
-            android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginEnd="@dimen/margin_large"
-            app:layout_constraintStart_toEndOf="@id/img_bookmark"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            app:layout_constraintTop_toBottomOf="@id/txt_bookmark_title"
+            app:layout_constraintStart_toEndOf="@id/progress_badge"
             app:layout_constraintEnd_toStartOf="@id/btn_bookmark"
-            app:layout_constraintBottom_toBottomOf="@id/img_bookmark"
+            app:layout_constraintBottom_toBottomOf="@id/progress_badge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
@@ -60,6 +78,7 @@
             app:iconTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

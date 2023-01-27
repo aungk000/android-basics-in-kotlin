@@ -30,6 +30,7 @@
                 <!--app:layout_scrollFlags="scroll|snap"-->
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
+                    app:titleCentered="true"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize" />
 
@@ -58,9 +59,9 @@
                 android:indeterminate="true"
                 app:indicatorColor="@color/green"
                 app:hideAnimationBehavior="outward"
-                app:minHideDelay="@integer/material_motion_duration_short_1"
+                app:minHideDelay="@integer/material_motion_duration_short_2"
                 app:showAnimationBehavior="inward"
-                app:showDelay="@integer/material_motion_duration_short_1"
+                app:showDelay="@integer/material_motion_duration_short_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

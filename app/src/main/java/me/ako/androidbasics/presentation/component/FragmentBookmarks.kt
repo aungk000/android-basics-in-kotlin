@@ -7,18 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
-import me.ako.androidbasics.data.model.BookmarkWithPathway
-import me.ako.androidbasics.data.model.UnitWithPathways
 import me.ako.androidbasics.databinding.FragmentBookmarksBinding
-import me.ako.androidbasics.databinding.FragmentPathwaysBinding
 import me.ako.androidbasics.domain.model.AppViewModel
 import me.ako.androidbasics.presentation.util.BookmarkAdapter
-import me.ako.androidbasics.presentation.util.PathwayAdapter
 
 class FragmentBookmarks: Fragment() {
     private val viewModel: AppViewModel by activityViewModels {
@@ -52,23 +48,20 @@ class FragmentBookmarks: Fragment() {
         val progressBar = requireActivity().findViewById<LinearProgressIndicator>(R.id.progress_main)
         progressBar.show()
 
-        binding.apply {
-
-
-        }
-
         val adapter = BookmarkAdapter(
             {
                 val action = FragmentBookmarksDirections.actionFragmentBookmarksToFragmentActivities(
-                    it.pathway.id,
-                    it.pathway.number
+                    it.id,
+                    it.number
                 )
                 findNavController().navigate(action)
             },
             {
-                viewModel.deleteBookmark(it.pathway.id)
+                it.bookmarked = false
+                viewModel.updatePathway(it)
             }
         )
+        binding.recyclerViewBookmarks.addItemDecoration(DividerItemDecoration(requireContext(), 1))
         binding.recyclerViewBookmarks.adapter = adapter
 
         viewModel.loadBookmarks().observe(viewLifecycleOwner) {

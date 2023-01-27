@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -17,7 +18,6 @@ import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
 import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.ActivityType
-import me.ako.androidbasics.data.model.BookmarkEntity
 import me.ako.androidbasics.data.model.PathwayWithActivities
 import me.ako.androidbasics.databinding.FragmentActivitiesBinding
 import me.ako.androidbasics.domain.model.AppViewModel
@@ -59,11 +59,26 @@ class FragmentActivities : Fragment() {
 
         binding.apply {
             btnBookmark.setOnClickListener {
-                /*btn.icon = if (isChecked) {
+                val checked = btnBookmark.isChecked
+                if(checked) {
+                    /*viewModel.addBookmark(BookmarkEntity(
+                        pathwayId = pathway.pathway.id,
+                        dateTime = DateTime.now()
+                    ))*/
+                    pathway.pathway.bookmarked = checked
+                    viewModel.updatePathway(pathway.pathway)
+                } else {
+                    //viewModel.deleteBookmark(pathway.pathway.id)
+                    pathway.pathway.bookmarked = checked
+                    viewModel.updatePathway(pathway.pathway)
+                }
+            }
+            /*btnBookmark. {
+                *//*btn.icon = if (isChecked) {
                     ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
                 } else {
                     ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
-                }*/
+                }*//*
                 if(btnBookmark.isChecked) {
                     viewModel.addBookmark(BookmarkEntity(
                         pathwayId = pathway.pathway.id,
@@ -79,7 +94,7 @@ class FragmentActivities : Fragment() {
 
                     btnBookmark.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
                 }
-            }
+            }*/
 
             val adapter = ActivityAdapter(
                 {
@@ -108,20 +123,22 @@ class FragmentActivities : Fragment() {
             val activityCount = "${item.activities.size} activities"
             txtActivityCount.text = activityCount
 
-            btnBookmark.icon = if(item.pathway.bookmarked) {
+            /*btnBookmark.icon = if(item.pathway.bookmarked) {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
             } else {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
-            }
+            }*/
         }
     }
 
     private fun onItemClicked(it: ActivityEntity) {
         if (!it.finished) {
-            viewModel.finishActivity(it, true)
+            it.finished = true
+            viewModel.updateActivity(it)
 
             if (!it.optional) {
-                viewModel.updateProgress(pathway.pathway, it.progress)
+                pathway.pathway.progress += it.progress
+                viewModel.updatePathway(pathway.pathway)
             }
         }
 
@@ -145,14 +162,16 @@ class FragmentActivities : Fragment() {
 
     private fun onItemLongClicked(it: ActivityEntity): Boolean {
         return if(it.finished) {
-            val dialog = MaterialAlertDialogBuilder(requireContext())
+            val dialog = AlertDialog.Builder(requireContext())
                 .setTitle("Mark as unread")
                 .setMessage("Are you sure you want to mark ${it.title} activity as unread.")
                 .setPositiveButton("Ok") {dialog, which ->
-                    viewModel.finishActivity(it, false)
+                    it.finished = false
+                    viewModel.updateActivity(it)
 
                     if (!it.optional) {
-                        viewModel.updateProgress(pathway.pathway, -it.progress)
+                        pathway.pathway.progress -= it.progress
+                        viewModel.updatePathway(pathway.pathway)
                     }
                 }
                 .setNegativeButton("Cancel") {dialog, which -> }

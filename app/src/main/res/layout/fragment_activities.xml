@@ -42,10 +42,21 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="@string/welcome_title" />
 
+                <!--<com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/btn_bookmark"
+                    app:buttonCompat="@drawable/ic_bookmark_selector"
+                    app:buttonTint="@color/colorPrimary"
+                    android:checked="@{item.pathway.bookmarked}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>-->
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_bookmark"
                     style="?materialIconButtonStyle"
-                    tools:icon="@drawable/ic_bookmark"
+                    app:icon="@drawable/ic_bookmark_selector"
                     app:iconTint="@color/colorPrimary"
                     app:iconSize="28dp"
                     android:checkable="true"

@@ -12,7 +12,7 @@ import org.joda.time.DateTime
 import java.util.concurrent.Executor
 
 @Database(
-    entities = [UnitEntity::class, PathwayEntity::class, ActivityEntity::class, BookmarkEntity::class],
+    entities = [UnitEntity::class, PathwayEntity::class, ActivityEntity::class],
     version = 1,
     exportSchema = false
 )

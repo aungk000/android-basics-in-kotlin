@@ -10,6 +10,7 @@ class DataRepository(private val database: AppDatabase) {
     suspend fun updateUnit(unit: UnitEntity) = database.dao.updateUnit(unit)
     suspend fun deleteUnit(unit: UnitEntity) = database.dao.deleteUnit(unit)
 
+    fun getBookmarks(): Flow<List<PathwayEntity>> = database.dao.getBookmarks()
     suspend fun addPathway(pathway: PathwayEntity) = database.dao.insertPathway(pathway)
     suspend fun updatePathway(pathway: PathwayEntity) = database.dao.updatePathway(pathway)
     suspend fun deletePathway(pathway: PathwayEntity) = database.dao.deletePathway(pathway)
@@ -24,9 +25,4 @@ class DataRepository(private val database: AppDatabase) {
 
     fun getPathwayWithActivities(pathwayId: Int): Flow<PathwayWithActivities> =
         database.dao.getPathwayWithActivities(pathwayId)
-
-    fun getBookmarksWithPathway(): Flow<List<BookmarkWithPathway>> =
-        database.dao.getBookmarksWithPathway()
-    fun addBookmark(bookmark: BookmarkEntity) = database.dao.insertBookmark(bookmark)
-    fun deleteBookmark(pathwayId: Int) = database.dao.deleteBookmark(pathwayId)
 }

@@ -59,41 +59,24 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
         return repository.getPathwayWithActivities(id).asLiveData(Dispatchers.IO)
     }
 
-    fun finishActivity(activity: ActivityEntity, finished: Boolean) {
-        activity.finished = finished
+    fun updateActivity(activity: ActivityEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateActivity(activity)
         }
     }
 
-    fun updateProgress(pathway: PathwayEntity, progress: Int) {
-        pathway.progress += progress
+    fun updatePathway(pathway: PathwayEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updatePathway(pathway)
         }
     }
 
-    fun updateBookmarked(pathway: PathwayEntity, bookmarked: Boolean) {
-        pathway.bookmarked = bookmarked
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.updatePathway(pathway)
-        }
-    }
-
-    fun loadBookmarks(): LiveData<List<BookmarkWithPathway>> {
+    /*fun loadBookmarks(): LiveData<List<BookmarkWithPathway>> {
         return repository.getBookmarksWithPathway().asLiveData(Dispatchers.IO)
-    }
+    }*/
 
-    fun addBookmark(bookmark: BookmarkEntity) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addBookmark(bookmark)
-        }
-    }
-
-    fun deleteBookmark(pathwayId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteBookmark(pathwayId)
-        }
+    fun loadBookmarks(): LiveData<List<PathwayEntity>> {
+        return repository.getBookmarks().asLiveData(Dispatchers.IO)
     }
 
     /*fun loadingFinished(): LiveData<Boolean> {

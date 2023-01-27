@@ -14,6 +14,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.checkbox.MaterialCheckBox
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.ActivityEntity
@@ -126,19 +128,27 @@ fun bindOptional(textView: TextView, optional: Boolean) {
 }
 
 @BindingAdapter("progressCompat")
-fun bindProgressLinear(indicator: LinearProgressIndicator, progress: Int?) {
+fun bindProgressCompat(indicator: LinearProgressIndicator, progress: Int?) {
     progress?.let {
         indicator.setProgressCompat(it, true)
     }
 }
 
-@BindingAdapter("android:checked", "contextCompat")
-fun bindBookmarked(button: MaterialButton, checked: Boolean?, context: Context) {
-    checked?.let {
-        button.icon = if (it) {
-            ContextCompat.getDrawable(context, R.drawable.ic_bookmark)
-        } else {
-            ContextCompat.getDrawable(context, R.drawable.ic_bookmark_border)
+@BindingAdapter("progressCompat")
+fun bindProgressCompat(indicator: CircularProgressIndicator, progress: Int?) {
+    progress?.let {
+        indicator.setProgressCompat(it, true)
+    }
+}
+
+@BindingAdapter("app:checkedState")
+fun bindCheckedState(checkBox: MaterialCheckBox, bookmarked: Boolean?) {
+    bookmarked?.let {
+        if(it) {
+            checkBox.checkedState = MaterialCheckBox.STATE_CHECKED
+        }
+        else {
+            checkBox.checkedState = MaterialCheckBox.STATE_UNCHECKED
         }
     }
 }
