@@ -2,11 +2,15 @@ package me.ako.androidbasics.presentation.util
 
 import androidx.recyclerview.widget.DiffUtil
 import me.ako.androidbasics.R
+import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.data.model.UnitWithPathways
 import me.ako.androidbasics.databinding.ItemUnitBinding
 import me.ako.androidbasics.domain.util.Base
 
-class UnitAdapter(private val onItemClicked: (UnitWithPathways) -> Unit) :
+class UnitAdapter(
+    private val onItemClicked: (UnitWithPathways) -> Unit,
+    private val onBadgeClicked: (PathwayEntity) -> Unit
+) :
     Base.ClickableListAdapter<UnitWithPathways, ItemUnitBinding>(
         R.layout.item_unit,
         DiffCallback()
@@ -23,7 +27,7 @@ class UnitAdapter(private val onItemClicked: (UnitWithPathways) -> Unit) :
     override fun onViewBind(item: UnitWithPathways, binding: ItemUnitBinding) {
         binding.apply {
             val adapter = BadgeAdapter {
-
+                onBadgeClicked(it)
             }
             recyclerViewBadges.adapter = adapter
 

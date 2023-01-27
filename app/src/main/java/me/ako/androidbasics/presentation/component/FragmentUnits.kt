@@ -57,17 +57,27 @@ class FragmentUnits : Fragment() {
             }
         })*/
 
-        val progressBar = requireActivity().findViewById<LinearProgressIndicator>(R.id.progress_main)
+        val progressBar =
+            requireActivity().findViewById<LinearProgressIndicator>(R.id.progress_main)
         progressBar.show()
 
         preloadData().observe(viewLifecycleOwner) { status ->
             if (status == Status.Done) {
-                val adapter = UnitAdapter {
-                    val action = FragmentUnitsDirections.actionFragmentUnitsToFragmentPathways(
-                        it.unit.id
-                    )
-                    findNavController().navigate(action)
-                }
+                val adapter = UnitAdapter(
+                    {
+                        val action = FragmentUnitsDirections.actionFragmentUnitsToFragmentPathways(
+                            it.unit.id
+                        )
+                        findNavController().navigate(action)
+                    },
+                    {
+                        val action = FragmentUnitsDirections.actionFragmentUnitsToFragmentActivities(
+                            it.id,
+                            it.number
+                        )
+                        findNavController().navigate(action)
+                    }
+                )
                 binding.recyclerViewUnits.adapter = adapter
 
                 viewModel.loadUnitsWithPathways().observe(viewLifecycleOwner) {
@@ -108,9 +118,10 @@ class FragmentUnits : Fragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when(menuItem.itemId) {
+                return when (menuItem.itemId) {
                     R.id.menu_bookmark -> {
-                        val action = FragmentUnitsDirections.actionFragmentUnitsToFragmentBookmarks()
+                        val action =
+                            FragmentUnitsDirections.actionFragmentUnitsToFragmentBookmarks()
                         findNavController().navigate(action)
                         true
                     }

@@ -12,10 +12,11 @@ class BadgeAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
         R.layout.item_badge,
         DiffCallback()
     ) {
-    class DiffCallback: DiffUtil.ItemCallback<PathwayEntity>() {
+    class DiffCallback : DiffUtil.ItemCallback<PathwayEntity>() {
         override fun areItemsTheSame(oldItem: PathwayEntity, newItem: PathwayEntity): Boolean {
             return oldItem.id == newItem.id
         }
+
         override fun areContentsTheSame(oldItem: PathwayEntity, newItem: PathwayEntity): Boolean {
             return oldItem == newItem
         }
@@ -23,11 +24,6 @@ class BadgeAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
 
     override fun onViewBind(item: PathwayEntity, binding: ItemBadgeBinding) {
         binding.apply {
-            imgBadge.setOnLongClickListener {
-                Snackbar.make(binding.root, item.title, Snackbar.LENGTH_SHORT).show()
-                true
-            }
-
             pathway = item
             executePendingBindings()
         }
@@ -35,5 +31,10 @@ class BadgeAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
 
     override fun onItemViewClicked(item: PathwayEntity, binding: ItemBadgeBinding) {
         onItemClicked(item)
+    }
+
+    override fun onItemViewLongClicked(item: PathwayEntity, binding: ItemBadgeBinding): Boolean {
+        Snackbar.make(binding.root, item.title, Snackbar.LENGTH_SHORT).show()
+        return true
     }
 }

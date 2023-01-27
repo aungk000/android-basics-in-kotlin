@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_fragmentUnits_to_fragmentBookmarks"
             app:destination="@id/fragmentBookmarks" />
+        <action
+            android:id="@+id/action_fragmentUnits_to_fragmentActivities"
+            app:destination="@id/fragmentActivities" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPathways"

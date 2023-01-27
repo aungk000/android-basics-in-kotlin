@@ -16,26 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progress_badge"
-            tools:progress="90"
-            app:progressCompat="@{pathway.progress}"
-            app:indicatorSize="62dp"
-            android:indeterminate="false"
-            app:trackThickness="4dp"
-            app:trackCornerRadius="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
         <ImageView
             android:id="@+id/img_bookmark"
             app:load="@{pathway.image}"
-            app:layout_constraintStart_toStartOf="@id/progress_badge"
-            app:layout_constraintEnd_toEndOf="@id/progress_badge"
-            app:layout_constraintTop_toTopOf="@id/progress_badge"
-            app:layout_constraintBottom_toBottomOf="@id/progress_badge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/badge_image"
             tools:src="@drawable/badge_architecture_components"
             android:scaleType="fitCenter"
@@ -49,9 +34,9 @@
             android:ellipsize="end"
             android:maxLines="1"
             tools:text="@string/welcome_description"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_normal"
-            app:layout_constraintStart_toEndOf="@id/progress_badge"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            app:layout_constraintStart_toEndOf="@id/img_bookmark"
             app:layout_constraintEnd_toStartOf="@id/btn_bookmark"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/txt_bookmark_progress"
@@ -62,12 +47,12 @@
             android:id="@+id/txt_bookmark_progress"
             android:text="@{pathway.progressCompleted}"
             tools:text="30% completed"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_large"
             app:layout_constraintTop_toBottomOf="@id/txt_bookmark_title"
-            app:layout_constraintStart_toEndOf="@id/progress_badge"
+            app:layout_constraintStart_toEndOf="@id/img_bookmark"
             app:layout_constraintEnd_toStartOf="@id/btn_bookmark"
-            app:layout_constraintBottom_toBottomOf="@id/progress_badge"
+            app:layout_constraintBottom_toBottomOf="@id/img_bookmark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
