@@ -3,6 +3,8 @@ package me.ako.androidbasics
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -66,6 +70,29 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }*/
+    }
+
+    override fun onSearchRequested(): Boolean {
+        val appData = Bundle().apply {
+            putBoolean("JARGON", true)
+        }
+        startSearch(null, false, appData, false)
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_search, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.menu_search -> {
+                
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setupDrawerNavigation(drawerLayout: DrawerLayout, navigationView: NavigationView) {

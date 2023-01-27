@@ -27,20 +27,40 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        <activity
+            android:launchMode="singleTop"
+            android:name=".SearchableActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
     </application>
     <queries>
         <intent>
-            <action android:name="android.intent.action.VIEW"/>
-            <data android:scheme="https" android:host="youtube.com"/>
+            <action android:name="android.intent.action.VIEW" />
+            <data
+                android:host="youtube.com"
+                android:scheme="https" />
         </intent>
         <intent>
-            <action android:name="android.intent.action.VIEW"/>
-            <data android:scheme="https" android:host="youtu.be"/>
+            <action android:name="android.intent.action.VIEW" />
+            <data
+                android:host="youtu.be"
+                android:scheme="https" />
         </intent>
         <intent>
-            <action android:name="android.intent.action.VIEW"/>
-            <data android:scheme="https" android:host="developer.android.com"/>
+            <action android:name="android.intent.action.VIEW" />
+            <data
+                android:host="developer.android.com"
+                android:scheme="https" />
         </intent>
     </queries>
 </manifest>
