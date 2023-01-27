@@ -5,11 +5,12 @@
     <dimen name="margin_normal">8dp</dimen>
     <dimen name="margin_large">16dp</dimen>
 
-    <dimen name="text_unit_title">24sp</dimen>
-    <dimen name="text_unit_description">18sp</dimen>
-    <dimen name="text_welcome_title">42sp</dimen>
+    <dimen name="text_title">24sp</dimen>
+    <dimen name="text_description">18sp</dimen>
+    <dimen name="text_title_large">38sp</dimen>
 
     <dimen name="track_thickness">8dp</dimen>
     <dimen name="track_corner_radius">8dp</dimen>
     <dimen name="image_badge">120dp</dimen>
+    <dimen name="image_min_height">48dp</dimen>
 </resources>

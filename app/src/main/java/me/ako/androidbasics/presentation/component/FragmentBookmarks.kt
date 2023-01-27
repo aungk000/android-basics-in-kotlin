@@ -12,12 +12,15 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
+import me.ako.androidbasics.data.model.BookmarkWithPathway
 import me.ako.androidbasics.data.model.UnitWithPathways
+import me.ako.androidbasics.databinding.FragmentBookmarksBinding
 import me.ako.androidbasics.databinding.FragmentPathwaysBinding
 import me.ako.androidbasics.domain.model.AppViewModel
+import me.ako.androidbasics.presentation.util.BookmarkAdapter
 import me.ako.androidbasics.presentation.util.PathwayAdapter
 
-class FragmentPathways : Fragment() {
+class FragmentBookmarks: Fragment() {
     private val viewModel: AppViewModel by activityViewModels {
         AppViewModel.Factory(
             DataRepository(
@@ -25,8 +28,8 @@ class FragmentPathways : Fragment() {
             )
         )
     }
-    private val args: FragmentPathwaysArgs by navArgs()
-    private var _binding: FragmentPathwaysBinding? = null
+
+    private var _binding: FragmentBookmarksBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -34,7 +37,7 @@ class FragmentPathways : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentPathwaysBinding.inflate(inflater, container, false)
+        _binding = FragmentBookmarksBinding.inflate(inflater, container, false)
         return _binding?.root
     }
 
@@ -50,30 +53,28 @@ class FragmentPathways : Fragment() {
         progressBar.show()
 
         binding.apply {
-            lifecycleOwner = viewLifecycleOwner
-            val adapter = PathwayAdapter {
-                val action = FragmentPathwaysDirections.actionFragmentPathwaysToFragmentActivities(
-                    it.id,
-                    it.number
+
+
+        }
+
+        val adapter = BookmarkAdapter(
+            {
+                val action = FragmentBookmarksDirections.actionFragmentBookmarksToFragmentActivities(
+                    it.pathway.id,
+                    it.pathway.number
                 )
                 findNavController().navigate(action)
+            },
+            {
+                viewModel.deleteBookmark(it.pathway.id)
             }
-            recyclerViewPathways.adapter = adapter
-        }
+        )
+        binding.recyclerViewBookmarks.adapter = adapter
 
-        viewModel.loadUnitWithPathways(args.id).observe(viewLifecycleOwner) {
+        viewModel.loadBookmarks().observe(viewLifecycleOwner) {
             progressBar.hide()
             progressBar.setVisibilityAfterHide(View.GONE)
-            onBind(it)
-        }
-    }
-
-    private fun onBind(item: UnitWithPathways) {
-        binding.apply {
-            this.item = item
-
-            val unit = "Unit ${item.unit.id}: ${item.unit.title}"
-            txtTitle.text = unit
+            adapter.submitList(it)
         }
     }
 }

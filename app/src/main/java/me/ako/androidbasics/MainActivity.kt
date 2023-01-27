@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -27,8 +28,11 @@ class MainActivity : AppCompatActivity() {
             setupDrawerNavigation(drawerLayout, navigationView)
         }
 
-        binding.appbarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(this)
+        binding.appbarLayout.setStatusBarForegroundColor(
+            ContextCompat.getColor(this, R.color.grey_dark)
+        )
+        /*binding.appbarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(this)*/
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupToolbarWithDrawer(toolbar: MaterialToolbar, drawerLayout: DrawerLayout) {
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHost.navController
         //val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)

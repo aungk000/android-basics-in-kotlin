@@ -42,7 +42,7 @@
                     android:id="@+id/txt_title"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="@dimen/text_unit_title"
+                    android:textSize="@dimen/text_title"
                     tools:text="@string/welcome_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:textSize="@dimen/text_unit_description"
+                    android:textSize="@dimen/text_description"
                     tools:text="@string/welcome_description" />
 
             </LinearLayout>

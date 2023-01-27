@@ -8,10 +8,7 @@ import kotlinx.coroutines.launch
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.data.AppData
 import me.ako.androidbasics.data.DataRepository
-import me.ako.androidbasics.data.model.ActivityEntity
-import me.ako.androidbasics.data.model.PathwayEntity
-import me.ako.androidbasics.data.model.PathwayWithActivities
-import me.ako.androidbasics.data.model.UnitWithPathways
+import me.ako.androidbasics.data.model.*
 
 class AppViewModel(private val repository: DataRepository) : ViewModel() {
     sealed class Status {
@@ -73,6 +70,29 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
         pathway.progress += progress
         viewModelScope.launch(Dispatchers.IO) {
             repository.updatePathway(pathway)
+        }
+    }
+
+    fun updateBookmarked(pathway: PathwayEntity, bookmarked: Boolean) {
+        pathway.bookmarked = bookmarked
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updatePathway(pathway)
+        }
+    }
+
+    fun loadBookmarks(): LiveData<List<BookmarkWithPathway>> {
+        return repository.getBookmarksWithPathway().asLiveData(Dispatchers.IO)
+    }
+
+    fun addBookmark(bookmark: BookmarkEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addBookmark(bookmark)
+        }
+    }
+
+    fun deleteBookmark(pathwayId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteBookmark(pathwayId)
         }
     }
 

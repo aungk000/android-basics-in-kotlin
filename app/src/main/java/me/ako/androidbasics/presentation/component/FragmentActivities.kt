@@ -11,15 +11,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
 import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.ActivityType
+import me.ako.androidbasics.data.model.BookmarkEntity
 import me.ako.androidbasics.data.model.PathwayWithActivities
 import me.ako.androidbasics.databinding.FragmentActivitiesBinding
 import me.ako.androidbasics.domain.model.AppViewModel
 import me.ako.androidbasics.presentation.util.ActivityAdapter
+import org.joda.time.DateTime
 
 class FragmentActivities : Fragment() {
     private val viewModel: AppViewModel by activityViewModels {
@@ -51,14 +54,30 @@ class FragmentActivities : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            lifecycleOwner = viewLifecycleOwner
+        /*val progressBar = requireActivity().findViewById<LinearProgressIndicator>(R.id.progress_main)
+        progressBar.show()*/
 
-            btnBookmark.addOnCheckedChangeListener { button, isChecked ->
-                button.icon = if (isChecked) {
+        binding.apply {
+            btnBookmark.setOnClickListener {
+                /*btn.icon = if (isChecked) {
                     ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
                 } else {
                     ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
+                }*/
+                if(btnBookmark.isChecked) {
+                    viewModel.addBookmark(BookmarkEntity(
+                        pathwayId = pathway.pathway.id,
+                        dateTime = DateTime.now()
+                    ))
+                    viewModel.updateBookmarked(pathway.pathway, btnBookmark.isChecked)
+
+                    btnBookmark.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
+                }
+                else {
+                    viewModel.deleteBookmark(pathway.pathway.id)
+                    viewModel.updateBookmarked(pathway.pathway, btnBookmark.isChecked)
+
+                    btnBookmark.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
                 }
             }
 
@@ -74,6 +93,8 @@ class FragmentActivities : Fragment() {
         }
 
         viewModel.loadPathwayWithActivities(args.id).observe(viewLifecycleOwner) {
+            /*progressBar.hide()
+            progressBar.setVisibilityAfterHide(View.GONE)*/
             pathway = it
             onBind(it)
         }
@@ -81,13 +102,17 @@ class FragmentActivities : Fragment() {
 
     private fun onBind(item: PathwayWithActivities) {
         binding.apply {
+            lifecycleOwner = viewLifecycleOwner
             this.item = item
-
-            val progress = "${item.pathway.progress}% completed"
-            txtProgress.text = progress
 
             val activityCount = "${item.activities.size} activities"
             txtActivityCount.text = activityCount
+
+            btnBookmark.icon = if(item.pathway.bookmarked) {
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
+            } else {
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
+            }
         }
     }
 

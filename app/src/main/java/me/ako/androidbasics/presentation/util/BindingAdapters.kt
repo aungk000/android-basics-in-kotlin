@@ -1,11 +1,14 @@
 package me.ako.androidbasics.presentation.util
 
+import android.content.Context
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -126,5 +129,16 @@ fun bindOptional(textView: TextView, optional: Boolean) {
 fun bindProgressLinear(indicator: LinearProgressIndicator, progress: Int?) {
     progress?.let {
         indicator.setProgressCompat(it, true)
+    }
+}
+
+@BindingAdapter("android:checked", "contextCompat")
+fun bindBookmarked(button: MaterialButton, checked: Boolean?, context: Context) {
+    checked?.let {
+        button.icon = if (it) {
+            ContextCompat.getDrawable(context, R.drawable.ic_bookmark)
+        } else {
+            ContextCompat.getDrawable(context, R.drawable.ic_bookmark_border)
+        }
     }
 }

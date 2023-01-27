@@ -8,14 +8,19 @@
     <fragment
         android:id="@+id/fragmentUnits"
         android:name="me.ako.androidbasics.presentation.component.FragmentUnits"
+        android:label="@string/fragment_units_label"
         tools:layout="@layout/fragment_units">
         <action
             android:id="@+id/action_fragmentUnits_to_fragmentPathways"
             app:destination="@id/fragmentPathways" />
+        <action
+            android:id="@+id/action_fragmentUnits_to_fragmentBookmarks"
+            app:destination="@id/fragmentBookmarks" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPathways"
         android:name="me.ako.androidbasics.presentation.component.FragmentPathways"
+        android:label="@string/fragment_pathways_label"
         tools:layout="@layout/fragment_pathways">
         <argument
             android:name="id"
@@ -38,9 +43,22 @@
     <fragment
         android:id="@+id/fragmentActivities"
         android:name="me.ako.androidbasics.presentation.component.FragmentActivities"
+        android:label="@string/fragment_activities_label"
         tools:layout="@layout/fragment_activities">
         <argument
             android:name="id"
             app:argType="integer" />
+        <argument
+            android:name="number"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentBookmarks"
+        android:name="me.ako.androidbasics.presentation.component.FragmentBookmarks"
+        android:label="@string/bookmarks"
+        tools:layout="@layout/fragment_bookmarks">
+        <action
+            android:id="@+id/action_fragmentBookmarks_to_fragmentActivities"
+            app:destination="@id/fragmentActivities" />
     </fragment>
 </navigation>

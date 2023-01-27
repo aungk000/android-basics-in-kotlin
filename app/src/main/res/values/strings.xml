@@ -23,4 +23,8 @@
     <string name="docs">Docs</string>
     <string name="games">Games</string>
     <string name="developers">Developers</string>
+    <string name="fragment_units_label"></string>
+    <string name="fragment_pathways_label">Unit {id}</string>
+    <string name="fragment_activities_label">Pathway {number}</string>
+    <string name="badge_image">Badge Image</string>
 </resources>

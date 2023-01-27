@@ -20,6 +20,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/header"
+                android:clipToPadding="false"
                 android:padding="@dimen/padding_large"
                 android:background="@color/background_alt"
                 app:layout_constraintTop_toTopOf="parent"
@@ -34,23 +35,24 @@
                     android:layout_height="wrap_content"
                     android:text="@{item.pathway.title}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_welcome_title"
+                    android:textSize="@dimen/text_title_large"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/btn_bookmark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/app_name" />
+                    tools:text="@string/welcome_title" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_bookmark"
                     style="?materialIconButtonStyle"
-                    app:icon="@drawable/ic_bookmark_border"
-                    app:iconSize="32dp"
+                    tools:icon="@drawable/ic_bookmark"
                     app:iconTint="@color/colorPrimary"
+                    app:iconSize="28dp"
                     android:checkable="true"
+                    android:checked="@{item.pathway.bookmarked}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/txt_description"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -65,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:textSize="@dimen/text_unit_description"
+                    android:textSize="@dimen/text_description"
                     tools:text="@string/welcome_description" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -108,6 +110,7 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/txt_progress"
+                            android:text="@{item.pathway.progressCompleted}"
                             tools:text="0% completed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>

@@ -51,4 +51,17 @@ interface DataDao {
     @Transaction
     @Query("SELECT * FROM pathway WHERE id = :pathwayId")
     fun getPathwayWithActivities(pathwayId: Int): Flow<PathwayWithActivities>
+
+    /*@Query("SELECT * FROM bookmark ORDER BY datetime DESC")
+    fun getBookmarksWithPathway(): Flow<List<BookmarkWithPathway>>*/
+
+    @Transaction
+    @Query("SELECT * FROM bookmark")
+    fun getBookmarksWithPathway(): Flow<List<BookmarkWithPathway>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertBookmark(bookmark: BookmarkEntity)
+
+    @Query("DELETE FROM bookmark WHERE pathway_id = :pathwayId")
+    fun deleteBookmark(pathwayId: Int)
 }

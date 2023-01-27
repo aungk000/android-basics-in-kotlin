@@ -12,7 +12,7 @@ import org.joda.time.DateTime
 import java.util.concurrent.Executor
 
 @Database(
-    entities = [UnitEntity::class, PathwayEntity::class, ActivityEntity::class],
+    entities = [UnitEntity::class, PathwayEntity::class, ActivityEntity::class, BookmarkEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -36,9 +36,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     "app_db"
-                )
-                    .createFromAsset("database/android_basics_kotlin.db")
-                    .build()
+                ).build()
 
                 INSTANCE = instance
                 instance

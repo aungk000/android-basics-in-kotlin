@@ -10,18 +10,19 @@
     <!--tools:openDrawer="start"-->
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:fitsSystemWindows="true"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appbar_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -34,30 +35,36 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <!--<com.google.android.material.progressindicator.LinearProgressIndicator
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/nav_host_fragment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar_layout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/nav_graph" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progress_main"
-                app:layout_anchor="@id/appbar_layout"
-                app:layout_anchorGravity="top"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar_layout"
                 app:trackThickness="4dp"
                 android:indeterminate="true"
                 app:indicatorColor="@color/green"
                 app:hideAnimationBehavior="outward"
-                app:minHideDelay="@integer/material_motion_duration_short_2"
+                app:minHideDelay="@integer/material_motion_duration_short_1"
                 app:showAnimationBehavior="inward"
                 app:showDelay="@integer/material_motion_duration_short_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>-->
+                android:layout_height="wrap_content"/>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/nav_host_fragment"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/nav_graph" />
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"

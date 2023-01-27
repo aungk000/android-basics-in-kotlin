@@ -32,5 +32,9 @@ data class PathwayEntity(
     @ColumnInfo(name = "datetime")
     val datetime: DateTime,
     @ColumnInfo(name = "progress")
-    var progress: Int = 0
-)
+    var progress: Int = 0,
+    @ColumnInfo(name = "bookmarked")
+    var bookmarked: Boolean = false
+) {
+    val progressCompleted: String get() =  "${progress}% completed"
+}
