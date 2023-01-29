@@ -3,51 +3,109 @@ package me.ako.androidbasics
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.util.Log
+import android.util.TypedValue
 import android.widget.ImageView
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.search.SearchBar
+import com.google.android.material.search.SearchView
+import com.google.android.material.search.SearchView.TransitionState
 import com.google.android.material.shape.MaterialShapeDrawable
 import me.ako.androidbasics.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL)
+        //setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL)
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHost.navController
+
         binding.apply {
-            setupToolbarWithDrawer(toolbar, drawerLayout)
-            setupDrawerNavigation(drawerLayout, navigationView)
+            setupAppbar(appbarLayout)
+            setupSearch(searchBar, searchView)
+            setupToolbar(toolbar, drawerLayout)
+            setupNavigationDrawer(drawerLayout, navigationView)
         }
 
-        binding.appbarLayout.setStatusBarForegroundColor(
+        handleBackPressed(navHost)
+    }
+
+    private fun handleBackPressed(navHost: NavHostFragment) {
+        onBackPressedDispatcher.addCallback(this) {
+            if (binding.drawerLayout.isOpen) {
+                binding.drawerLayout.close()
+            } else if (binding.searchView.isShowing) {
+                binding.searchView.hide()
+            } else {
+                val backStack = navHost.childFragmentManager.backStackEntryCount
+                if(backStack == 0) {
+                    finish()
+                }
+                else {
+                    navController.navigateUp()
+                }
+            }
+        }
+    }
+
+    // deprecated but works
+    /*override fun onBackPressed() {
+        if (binding.searchView.isShowing || binding.searchView.isShowing) {
+            binding.searchView.hide()
+        } else {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }*/
+
+    private fun setupAppbar(appBarLayout: AppBarLayout) {
+        val typedValue = TypedValue()
+        theme.resolveAttribute(android.R.attr.colorBackground, typedValue, true)
+        appBarLayout.setBackgroundColor(typedValue.data)
+
+        /*appBarLayout.setStatusBarForegroundColor(
             ContextCompat.getColor(this, R.color.grey_dark)
-        )
-        /*binding.appbarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(this)*/
+        )*/
+        appBarLayout.statusBarForeground =
+            MaterialShapeDrawable.createWithElevationOverlay(this)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+    private fun setupSearch(
+        searchBar: SearchBar,
+        searchView: SearchView
+    ) {
+        //searchView.setupWithSearchBar(searchBar)
+
+        searchView.editText.setOnEditorActionListener { v, actionId, event ->
+            //searchBar.text = searchView.text
+            //searchView.hide()
+            true
+        }
+
+        searchView.addTransitionListener { v, previousState, newState ->
+            if (newState == TransitionState.SHOWING) {
+                // Handle search view opened.
+            }
+        }
     }
 
-    private fun setupToolbarWithDrawer(toolbar: MaterialToolbar, drawerLayout: DrawerLayout) {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHost.navController
+    private fun setupToolbar(toolbar: MaterialToolbar, drawerLayout: DrawerLayout) {
         //val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         NavigationUI.setupWithNavController(toolbar, navController, drawerLayout)
 
@@ -80,7 +138,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -93,17 +151,18 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
+    }*/
 
-    private fun setupDrawerNavigation(drawerLayout: DrawerLayout, navigationView: NavigationView) {
-        val imgHeader: ImageView = navigationView.getHeaderView(0).findViewById(R.id.img_developers)
+    private fun setupNavigationDrawer(drawerLayout: DrawerLayout, navigationView: NavigationView) {
+        val header = navigationView.getHeaderView(0)
+        val imgHeader: ImageView = header.findViewById(R.id.img_developers)
         imgHeader.setOnClickListener {
             drawerLayout.close()
             intentActionView("")
         }
 
         navigationView.setNavigationItemSelectedListener {
-            it.isChecked = true
+            //it.isChecked = true
             drawerLayout.close()
 
             when (it.itemId) {

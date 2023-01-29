@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.android.material.search.SearchView
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
@@ -53,8 +55,8 @@ class FragmentPathways : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             val adapter = PathwayAdapter {
                 val action = FragmentPathwaysDirections.actionFragmentPathwaysToFragmentActivities(
-                    it.id,
-                    it.number
+                    id = it.id,
+                    number = it.number
                 )
                 findNavController().navigate(action)
             }

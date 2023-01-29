@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragmentUnits"
         android:name="me.ako.androidbasics.presentation.component.FragmentUnits"
-        android:label="@string/fragment_units_label"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_units">
         <action
             android:id="@+id/action_fragmentUnits_to_fragmentPathways"

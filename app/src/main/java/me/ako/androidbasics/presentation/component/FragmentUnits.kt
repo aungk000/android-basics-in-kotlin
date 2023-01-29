@@ -1,8 +1,10 @@
 package me.ako.androidbasics.presentation.component
 
+import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -11,7 +13,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.android.material.search.SearchView
 import me.ako.androidbasics.AndroidBasicsApplication
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.DataRepository
@@ -50,15 +54,8 @@ class FragmentUnits : Fragment() {
 
         addMenuProvider()
 
-        /*requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object :
-            OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // disable onBackPressed
-            }
-        })*/
-
-        val progressBar =
-            requireActivity().findViewById<LinearProgressIndicator>(R.id.progress_main)
+        val progressBar: LinearProgressIndicator =
+            requireActivity().findViewById(R.id.progress_main)
         progressBar.show()
 
         preloadData().observe(viewLifecycleOwner) { status ->
@@ -71,10 +68,11 @@ class FragmentUnits : Fragment() {
                         findNavController().navigate(action)
                     },
                     {
-                        val action = FragmentUnitsDirections.actionFragmentUnitsToFragmentActivities(
-                            it.id,
-                            it.number
-                        )
+                        val action =
+                            FragmentUnitsDirections.actionFragmentUnitsToFragmentActivities(
+                                it.id,
+                                it.number
+                            )
                         findNavController().navigate(action)
                     }
                 )
@@ -110,11 +108,53 @@ class FragmentUnits : Fragment() {
         return loading
     }
 
+    /*private fun onBindSearchView(menu: Menu) {
+        val expandListener = object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                return true
+            }
+        }
+        val searchItem = menu.findItem(R.id.menu_search)
+        searchItem.setOnActionExpandListener(expandListener)
+        val searchView = searchItem.actionView as SearchView
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView.apply {
+            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+            //setIconifiedByDefault(true)
+            isSubmitButtonEnabled = true
+            isQueryRefinementEnabled = true
+            *//*setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    clearFocus()
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+                }
+
+            })*//*
+        }
+    }*/
+
+    /*private fun setupSearch(menu: Menu) {
+        val searchItem = menu.findItem(R.id.menu_search)
+        val searchView = searchItem.actionView as SearchView
+
+    }*/
+
     private fun addMenuProvider() {
-        val menuHost = requireActivity() as MenuHost
-        menuHost.addMenuProvider(object : MenuProvider {
+        //val menuHost = requireActivity() as MenuHost
+        val toolbar: MaterialToolbar = requireActivity().findViewById(R.id.toolbar)
+        toolbar.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_main, menu)
+                //onBindSearchView(menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
