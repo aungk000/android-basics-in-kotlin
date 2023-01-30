@@ -3,15 +3,20 @@ package me.ako.androidbasics
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.SearchRecentSuggestions
 import android.util.Log
 import android.util.TypedValue
+import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.inputmethod.EditorInfoCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import androidx.room.util.query
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
@@ -19,8 +24,12 @@ import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
 import com.google.android.material.search.SearchView.TransitionState
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import me.ako.androidbasics.databinding.ActivityMainBinding
+import me.ako.androidbasics.domain.util.SearchProvider
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
@@ -55,10 +64,9 @@ class MainActivity : AppCompatActivity() {
                 binding.searchView.hide()
             } else {
                 val backStack = navHost.childFragmentManager.backStackEntryCount
-                if(backStack == 0) {
+                if (backStack == 0) {
                     finish()
-                }
-                else {
+                } else {
                     navController.navigateUp()
                 }
             }
@@ -90,17 +98,26 @@ class MainActivity : AppCompatActivity() {
         searchBar: SearchBar,
         searchView: SearchView
     ) {
-        //searchView.setupWithSearchBar(searchBar)
+        searchView.apply {
+            setupWithSearchBar(searchBar)
+            editText.setOnEditorActionListener { view, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if (editText.text.isNotEmpty()) {
+                        Snackbar.make(this, editText.text.toString(), Snackbar.LENGTH_SHORT)
+                            .show()
+                    }
 
-        searchView.editText.setOnEditorActionListener { v, actionId, event ->
-            //searchBar.text = searchView.text
-            //searchView.hide()
-            true
-        }
+                    view.clearFocus()
+                    true
+                } else {
+                    false
+                }
+            }
 
-        searchView.addTransitionListener { v, previousState, newState ->
-            if (newState == TransitionState.SHOWING) {
-                // Handle search view opened.
+            addTransitionListener { view, previousState, newState ->
+                if (newState == TransitionState.SHOWING) {
+                    // Handle search view opened.
+                }
             }
         }
     }
@@ -137,21 +154,6 @@ class MainActivity : AppCompatActivity() {
         startSearch(null, false, appData, false)
         return true
     }
-
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_search, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.menu_search -> {
-                
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }*/
 
     private fun setupNavigationDrawer(drawerLayout: DrawerLayout, navigationView: NavigationView) {
         val header = navigationView.getHeaderView(0)

@@ -1,4 +1,4 @@
-package me.ako.androidbasics.data
+package me.ako.androidbasics.data.datasource
 
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.*

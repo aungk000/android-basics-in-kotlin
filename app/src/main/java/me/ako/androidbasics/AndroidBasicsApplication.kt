@@ -1,10 +1,11 @@
 package me.ako.androidbasics
 
 import android.app.Application
-import me.ako.androidbasics.data.AppDatabase
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class AndroidBasicsApplication: Application() {
-    val database: AppDatabase by lazy {
+    /*val database: AppDatabase by lazy {
         AppDatabase.getInstance(this)
-    }
+    }*/
 }

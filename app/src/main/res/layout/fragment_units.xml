@@ -15,7 +15,7 @@
             android:id="@+id/constraint_units"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".presentation.component.FragmentUnits">
+            tools:context=".presentation.view.FragmentUnits">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/header"

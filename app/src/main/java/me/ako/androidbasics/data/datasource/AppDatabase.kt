@@ -1,15 +1,11 @@
-package me.ako.androidbasics.data
+package me.ako.androidbasics.data.datasource
 
-import android.content.Context
-import android.util.Log
-import androidx.room.TypeConverter
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import me.ako.androidbasics.data.model.*
 import org.joda.time.DateTime
-import java.util.concurrent.Executor
 
 @Database(
     entities = [UnitEntity::class, PathwayEntity::class, ActivityEntity::class],
@@ -20,7 +16,7 @@ import java.util.concurrent.Executor
 abstract class AppDatabase : RoomDatabase() {
     abstract val dao: DataDao
 
-    companion object {
+    /*companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
@@ -42,7 +38,7 @@ abstract class AppDatabase : RoomDatabase() {
                 instance
             }
         }
-    }
+    }*/
 
     class Converters {
         @TypeConverter

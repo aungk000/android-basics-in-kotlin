@@ -1,16 +1,18 @@
 package me.ako.androidbasics.domain.model
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import me.ako.androidbasics.AndroidBasicsApplication
-import me.ako.androidbasics.data.AppData
-import me.ako.androidbasics.data.DataRepository
+import me.ako.androidbasics.data.datasource.AppData
 import me.ako.androidbasics.data.model.*
+import me.ako.androidbasics.data.repository.DataRepositoryImpl
+import me.ako.androidbasics.domain.repository.DataRepository
+import javax.inject.Inject
 
-class AppViewModel(private val repository: DataRepository) : ViewModel() {
+@HiltViewModel
+class AppViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
     sealed class Status {
         object Loading : Status()
         object Error : Status()
@@ -28,13 +30,13 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
             try {
                 val data = AppData()
                 data.units.forEach {
-                    repository.addUnit(it)
+                    repository.insertUnit(it)
                 }
                 data.pathways.forEach {
-                    repository.addPathway(it)
+                    repository.insertPathway(it)
                 }
                 data.activities.forEach {
-                    repository.addActivity(it)
+                    repository.insertActivity(it)
                 }
 
                 status.value = Status.Done
@@ -98,7 +100,7 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
         return unitLoading.value == Status.Done && pathwaysLoading.value == Status.Done
     }*/
 
-    class Factory(private val repository: DataRepository) : ViewModelProvider.Factory {
+    /*class Factory(private val repository: DataRepositoryImpl) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AppViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
@@ -106,5 +108,5 @@ class AppViewModel(private val repository: DataRepository) : ViewModel() {
             }
             throw IllegalArgumentException("Unknown ViewModel")
         }
-    }
+    }*/
 }

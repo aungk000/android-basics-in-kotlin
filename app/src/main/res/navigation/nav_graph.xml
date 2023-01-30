@@ -7,7 +7,7 @@
     app:startDestination="@id/fragmentUnits">
     <fragment
         android:id="@+id/fragmentUnits"
-        android:name="me.ako.androidbasics.presentation.component.FragmentUnits"
+        android:name="me.ako.androidbasics.presentation.view.FragmentUnits"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_units">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentPathways"
-        android:name="me.ako.androidbasics.presentation.component.FragmentPathways"
+        android:name="me.ako.androidbasics.presentation.view.FragmentPathways"
         android:label="@string/fragment_pathways_label"
         tools:layout="@layout/fragment_pathways">
         <argument
@@ -45,7 +45,7 @@
     </fragment>-->
     <fragment
         android:id="@+id/fragmentActivities"
-        android:name="me.ako.androidbasics.presentation.component.FragmentActivities"
+        android:name="me.ako.androidbasics.presentation.view.FragmentActivities"
         android:label="@string/fragment_activities_label"
         tools:layout="@layout/fragment_activities">
         <argument
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentBookmarks"
-        android:name="me.ako.androidbasics.presentation.component.FragmentBookmarks"
+        android:name="me.ako.androidbasics.presentation.view.FragmentBookmarks"
         android:label="@string/bookmarks"
         tools:layout="@layout/fragment_bookmarks">
         <action

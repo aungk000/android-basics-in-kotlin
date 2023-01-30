@@ -1,11 +1,8 @@
-package me.ako.androidbasics.presentation.component
+package me.ako.androidbasics.presentation.view
 
-import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.activity.OnBackPressedCallback
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,23 +12,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.LinearProgressIndicator
-import com.google.android.material.search.SearchView
-import me.ako.androidbasics.AndroidBasicsApplication
+import dagger.hilt.android.AndroidEntryPoint
 import me.ako.androidbasics.R
-import me.ako.androidbasics.data.DataRepository
 import me.ako.androidbasics.databinding.FragmentUnitsBinding
 import me.ako.androidbasics.domain.model.AppViewModel
 import me.ako.androidbasics.domain.model.AppViewModel.Status
 import me.ako.androidbasics.presentation.util.UnitAdapter
 
+@AndroidEntryPoint
 class FragmentUnits : Fragment() {
-    private val viewModel: AppViewModel by activityViewModels {
+    private val viewModel: AppViewModel by activityViewModels()
+    /*private val viewModel: AppViewModel by activityViewModels {
         AppViewModel.Factory(
             DataRepository(
                 (requireActivity().application as AndroidBasicsApplication).database
             )
         )
-    }
+    }*/
     private var _binding: FragmentUnitsBinding? = null
     private val binding get() = _binding!!
 
@@ -128,7 +125,7 @@ class FragmentUnits : Fragment() {
             //setIconifiedByDefault(true)
             isSubmitButtonEnabled = true
             isQueryRefinementEnabled = true
-            *//*setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            setOnQueryTextListener(object: SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     clearFocus()
                     return true
@@ -138,14 +135,8 @@ class FragmentUnits : Fragment() {
                     return true
                 }
 
-            })*//*
+            })
         }
-    }*/
-
-    /*private fun setupSearch(menu: Menu) {
-        val searchItem = menu.findItem(R.id.menu_search)
-        val searchView = searchItem.actionView as SearchView
-
     }*/
 
     private fun addMenuProvider() {
