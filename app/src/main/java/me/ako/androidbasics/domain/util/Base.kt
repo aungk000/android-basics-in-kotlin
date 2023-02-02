@@ -5,15 +5,20 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import me.ako.androidbasics.data.model.ActivityEntity
+import me.ako.androidbasics.data.model.PathwayEntity
+import me.ako.androidbasics.data.model.UnitEntity
+import me.ako.androidbasics.presentation.model.Search
 
 abstract class Base {
     abstract class ClickableListAdapter<T, VB : ViewDataBinding>(
-        @LayoutRes val layoutId: Int,
-        diffCallback: DiffUtil.ItemCallback<T>
+        @LayoutRes val layoutId: Int, diffCallback: DiffUtil.ItemCallback<T>
     ) : ListAdapter<T, ClickableListAdapter.ClickableViewHolder<VB>>(
         AsyncDifferConfig.Builder(diffCallback).build()
     ) {
@@ -45,8 +50,7 @@ abstract class Base {
     }
 
     abstract class RecyclerListAdapter<T, VB : ViewDataBinding>(
-        @LayoutRes val layoutId: Int,
-        diffCallback: DiffUtil.ItemCallback<T>
+        @LayoutRes val layoutId: Int, diffCallback: DiffUtil.ItemCallback<T>
     ) : ListAdapter<T, RecyclerListAdapter.RecyclerViewHolder<VB>>(diffCallback) {
         abstract fun onViewBind(item: T, binding: VB)
 

@@ -17,18 +17,11 @@ import me.ako.androidbasics.R
 import me.ako.androidbasics.databinding.FragmentUnitsBinding
 import me.ako.androidbasics.domain.model.AppViewModel
 import me.ako.androidbasics.domain.model.AppViewModel.Status
-import me.ako.androidbasics.presentation.util.UnitAdapter
+import me.ako.androidbasics.presentation.presenter.UnitAdapter
 
 @AndroidEntryPoint
 class FragmentUnits : Fragment() {
     private val viewModel: AppViewModel by activityViewModels()
-    /*private val viewModel: AppViewModel by activityViewModels {
-        AppViewModel.Factory(
-            DataRepository(
-                (requireActivity().application as AndroidBasicsApplication).database
-            )
-        )
-    }*/
     private var _binding: FragmentUnitsBinding? = null
     private val binding get() = _binding!!
 
@@ -140,7 +133,6 @@ class FragmentUnits : Fragment() {
     }*/
 
     private fun addMenuProvider() {
-        //val menuHost = requireActivity() as MenuHost
         val toolbar: MaterialToolbar = requireActivity().findViewById(R.id.toolbar)
         toolbar.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

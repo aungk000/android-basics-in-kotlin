@@ -1,6 +1,5 @@
-package me.ako.androidbasics.presentation.util
+package me.ako.androidbasics.presentation.presenter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

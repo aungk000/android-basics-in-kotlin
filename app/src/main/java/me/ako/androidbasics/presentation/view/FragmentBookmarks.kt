@@ -13,19 +13,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import me.ako.androidbasics.R
 import me.ako.androidbasics.databinding.FragmentBookmarksBinding
 import me.ako.androidbasics.domain.model.AppViewModel
-import me.ako.androidbasics.presentation.util.BookmarkAdapter
+import me.ako.androidbasics.presentation.presenter.BookmarkAdapter
 
 @AndroidEntryPoint
 class FragmentBookmarks: Fragment() {
     private val viewModel: AppViewModel by activityViewModels()
-    /*private val viewModel: AppViewModel by activityViewModels {
-        AppViewModel.Factory(
-            DataRepository(
-                (requireActivity().application as AndroidBasicsApplication).database
-            )
-        )
-    }*/
-
     private var _binding: FragmentBookmarksBinding? = null
     private val binding get() = _binding!!
 

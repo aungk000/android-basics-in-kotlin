@@ -14,18 +14,11 @@ import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.UnitWithPathways
 import me.ako.androidbasics.databinding.FragmentPathwaysBinding
 import me.ako.androidbasics.domain.model.AppViewModel
-import me.ako.androidbasics.presentation.util.PathwayAdapter
+import me.ako.androidbasics.presentation.presenter.PathwayAdapter
 
 @AndroidEntryPoint
 class FragmentPathways : Fragment() {
     private val viewModel: AppViewModel by activityViewModels()
-    /*private val viewModel: AppViewModel by activityViewModels {
-        AppViewModel.Factory(
-            DataRepository(
-                (requireActivity().application as AndroidBasicsApplication).database
-            )
-        )
-    }*/
     private val args: FragmentPathwaysArgs by navArgs()
     private var _binding: FragmentPathwaysBinding? = null
     private val binding get() = _binding!!
@@ -70,11 +63,6 @@ class FragmentPathways : Fragment() {
     }
 
     private fun onBind(item: UnitWithPathways) {
-        binding.apply {
-            this.item = item
-
-            val unit = "Unit ${item.unit.id}: ${item.unit.title}"
-            txtTitle.text = unit
-        }
+        binding.item = item
     }
 }

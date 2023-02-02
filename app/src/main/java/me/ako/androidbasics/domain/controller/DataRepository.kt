@@ -1,4 +1,4 @@
-package me.ako.androidbasics.domain.repository
+package me.ako.androidbasics.domain.controller
 
 import kotlinx.coroutines.flow.Flow
 import me.ako.androidbasics.data.model.*
@@ -11,6 +11,7 @@ interface DataRepository {
     suspend fun deleteUnit(unit: UnitEntity)
     fun getUnitsWithPathways(): Flow<List<UnitWithPathways>>
     fun getUnitWithPathways(unitId: Int): Flow<UnitWithPathways>
+    fun searchUnit(query: String): Flow<List<UnitEntity>>
 
     fun getPathways(): Flow<List<PathwayEntity>>
     fun getPathway(id: Int): Flow<PathwayEntity>
@@ -19,10 +20,12 @@ interface DataRepository {
     suspend fun deletePathway(pathway: PathwayEntity)
     fun getPathwayWithActivities(id: Int): Flow<PathwayWithActivities>
     fun getBookmarks(): Flow<List<PathwayEntity>>
+    fun searchPathway(query: String): Flow<List<PathwayEntity>>
 
     fun getActivities(): Flow<List<ActivityEntity>>
     fun getActivity(id: Int): Flow<ActivityEntity>
     suspend fun insertActivity(activity: ActivityEntity)
     suspend fun updateActivity(activity: ActivityEntity)
     suspend fun deleteActivity(activity: ActivityEntity)
+    fun searchActivity(query: String): Flow<List<ActivityEntity>>
 }

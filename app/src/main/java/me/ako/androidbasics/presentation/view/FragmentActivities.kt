@@ -1,7 +1,5 @@
 package me.ako.androidbasics.presentation.view
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,26 +12,21 @@ import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.ActivityEntity
-import me.ako.androidbasics.data.model.ActivityType
 import me.ako.androidbasics.data.model.PathwayWithActivities
 import me.ako.androidbasics.databinding.FragmentActivitiesBinding
 import me.ako.androidbasics.domain.model.AppViewModel
-import me.ako.androidbasics.presentation.util.ActivityAdapter
+import me.ako.androidbasics.presentation.presenter.ActivityAdapter
+import me.ako.androidbasics.presentation.util.Utils
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentActivities : Fragment() {
     private val viewModel: AppViewModel by activityViewModels()
-    /*private val viewModel: AppViewModel by activityViewModels {
-        AppViewModel.Factory(
-            DataRepository(
-                (requireActivity().application as AndroidBasicsApplication).database
-            )
-        )
-    }*/
     private val args: FragmentPathwaysArgs by navArgs()
     private var _binding: FragmentActivitiesBinding? = null
     private val binding get() = _binding!!
     private lateinit var pathway: PathwayWithActivities
+    @Inject lateinit var utils: Utils
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,40 +52,13 @@ class FragmentActivities : Fragment() {
             btnBookmark.setOnClickListener {
                 val checked = btnBookmark.isChecked
                 if(checked) {
-                    /*viewModel.addBookmark(BookmarkEntity(
-                        pathwayId = pathway.pathway.id,
-                        dateTime = DateTime.now()
-                    ))*/
                     pathway.pathway.bookmarked = checked
                     viewModel.updatePathway(pathway.pathway)
                 } else {
-                    //viewModel.deleteBookmark(pathway.pathway.id)
                     pathway.pathway.bookmarked = checked
                     viewModel.updatePathway(pathway.pathway)
                 }
             }
-            /*btnBookmark. {
-                *//*btn.icon = if (isChecked) {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
-                } else {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
-                }*//*
-                if(btnBookmark.isChecked) {
-                    viewModel.addBookmark(BookmarkEntity(
-                        pathwayId = pathway.pathway.id,
-                        dateTime = DateTime.now()
-                    ))
-                    viewModel.updateBookmarked(pathway.pathway, btnBookmark.isChecked)
-
-                    btnBookmark.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
-                }
-                else {
-                    viewModel.deleteBookmark(pathway.pathway.id)
-                    viewModel.updateBookmarked(pathway.pathway, btnBookmark.isChecked)
-
-                    btnBookmark.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
-                }
-            }*/
 
             val adapter = ActivityAdapter(
                 {
@@ -120,12 +86,6 @@ class FragmentActivities : Fragment() {
 
             val activityCount = "${item.activities.size} activities"
             txtActivityCount.text = activityCount
-
-            /*btnBookmark.icon = if(item.pathway.bookmarked) {
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark)
-            } else {
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_bookmark_border)
-            }*/
         }
     }
 
@@ -140,22 +100,7 @@ class FragmentActivities : Fragment() {
             }
         }
 
-        intentActionView(it)
-    }
-
-    private fun intentActionView(it: ActivityEntity) {
-        if (it.type == ActivityType.Video) {
-            // Try to generate a direct intent to the YouTube app
-            var intent = Intent(Intent.ACTION_VIEW, it.launchUri)
-            if (intent.resolveActivity(requireActivity().packageManager) == null) {
-                // YouTube app isn't found, use the web url
-                intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.url))
-            }
-            startActivity(intent)
-        } else {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.url))
-            startActivity(intent)
-        }
+        utils.handleActivityClick(requireActivity(), it)
     }
 
     private fun onItemLongClicked(it: ActivityEntity): Boolean {

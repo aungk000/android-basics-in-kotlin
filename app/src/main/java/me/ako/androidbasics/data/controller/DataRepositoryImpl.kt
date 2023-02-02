@@ -1,9 +1,9 @@
-package me.ako.androidbasics.data.repository
+package me.ako.androidbasics.data.controller
 
 import kotlinx.coroutines.flow.Flow
 import me.ako.androidbasics.data.datasource.DataDao
 import me.ako.androidbasics.data.model.*
-import me.ako.androidbasics.domain.repository.DataRepository
+import me.ako.androidbasics.domain.controller.DataRepository
 
 class DataRepositoryImpl(private val dao: DataDao): DataRepository {
     override fun getUnits(): Flow<List<UnitEntity>> {
@@ -34,6 +34,10 @@ class DataRepositoryImpl(private val dao: DataDao): DataRepository {
         return dao.getUnitWithPathways(unitId)
     }
 
+    override fun searchUnit(query: String): Flow<List<UnitEntity>> {
+        return dao.searchUnit(query)
+    }
+
     override fun getPathways(): Flow<List<PathwayEntity>> {
         return dao.getPathways()
     }
@@ -62,6 +66,10 @@ class DataRepositoryImpl(private val dao: DataDao): DataRepository {
         return dao.getBookmarks()
     }
 
+    override fun searchPathway(query: String): Flow<List<PathwayEntity>> {
+        return dao.searchPathway(query)
+    }
+
     override fun getActivities(): Flow<List<ActivityEntity>> {
         return dao.getActivities()
     }
@@ -80,5 +88,9 @@ class DataRepositoryImpl(private val dao: DataDao): DataRepository {
 
     override suspend fun deleteActivity(activity: ActivityEntity) {
         dao.deleteActivity(activity)
+    }
+
+    override fun searchActivity(query: String): Flow<List<ActivityEntity>> {
+        return dao.searchActivity(query)
     }
 }

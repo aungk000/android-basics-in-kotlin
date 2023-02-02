@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="header"
+            type="String" />
+    </data>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_header"
+        android:text="@{header}"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:padding="@dimen/padding_large"
+        tools:text="Activities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</layout>

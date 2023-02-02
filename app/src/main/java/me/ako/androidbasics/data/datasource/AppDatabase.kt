@@ -8,37 +8,17 @@ import me.ako.androidbasics.data.model.*
 import org.joda.time.DateTime
 
 @Database(
-    entities = [UnitEntity::class, PathwayEntity::class, ActivityEntity::class],
+    entities = [
+        UnitEntity::class, UnitFtsEntity::class,
+        PathwayEntity::class, PathwayFtsEntity::class,
+        ActivityEntity::class, ActivityFtsEntity::class
+    ],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(AppDatabase.Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract val dao: DataDao
-
-    /*companion object {
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-
-        private val queryCallback = object : QueryCallback {
-            override fun onQuery(sqlQuery: String, bindArgs: List<Any?>) {
-                Log.d("AppDatabase", "SQL query: $sqlQuery, SQL args: $bindArgs")
-            }
-        }
-
-        fun getInstance(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context,
-                    AppDatabase::class.java,
-                    "app_db"
-                ).build()
-
-                INSTANCE = instance
-                instance
-            }
-        }
-    }*/
 
     class Converters {
         @TypeConverter

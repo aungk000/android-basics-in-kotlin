@@ -1,4 +1,4 @@
-package me.ako.androidbasics.presentation.util
+package me.ako.androidbasics.presentation.presenter
 
 import androidx.recyclerview.widget.DiffUtil
 import me.ako.androidbasics.R

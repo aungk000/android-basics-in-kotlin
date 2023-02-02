@@ -39,7 +39,7 @@
                 <com.google.android.material.search.SearchBar
                     android:id="@+id/search_bar"
                     app:layout_scrollFlags="enterAlwaysCollapsed"
-                    android:hint="@string/search"
+                    android:hint="@string/search_hint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -80,11 +80,27 @@
                 app:layout_anchor="@id/search_bar"
                 app:useDrawerArrowDrawable="false"
                 app:animateNavigationIcon="true"
-                android:hint="@string/search"
+                android:hint="@string/search_hint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <!-- Search suggestions/results go here -->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_search"
+                    tools:listitem="@layout/item_search"
+                    tools:itemCount="3"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progress_search"
+                    android:indeterminate="true"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </com.google.android.material.search.SearchView>
 

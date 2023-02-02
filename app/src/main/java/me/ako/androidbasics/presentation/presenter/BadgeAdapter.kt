@@ -1,4 +1,4 @@
-package me.ako.androidbasics.presentation.util
+package me.ako.androidbasics.presentation.presenter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.google.android.material.snackbar.Snackbar
@@ -12,7 +12,7 @@ class BadgeAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
         R.layout.item_badge,
         DiffCallback()
     ) {
-    class DiffCallback : DiffUtil.ItemCallback<PathwayEntity>() {
+    private class DiffCallback : DiffUtil.ItemCallback<PathwayEntity>() {
         override fun areItemsTheSame(oldItem: PathwayEntity, newItem: PathwayEntity): Boolean {
             return oldItem.id == newItem.id
         }

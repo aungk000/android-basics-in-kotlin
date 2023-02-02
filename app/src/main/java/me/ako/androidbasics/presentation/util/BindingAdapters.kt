@@ -1,19 +1,14 @@
 package me.ako.androidbasics.presentation.util
 
-import android.content.Context
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -23,7 +18,10 @@ import me.ako.androidbasics.data.model.ActivityType
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.data.model.UnitWithPathways
 import me.ako.androidbasics.domain.model.AppViewModel.Status
-import org.w3c.dom.Text
+import me.ako.androidbasics.presentation.presenter.ActivityAdapter
+import me.ako.androidbasics.presentation.presenter.BadgeAdapter
+import me.ako.androidbasics.presentation.presenter.PathwayAdapter
+import me.ako.androidbasics.presentation.presenter.UnitAdapter
 
 @BindingAdapter("units")
 fun bindUnits(recyclerView: RecyclerView, data: List<UnitWithPathways>?) {

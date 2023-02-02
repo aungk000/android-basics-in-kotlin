@@ -28,5 +28,6 @@
     <string name="fragment_activities_label">Pathway {number}</string>
     <string name="badge_image">Badge Image</string>
     <string name="search">Search</string>
+    <string name="search_hint">Search topics</string>
     <string name="share">Share</string>
 </resources>

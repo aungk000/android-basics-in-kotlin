@@ -1,22 +1,17 @@
 package me.ako.androidbasics
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.SearchRecentSuggestions
 import android.util.Log
 import android.util.TypedValue
-import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.inputmethod.EditorInfoCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.room.util.query
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
@@ -24,15 +19,20 @@ import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
 import com.google.android.material.search.SearchView.TransitionState
 import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import me.ako.androidbasics.databinding.ActivityMainBinding
-import me.ako.androidbasics.domain.util.SearchProvider
+import me.ako.androidbasics.domain.model.AppViewModel
+import me.ako.androidbasics.presentation.presenter.SearchAdapter
+import me.ako.androidbasics.presentation.util.Utils
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: AppViewModel by viewModels()
+    @Inject
+    lateinit var utils: Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,33 +90,63 @@ class MainActivity : AppCompatActivity() {
         /*appBarLayout.setStatusBarForegroundColor(
             ContextCompat.getColor(this, R.color.grey_dark)
         )*/
-        appBarLayout.statusBarForeground =
-            MaterialShapeDrawable.createWithElevationOverlay(this)
+        appBarLayout.statusBarForeground = MaterialShapeDrawable.createWithElevationOverlay(this)
+    }
+
+    enum class NavFragment(val id: Int) {
+        UnitsFragment(2131296472),
+        PathwaysFragment(2131296471),
+        ActivitiesFragment(2131296469),
+        BookmarksFragment(2131296470)
     }
 
     private fun setupSearch(
-        searchBar: SearchBar,
-        searchView: SearchView
+        searchBar: SearchBar, searchView: SearchView
     ) {
         searchView.apply {
-            setupWithSearchBar(searchBar)
-            editText.setOnEditorActionListener { view, actionId, event ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if (editText.text.isNotEmpty()) {
-                        Snackbar.make(this, editText.text.toString(), Snackbar.LENGTH_SHORT)
-                            .show()
-                    }
+            //setupWithSearchBar(searchBar)
 
-                    view.clearFocus()
-                    true
-                } else {
-                    false
+            val adapter = SearchAdapter(
+                {
+                    utils.handleSearchUnitClick(navController, it)
+                    hide()
+                },
+                {
+                    utils.handleSearchPathwayClick(navController, it)
+                    hide()
+                },
+                {
+                    utils.handleActivityClick(this@MainActivity, it)
                 }
+            )
+            binding.recyclerViewSearch.adapter = adapter
+
+            viewModel.searchData.observe(this@MainActivity) { list ->
+                adapter.submitList(list)
+                if(binding.progressSearch.isShown) {
+                    binding.progressSearch.hide()
+                }
+                Log.d("MainActivity", "search: ended")
+            }
+
+            editText.addTextChangedListener {
+            }
+
+            editText.setOnEditorActionListener { view, actionId, event ->
+                if (editText.text.isNotEmpty()) {
+                    Log.d("MainActivity", "search: started")
+                    binding.progressSearch.show()
+                    val query = editText.text.toString().lowercase()
+                    viewModel.searchDb(query)
+                }
+
+                this.clearFocusAndHideKeyboard()
+                true
             }
 
             addTransitionListener { view, previousState, newState ->
-                if (newState == TransitionState.SHOWING) {
-                    // Handle search view opened.
+                if (newState == TransitionState.HIDING) {
+                    adapter.submitList(null)
                 }
             }
         }
@@ -160,7 +190,7 @@ class MainActivity : AppCompatActivity() {
         val imgHeader: ImageView = header.findViewById(R.id.img_developers)
         imgHeader.setOnClickListener {
             drawerLayout.close()
-            intentActionView("")
+            utils.endpoint(this, "")
         }
 
         navigationView.setNavigationItemSelectedListener {
@@ -169,35 +199,29 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.menu_platform -> {
-                    intentActionView("about")
+                    utils.endpoint(this, "about")
                 }
                 R.id.menu_android_studio -> {
-                    intentActionView("studio")
+                    utils.endpoint(this, "studio")
                 }
                 R.id.menu_google_play -> {
-                    intentActionView("distribute")
+                    utils.endpoint(this, "distribute")
                 }
                 R.id.menu_jetpack -> {
-                    intentActionView("jetpack")
+                    utils.endpoint(this, "jetpack")
                 }
                 R.id.menu_kotlin -> {
-                    intentActionView("kotlin")
+                    utils.endpoint(this, "kotlin")
                 }
                 R.id.menu_docs -> {
-                    intentActionView("docs")
+                    utils.endpoint(this, "docs")
                 }
                 R.id.menu_games -> {
-                    intentActionView("games")
+                    utils.endpoint(this, "games")
                 }
             }
 
             true
         }
-    }
-
-    private fun intentActionView(endPoint: String) {
-        val intent =
-            Intent(Intent.ACTION_VIEW, Uri.parse("https://developer.android.com/$endPoint"))
-        startActivity(intent)
     }
 }

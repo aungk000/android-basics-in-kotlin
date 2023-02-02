@@ -12,13 +12,19 @@
         tools:layout="@layout/fragment_units">
         <action
             android:id="@+id/action_fragmentUnits_to_fragmentPathways"
-            app:destination="@id/fragmentPathways" />
+            app:destination="@id/fragmentPathways"
+            app:popUpTo="@id/fragmentPathways"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_fragmentUnits_to_fragmentBookmarks"
-            app:destination="@id/fragmentBookmarks" />
+            app:destination="@id/fragmentBookmarks"
+            app:popUpTo="@id/fragmentBookmarks"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_fragmentUnits_to_fragmentActivities"
-            app:destination="@id/fragmentActivities" />
+            app:destination="@id/fragmentActivities"
+            app:popUpTo="@id/fragmentActivities"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/fragmentPathways"
@@ -30,7 +36,14 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_fragmentPathways_to_fragmentActivities"
-            app:destination="@id/fragmentActivities" />
+            app:destination="@id/fragmentActivities"
+            app:popUpTo="@id/fragmentActivities"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_fragmentPathways_self"
+            app:destination="@id/fragmentPathways"
+            app:popUpTo="@id/fragmentPathways"
+            app:popUpToInclusive="true"/>
     </fragment>
     <!--<fragment
         android:id="@+id/fragmentMain"
@@ -54,6 +67,16 @@
         <argument
             android:name="number"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentActivities_self"
+            app:destination="@id/fragmentActivities"
+            app:popUpTo="@id/fragmentActivities"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_fragmentActivities_to_fragmentPathways"
+            app:destination="@id/fragmentPathways"
+            app:popUpTo="@id/fragmentPathways"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/fragmentBookmarks"
@@ -62,6 +85,13 @@
         tools:layout="@layout/fragment_bookmarks">
         <action
             android:id="@+id/action_fragmentBookmarks_to_fragmentActivities"
-            app:destination="@id/fragmentActivities" />
+            app:destination="@id/fragmentActivities"
+            app:popUpTo="@id/fragmentActivities"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_fragmentBookmarks_to_fragmentPathways"
+            app:destination="@id/fragmentPathways"
+            app:popUpTo="@id/fragmentPathways"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

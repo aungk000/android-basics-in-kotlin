@@ -7,12 +7,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import me.ako.androidbasics.data.datasource.AppData
 import me.ako.androidbasics.data.model.*
-import me.ako.androidbasics.data.repository.DataRepositoryImpl
-import me.ako.androidbasics.domain.repository.DataRepository
+import me.ako.androidbasics.domain.controller.DataRepository
+import me.ako.androidbasics.presentation.model.*
 import javax.inject.Inject
 
 @HiltViewModel
 class AppViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
+    private val _searchData = CombinedLiveData()
+    val searchData get() = _searchData
+
+    init {
+        Log.d("AppViewModel", "ViewModel created")
+    }
+
+    override fun onCleared() {
+        Log.d("AppViewModel", "ViewModel destroyed")
+        super.onCleared()
+    }
+
     sealed class Status {
         object Loading : Status()
         object Error : Status()
@@ -47,6 +59,73 @@ class AppViewModel @Inject constructor(private val repository: DataRepository) :
         }
 
         return status
+    }
+
+    class CombinedLiveData : MediatorLiveData<List<Search>>() {
+        private var data1: List<UnitEntity>? = null
+        private var data2: List<PathwayEntity>? = null
+        private var data3: List<ActivityEntity>? = null
+
+        fun addSources(
+            source1: LiveData<List<UnitEntity>>,
+            source2: LiveData<List<PathwayEntity>>,
+            source3: LiveData<List<ActivityEntity>>
+        ) {
+            super.addSource(source1) {
+                data1 = it
+                value = combineListData(data1, data2, data3)
+            }
+            super.addSource(source2) {
+                data2 = it
+                value = combineListData(data1, data2, data3)
+            }
+            super.addSource(source3) {
+                data3 = it
+                value = combineListData(data1, data2, data3)
+            }
+        }
+
+        private fun combineListData(
+            units: List<UnitEntity>?,
+            pathways: List<PathwayEntity>?,
+            activities: List<ActivityEntity>?
+        ): List<Search> {
+            val listData = mutableListOf<Search>()
+            if (units != null && units.isNotEmpty()) {
+                listData.add(SearchHeader(SearchHeader.Type.Unit))
+                listData.addAll(
+                    units.map {
+                        SearchUnit(it)
+                    }
+                )
+            }
+            if (pathways != null && pathways.isNotEmpty()) {
+                listData.add(SearchHeader(SearchHeader.Type.Pathway))
+                listData.addAll(
+                    pathways.map {
+                        SearchPathway(it)
+                    }
+                )
+            }
+            if (activities != null && activities.isNotEmpty()) {
+                listData.add(SearchHeader(SearchHeader.Type.Activity))
+                listData.addAll(
+                    activities.map {
+                        SearchActivity(it)
+                    }
+                )
+            }
+
+            return listData
+        }
+    }
+
+    fun searchDb(query: String) {
+        val units = repository.searchUnit(query).asLiveData(Dispatchers.IO)
+        val pathways = repository.searchPathway(query).asLiveData(Dispatchers.IO)
+        val activities = repository.searchActivity(query).asLiveData(Dispatchers.IO)
+
+        _searchData.addSources(units, pathways, activities)
     }
 
     fun loadUnitsWithPathways(): LiveData<List<UnitWithPathways>> {

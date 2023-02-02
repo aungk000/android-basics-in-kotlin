@@ -1,13 +1,9 @@
-package me.ako.androidbasics.presentation.util
+package me.ako.androidbasics.presentation.presenter
 
 import androidx.recyclerview.widget.DiffUtil
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.databinding.ItemPathwayBinding
-import me.ako.androidbasics.domain.model.AppViewModel
 import me.ako.androidbasics.domain.util.Base
 import org.joda.time.format.DateTimeFormat
 
@@ -16,7 +12,7 @@ class PathwayAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
         R.layout.item_pathway,
         DiffCallback()
     ) {
-    class DiffCallback: DiffUtil.ItemCallback<PathwayEntity>() {
+    private class DiffCallback: DiffUtil.ItemCallback<PathwayEntity>() {
         override fun areItemsTheSame(oldItem: PathwayEntity, newItem: PathwayEntity): Boolean {
             return oldItem.id == newItem.id
         }
@@ -34,12 +30,6 @@ class PathwayAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
 
             val activities = "${item.activities} Activities"
             txtActivities.text = activities
-
-            /*CoroutineScope(Dispatchers.IO).launch {
-                val activityCount = viewModel.loadPathwayWithActivities(item.id).activities.size
-                val activities = "$activityCount Activities"
-                binding.txtActivities.text = activities
-            }*/
 
             val datetime = DateTimeFormat.forPattern("MMMM yyyy").print(item.datetime)
             txtDatetime.text = datetime

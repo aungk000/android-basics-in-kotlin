@@ -13,6 +13,9 @@ interface DataDao {
     @Query("SELECT * FROM unit WHERE id = :id")
     fun getUnit(id: Int): Flow<UnitEntity>
 
+    /*@Query("SELECT * FROM unit WHERE ((title + description) LIKE '%' || :query || '%')")
+    fun searchUnit(query: String): Flow<List<UnitEntity>>*/
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertUnit(unit: UnitEntity)
 
@@ -37,6 +40,9 @@ interface DataDao {
     @Query("SELECT * FROM pathway WHERE id = :id")
     fun getPathway(id: Int): Flow<PathwayEntity>
 
+    /*@Query("SELECT * FROM pathway WHERE ((title + description) LIKE '%' || :query || '%')")
+    fun searchPathway(query: String): Flow<List<PathwayEntity>>*/
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertPathway(pathway: PathwayEntity)
 
@@ -60,6 +66,9 @@ interface DataDao {
     @Query("SELECT * FROM activity WHERE id = :id")
     fun getActivity(id: Int): Flow<ActivityEntity>
 
+    /*@Query("SELECT * FROM activity WHERE ((title + description) LIKE '%' || :query || '%')")
+    fun searchActivity(query: String): Flow<List<ActivityEntity>>*/
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertActivity(activity: ActivityEntity)
 
@@ -68,4 +77,17 @@ interface DataDao {
 
     @Delete
     suspend fun deleteActivity(activity: ActivityEntity)
+
+    // fts
+    @Query("SELECT * FROM unit JOIN unit_fts ON unit.id == unit_fts.rowid WHERE " +
+            "unit_fts MATCH :query")
+    fun searchUnit(query: String): Flow<List<UnitEntity>>
+
+    @Query("SELECT * FROM pathway JOIN pathway_fts ON pathway.id == pathway_fts.rowid " +
+            "WHERE pathway_fts MATCH :query")
+    fun searchPathway(query: String): Flow<List<PathwayEntity>>
+
+    @Query("SELECT * FROM activity JOIN activity_fts ON activity.id == activity_fts.rowid " +
+            "WHERE activity_fts MATCH :query")
+    fun searchActivity(query: String): Flow<List<ActivityEntity>>
 }
