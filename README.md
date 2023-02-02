@@ -2,6 +2,13 @@
 
 App for official [Android basics in Kotlin](https://developer.android.com/courses/android-basics-kotlin/course) course
 
+# Features
+- Units, Pathways, Activities (Youtube or CodeLabs)
+- Bookmarks
+- Keep progress to unlock Badges
+- Search the whole app
+- Additional topics
+
 # Screenshot
 
 | Units | Pathways |
