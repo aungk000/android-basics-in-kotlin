@@ -57,7 +57,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // room
     implementation("androidx.room:room-ktx:2.5.0")
@@ -68,13 +67,6 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44.2")
     kapt("com.google.dagger:hilt-android-compiler:2.44.2")
 
-    // appsearch
-    implementation("androidx.appsearch:appsearch:1.1.0-alpha02")
-    kapt("androidx.appsearch:appsearch-compiler:1.1.0-alpha02")
-    implementation("androidx.appsearch:appsearch-local-storage:1.1.0-alpha02")
-    implementation("androidx.appsearch:appsearch-platform-storage:1.1.0-alpha02")
-    implementation 'androidx.appsearch:appsearch-builtin-types:1.1.0-alpha02'
-
     // individuals
     implementation 'io.coil-kt:coil:2.2.2'
     implementation 'androidx.preference:preference-ktx:1.2.0'
@@ -84,7 +76,6 @@ dependencies {
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
     implementation("androidx.activity:activity-ktx:1.6.1")
     implementation("androidx.fragment:fragment-ktx:1.5.5")
-    implementation("com.google.guava:guava:31.1-android")
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

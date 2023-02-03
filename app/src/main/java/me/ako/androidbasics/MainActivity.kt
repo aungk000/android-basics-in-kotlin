@@ -31,8 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
     private val viewModel: AppViewModel by viewModels()
-    @Inject
-    lateinit var utils: Utils
+    @Inject lateinit var utils: Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,13 +92,6 @@ class MainActivity : AppCompatActivity() {
         appBarLayout.statusBarForeground = MaterialShapeDrawable.createWithElevationOverlay(this)
     }
 
-    enum class NavFragment(val id: Int) {
-        UnitsFragment(2131296472),
-        PathwaysFragment(2131296471),
-        ActivitiesFragment(2131296469),
-        BookmarksFragment(2131296470)
-    }
-
     private fun setupSearch(
         searchBar: SearchBar, searchView: SearchView
     ) {
@@ -146,7 +138,7 @@ class MainActivity : AppCompatActivity() {
 
             addTransitionListener { view, previousState, newState ->
                 if (newState == TransitionState.HIDING) {
-                    adapter.submitList(null)
+                    //adapter.submitList(null)
                 }
             }
         }

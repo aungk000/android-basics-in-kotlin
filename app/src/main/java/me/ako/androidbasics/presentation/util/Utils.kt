@@ -1,11 +1,9 @@
 package me.ako.androidbasics.presentation.util
 
 import android.app.Activity
-import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import androidx.navigation.NavController
-import me.ako.androidbasics.MainActivity
 import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.ActivityType
 import me.ako.androidbasics.data.model.PathwayEntity
@@ -16,26 +14,33 @@ import me.ako.androidbasics.presentation.view.FragmentPathwaysDirections
 import me.ako.androidbasics.presentation.view.FragmentUnitsDirections
 
 class Utils {
+    enum class NavFragment(val id: String) {
+        UnitsFragment("me.ako.androidbasics:id/fragmentUnits"),
+        PathwaysFragment("me.ako.androidbasics:id/fragmentPathways"),
+        ActivitiesFragment("me.ako.androidbasics:id/fragmentActivities"),
+        BookmarksFragment("me.ako.androidbasics:id/fragmentBookmarks")
+    }
+    
     fun handleSearchUnitClick(navController: NavController, unit: UnitEntity) {
-        when (navController.currentDestination?.id) {
-            MainActivity.NavFragment.UnitsFragment.id -> {
+        when (navController.currentDestination?.displayName) {
+            NavFragment.UnitsFragment.id -> {
                 val action =
                     FragmentUnitsDirections.actionFragmentUnitsToFragmentPathways(unit.id)
                 navController.navigate(action)
             }
-            MainActivity.NavFragment.PathwaysFragment.id -> {
+            NavFragment.PathwaysFragment.id -> {
                 val action =
                     FragmentPathwaysDirections.actionFragmentPathwaysSelf(unit.id)
                 navController.navigate(action)
             }
-            MainActivity.NavFragment.ActivitiesFragment.id -> {
+            NavFragment.ActivitiesFragment.id -> {
                 val action =
                     FragmentActivitiesDirections.actionFragmentActivitiesToFragmentPathways(
                         unit.id
                     )
                 navController.navigate(action)
             }
-            MainActivity.NavFragment.BookmarksFragment.id -> {
+            NavFragment.BookmarksFragment.id -> {
                 val action =
                     FragmentBookmarksDirections.actionFragmentBookmarksToFragmentPathways(
                         unit.id
@@ -46,8 +51,8 @@ class Utils {
     }
 
     fun handleSearchPathwayClick(navController: NavController, pathway: PathwayEntity) {
-        when (navController.currentDestination?.id) {
-            MainActivity.NavFragment.UnitsFragment.id -> {
+        when (navController.currentDestination?.displayName) {
+            NavFragment.UnitsFragment.id -> {
                 val action =
                     FragmentUnitsDirections.actionFragmentUnitsToFragmentActivities(
                         pathway.id,
@@ -55,7 +60,7 @@ class Utils {
                     )
                 navController.navigate(action)
             }
-            MainActivity.NavFragment.PathwaysFragment.id -> {
+            NavFragment.PathwaysFragment.id -> {
                 val action =
                     FragmentPathwaysDirections.actionFragmentPathwaysToFragmentActivities(
                         pathway.id,
@@ -63,7 +68,7 @@ class Utils {
                     )
                 navController.navigate(action)
             }
-            MainActivity.NavFragment.ActivitiesFragment.id -> {
+            NavFragment.ActivitiesFragment.id -> {
                 val action =
                     FragmentActivitiesDirections.actionFragmentActivitiesSelf(
                         pathway.id,
@@ -71,7 +76,7 @@ class Utils {
                     )
                 navController.navigate(action)
             }
-            MainActivity.NavFragment.BookmarksFragment.id -> {
+            NavFragment.BookmarksFragment.id -> {
                 val action =
                     FragmentBookmarksDirections.actionFragmentBookmarksToFragmentActivities(
                         pathway.id,
