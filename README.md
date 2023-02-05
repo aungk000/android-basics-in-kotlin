@@ -8,6 +8,7 @@ App for official [Android basics in Kotlin](https://developer.android.com/course
 - Keep progress to unlock Badges
 - Search the whole app
 - Additional topics
+- Settings
 
 # Screenshot
 
@@ -16,6 +17,8 @@ App for official [Android basics in Kotlin](https://developer.android.com/course
 | <img src="/readme/screenshot-1.jpg" alt="screenshot-units"/> | <img src="/readme/screenshot-2.jpg" alt="screenshot-pathways"/> |
 | Activities | Bookmarks |
 | <img src="/readme/screenshot-3.jpg" alt="screenshot-activities"/> | <img src="/readme/screenshot-4.jpg" alt="screenshot-bookmarks"/> |
+| Settings |
+| <img src="/readme/screenshot-5.jpg" alt="screenshot-settings"/> |
 
 # Apk
 
