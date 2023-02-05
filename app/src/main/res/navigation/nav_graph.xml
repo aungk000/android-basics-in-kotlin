@@ -25,6 +25,9 @@
             app:destination="@id/fragmentActivities"
             app:popUpTo="@id/fragmentActivities"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_fragmentUnits_to_fragmentSettings"
+            app:destination="@id/fragmentSettings" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPathways"
@@ -92,6 +95,21 @@
             android:id="@+id/action_fragmentBookmarks_to_fragmentPathways"
             app:destination="@id/fragmentPathways"
             app:popUpTo="@id/fragmentPathways"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:name="me.ako.androidbasics.presentation.view.FragmentSettings"
+        android:label="@string/settings">
+        <action
+            android:id="@+id/action_fragmentSettings_to_fragmentPathways"
+            app:destination="@id/fragmentPathways"
+            app:popUpTo="@id/fragmentPathways"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentSettings_to_fragmentActivities"
+            app:destination="@id/fragmentActivities"
+            app:popUpTo="@id/fragmentActivities"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

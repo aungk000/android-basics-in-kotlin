@@ -3,6 +3,7 @@ package me.ako.androidbasics.presentation.view
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,12 +19,15 @@ import me.ako.androidbasics.databinding.FragmentUnitsBinding
 import me.ako.androidbasics.domain.model.AppViewModel
 import me.ako.androidbasics.domain.model.AppViewModel.Status
 import me.ako.androidbasics.presentation.presenter.UnitAdapter
+import me.ako.androidbasics.presentation.util.Utils
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentUnits : Fragment() {
     private val viewModel: AppViewModel by activityViewModels()
     private var _binding: FragmentUnitsBinding? = null
     private val binding get() = _binding!!
+    @Inject lateinit var utils: Utils
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -98,46 +102,11 @@ class FragmentUnits : Fragment() {
         return loading
     }
 
-    /*private fun onBindSearchView(menu: Menu) {
-        val expandListener = object : MenuItem.OnActionExpandListener {
-            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                return true
-            }
-
-            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                return true
-            }
-        }
-        val searchItem = menu.findItem(R.id.menu_search)
-        searchItem.setOnActionExpandListener(expandListener)
-        val searchView = searchItem.actionView as SearchView
-        val searchManager =
-            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView.apply {
-            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-            //setIconifiedByDefault(true)
-            isSubmitButtonEnabled = true
-            isQueryRefinementEnabled = true
-            setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    clearFocus()
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    return true
-                }
-
-            })
-        }
-    }*/
-
     private fun addMenuProvider() {
         val toolbar: MaterialToolbar = requireActivity().findViewById(R.id.toolbar)
         toolbar.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_main, menu)
-                //onBindSearchView(menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -149,15 +118,31 @@ class FragmentUnits : Fragment() {
                         true
                     }
                     R.id.menu_settings -> {
+                        val action = FragmentUnitsDirections.actionFragmentUnitsToFragmentSettings()
+                        findNavController().navigate(action)
                         true
                     }
                     R.id.menu_about -> {
+                        showAboutDialog()
                         true
                     }
                     else -> false
                 }
             }
-
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun showAboutDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("About")
+            .setMessage("Developer: Aung Ko Oo")
+            .setNegativeButton("Github") { v, which ->
+                utils.url(requireActivity(), "https://github.com/aungk000")
+            }
+            .setPositiveButton("Close") { dialog, which ->
+            }
+            .setCancelable(false)
+
+        dialog.show()
     }
 }

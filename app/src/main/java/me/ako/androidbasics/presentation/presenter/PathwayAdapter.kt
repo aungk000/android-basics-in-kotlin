@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.databinding.ItemPathwayBinding
-import me.ako.androidbasics.domain.util.Base
+import me.ako.androidbasics.presentation.util.Base
 import org.joda.time.format.DateTimeFormat
 
 class PathwayAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :

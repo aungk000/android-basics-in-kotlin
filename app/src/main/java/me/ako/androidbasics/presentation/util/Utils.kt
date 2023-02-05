@@ -3,22 +3,21 @@ package me.ako.androidbasics.presentation.util
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import me.ako.androidbasics.data.model.ActivityEntity
 import me.ako.androidbasics.data.model.ActivityType
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.data.model.UnitEntity
-import me.ako.androidbasics.presentation.view.FragmentActivitiesDirections
-import me.ako.androidbasics.presentation.view.FragmentBookmarksDirections
-import me.ako.androidbasics.presentation.view.FragmentPathwaysDirections
-import me.ako.androidbasics.presentation.view.FragmentUnitsDirections
+import me.ako.androidbasics.presentation.view.*
 
 class Utils {
     enum class NavFragment(val id: String) {
         UnitsFragment("me.ako.androidbasics:id/fragmentUnits"),
         PathwaysFragment("me.ako.androidbasics:id/fragmentPathways"),
         ActivitiesFragment("me.ako.androidbasics:id/fragmentActivities"),
-        BookmarksFragment("me.ako.androidbasics:id/fragmentBookmarks")
+        BookmarksFragment("me.ako.androidbasics:id/fragmentBookmarks"),
+        SettingsFragment("me.ako.androidbasics:id/fragmentSettings")
     }
     
     fun handleSearchUnitClick(navController: NavController, unit: UnitEntity) {
@@ -43,6 +42,13 @@ class Utils {
             NavFragment.BookmarksFragment.id -> {
                 val action =
                     FragmentBookmarksDirections.actionFragmentBookmarksToFragmentPathways(
+                        unit.id
+                    )
+                navController.navigate(action)
+            }
+            NavFragment.SettingsFragment.id -> {
+                val action =
+                    FragmentSettingsDirections.actionFragmentSettingsToFragmentPathways(
                         unit.id
                     )
                 navController.navigate(action)
@@ -84,6 +90,14 @@ class Utils {
                     )
                 navController.navigate(action)
             }
+            NavFragment.SettingsFragment.id -> {
+                val action =
+                    FragmentSettingsDirections.actionFragmentSettingsToFragmentActivities(
+                        pathway.id,
+                        pathway.number
+                    )
+                navController.navigate(action)
+            }
         }
     }
 
@@ -116,5 +130,19 @@ class Utils {
         val intent =
             Intent(Intent.ACTION_VIEW, Uri.parse(url))
         activity.startActivity(intent)
+    }
+
+    fun setTheme(value: String?) {
+        when(value) {
+            "dark" -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            "light" -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            "system" -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+        }
     }
 }

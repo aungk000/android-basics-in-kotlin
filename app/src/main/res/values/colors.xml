@@ -20,7 +20,9 @@
     <color name="blue">#4285f4</color>
     <color name="blue_dark">#1769e0</color>
 
+    <color name="default_text">#808080</color>
+
     <color name="colorPrimary">@color/blue</color>
     <color name="colorSecondary">@color/blue_light</color>
-    <color name="colorPrimaryContainer">@color/blue_light</color>
+    <color name="colorPrimaryContainer">@color/blue_dark</color>
 </resources>

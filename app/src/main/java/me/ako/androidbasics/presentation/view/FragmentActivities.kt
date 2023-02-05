@@ -119,6 +119,7 @@ class FragmentActivities : Fragment() {
                 }
                 .setNegativeButton("Cancel") {dialog, which -> }
                 .setCancelable(true)
+                .create()
             dialog.show()
             true
         }

@@ -5,7 +5,7 @@ import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.data.model.UnitWithPathways
 import me.ako.androidbasics.databinding.ItemUnitBinding
-import me.ako.androidbasics.domain.util.Base
+import me.ako.androidbasics.presentation.util.Base
 
 class UnitAdapter(
     private val onItemClicked: (UnitWithPathways) -> Unit,

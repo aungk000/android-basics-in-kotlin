@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.databinding.ItemBookmarkBinding
-import me.ako.androidbasics.domain.util.Base
+import me.ako.androidbasics.presentation.util.Base
 
 class BookmarkAdapter(
     private val onItemClicked: (PathwayEntity) -> Unit,

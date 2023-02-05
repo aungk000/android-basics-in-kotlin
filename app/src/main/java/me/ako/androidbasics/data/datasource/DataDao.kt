@@ -80,14 +80,14 @@ interface DataDao {
 
     // fts
     @Query("SELECT * FROM unit JOIN unit_fts ON unit.id == unit_fts.rowid WHERE " +
-            "unit_fts MATCH :query")
+            "unit_fts MATCH '' || :query || '*'")
     fun searchUnit(query: String): Flow<List<UnitEntity>>
 
     @Query("SELECT * FROM pathway JOIN pathway_fts ON pathway.id == pathway_fts.rowid " +
-            "WHERE pathway_fts MATCH :query")
+            "WHERE pathway_fts MATCH '' || :query || '*'")
     fun searchPathway(query: String): Flow<List<PathwayEntity>>
 
     @Query("SELECT * FROM activity JOIN activity_fts ON activity.id == activity_fts.rowid " +
-            "WHERE activity_fts MATCH :query")
+            "WHERE activity_fts MATCH '' || :query || '*'")
     fun searchActivity(query: String): Flow<List<ActivityEntity>>
 }

@@ -5,7 +5,7 @@ import com.google.android.material.snackbar.Snackbar
 import me.ako.androidbasics.R
 import me.ako.androidbasics.data.model.PathwayEntity
 import me.ako.androidbasics.databinding.ItemBadgeBinding
-import me.ako.androidbasics.domain.util.Base
+import me.ako.androidbasics.presentation.util.Base
 
 class BadgeAdapter(private val onItemClicked: (PathwayEntity) -> Unit) :
     Base.ClickableListAdapter<PathwayEntity, ItemBadgeBinding>(

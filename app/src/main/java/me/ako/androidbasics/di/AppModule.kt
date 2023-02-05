@@ -1,6 +1,8 @@
 package me.ako.androidbasics.di
 
 import android.app.Application
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -34,4 +36,10 @@ object AppModule {
     @Singleton
     @Provides
     fun getUtils() : Utils = Utils()
+
+    @Singleton
+    @Provides
+    fun getPrefs(app: Application): SharedPreferences {
+        return PreferenceManager.getDefaultSharedPreferences(app)
+    }
 }

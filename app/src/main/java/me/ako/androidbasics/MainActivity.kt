@@ -1,5 +1,6 @@
 package me.ako.androidbasics
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.addTextChangedListener
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -32,11 +34,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: AppViewModel by viewModels()
     @Inject lateinit var utils: Utils
+    @Inject lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL)
+        utils.setTheme(prefs.getString("theme", "system"))
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -72,23 +75,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // deprecated but works
-    /*override fun onBackPressed() {
-        if (binding.searchView.isShowing || binding.searchView.isShowing) {
-            binding.searchView.hide()
-        } else {
-            onBackPressedDispatcher.onBackPressed()
-        }
-    }*/
-
     private fun setupAppbar(appBarLayout: AppBarLayout) {
         val typedValue = TypedValue()
         theme.resolveAttribute(android.R.attr.colorBackground, typedValue, true)
         appBarLayout.setBackgroundColor(typedValue.data)
 
-        /*appBarLayout.setStatusBarForegroundColor(
-            ContextCompat.getColor(this, R.color.grey_dark)
-        )*/
         appBarLayout.statusBarForeground = MaterialShapeDrawable.createWithElevationOverlay(this)
     }
 
@@ -118,7 +109,6 @@ class MainActivity : AppCompatActivity() {
                 if(binding.progressSearch.isShown) {
                     binding.progressSearch.hide()
                 }
-                Log.d("MainActivity", "search: ended")
             }
 
             editText.addTextChangedListener {
@@ -126,7 +116,6 @@ class MainActivity : AppCompatActivity() {
 
             editText.setOnEditorActionListener { view, actionId, event ->
                 if (editText.text.isNotEmpty()) {
-                    Log.d("MainActivity", "search: started")
                     binding.progressSearch.show()
                     val query = editText.text.toString().lowercase()
                     viewModel.searchDb(query)
@@ -147,34 +136,6 @@ class MainActivity : AppCompatActivity() {
     private fun setupToolbar(toolbar: MaterialToolbar, drawerLayout: DrawerLayout) {
         //val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         NavigationUI.setupWithNavController(toolbar, navController, drawerLayout)
-
-        /*toolbar.setNavigationOnClickListener {
-            drawerLayout.open()
-        }*/
-
-        /*toolbar.inflateMenu(R.menu.menu_main)
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_bookmark -> {
-                    true
-                }
-                R.id.menu_settings -> {
-                    true
-                }
-                R.id.menu_about -> {
-                    true
-                }
-                else -> false
-            }
-        }*/
-    }
-
-    override fun onSearchRequested(): Boolean {
-        val appData = Bundle().apply {
-            putBoolean("JARGON", true)
-        }
-        startSearch(null, false, appData, false)
-        return true
     }
 
     private fun setupNavigationDrawer(drawerLayout: DrawerLayout, navigationView: NavigationView) {
@@ -186,7 +147,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         navigationView.setNavigationItemSelectedListener {
-            //it.isChecked = true
             drawerLayout.close()
 
             when (it.itemId) {
