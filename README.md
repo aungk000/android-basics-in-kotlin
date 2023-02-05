@@ -13,9 +13,9 @@ App for official [Android basics in Kotlin](https://developer.android.com/course
 
 | Units | Pathways |
 |-------|----------|
-| <img src="/readme/screenshot-1.jpg" alt="screenshot-units" height="400"/> | <img src="/readme/screenshot-2.jpg" alt="screenshot-pathways" height="400"/> |
+| <img src="/readme/screenshot-1.jpg" alt="screenshot-units"/> | <img src="/readme/screenshot-2.jpg" alt="screenshot-pathways"/> |
 | Activities | Bookmarks |
-| <img src="/readme/screenshot-3.jpg" alt="screenshot-activities" height="400"/> | <img src="/readme/screenshot-4.jpg" alt="screenshot-bookmarks" height="400"/> |
+| <img src="/readme/screenshot-3.jpg" alt="screenshot-activities"/> | <img src="/readme/screenshot-4.jpg" alt="screenshot-bookmarks"/> |
 
 # Apk
 
